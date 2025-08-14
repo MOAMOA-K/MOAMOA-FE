@@ -1,7 +1,7 @@
-import { Global, ThemeProvider } from "@emotion/react";
-import { GlobalResetStyle } from "@/styles/reset";
-import { GlobalTypographyStyle } from "@/styles/typography";
-import { theme } from "./styles/theme";
+import { Global, ThemeProvider } from '@emotion/react';
+import { GlobalResetStyle } from '@/styles/reset';
+import { GlobalTypographyStyle } from '@/styles/typography';
+import { theme } from './styles/theme';
 
 function App() {
   return (
