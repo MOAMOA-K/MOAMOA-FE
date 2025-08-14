@@ -24,7 +24,6 @@ export const GlobalResetStyle = css`
     all: unset;
   }
   button {
-    all: unset;
     cursor: pointer;
   }
 `;
