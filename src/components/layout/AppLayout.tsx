@@ -1,10 +1,7 @@
 import styled from '@emotion/styled';
+import type { PropsWithChildren } from 'react';
 
-type AppLayoutProps = {
-  children: React.ReactNode;
-};
-
-const AppLayout = ({ children }: AppLayoutProps) => {
+const AppLayout = ({ children }: PropsWithChildren) => {
   return (
     <Background>
       <Container>{children}</Container>
