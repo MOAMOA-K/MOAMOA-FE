@@ -1,7 +1,21 @@
 import styled from '@emotion/styled';
+import LandingSection from './components/LandingSection';
+import ButtonSection from './components/ButtonSection';
+import useStep from './hooks/useStep';
 
 const LandingPage = () => {
-  return <Container></Container>;
+  const { step, goToNextStep, goToPrevStep } = useStep();
+
+  return (
+    <Container>
+      <LandingSection step={step} />
+      <ButtonSection
+        step={step}
+        goToNextStep={goToNextStep}
+        goToPrevStep={goToPrevStep}
+      />
+    </Container>
+  );
 };
 
 export default LandingPage;
