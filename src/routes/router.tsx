@@ -3,6 +3,7 @@ import { ROUTE_PATH } from './paths';
 import MainPage from '@/pages/main/MainPage';
 import LandingPage from '@/pages/landing/LandingPage';
 import LoginPage from '@/pages/login/LoginPage';
+import MapPage from '@/pages/map/MapPage';
 
 const Router = () => {
   return (
@@ -10,6 +11,7 @@ const Router = () => {
       <Route path={ROUTE_PATH.HOME} element={<MainPage />} />
       <Route path={ROUTE_PATH.LANDING} element={<LandingPage />} />
       <Route path={ROUTE_PATH.LOGIN} element={<LoginPage />} />
+      <Route path={ROUTE_PATH.MAP} element={<MapPage />} />
     </Routes>
   );
 };
