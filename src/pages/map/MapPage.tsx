@@ -1,10 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
+import type { Store } from '@/pages/map/mocks/stores';
+import { mockStores } from '@/pages/map/mocks/stores';
+import BottomSheet from '@/pages/map/components/BottomSheet';
 
 function MapPage() {
   const mapRef = useRef<HTMLDivElement | null>(null);
+  const [selected, setSelected] = useState<Store | null>(null);
 
-  // 간단 스크립트 로더 (중복 로딩 방지 X)
   const loadScript = (src: string) =>
     new Promise<void>((resolve, reject) => {
       const s = document.createElement('script');
@@ -17,37 +20,78 @@ function MapPage() {
 
   useEffect(() => {
     const KEY = import.meta.env.VITE_KAKAO_MAP_KEY;
+    if (!KEY) return;
 
-    if (!KEY) {
-      console.error('VITE_KAKAO_MAP_KEY is missing.');
-      return;
-    }
+    const markers: kakao.maps.Marker[] = [];
 
     loadScript(
       `https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${KEY}`,
     )
       .then(() => {
-        // kakao 전역 접근 (가볍게 any 1회 캐스팅)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const kakao = (window as any).kakao;
 
         kakao.maps.load(() => {
           if (!mapRef.current) return;
 
-          const center = new kakao.maps.LatLng(35.8885, 128.6106); // KNU
-          const map = new kakao.maps.Map(mapRef.current, { center, level: 3 });
+          const center = new kakao.maps.LatLng(35.8889, 128.6109); // 경북대 본관
+          const map = new kakao.maps.Map(mapRef.current, { center, level: 4 });
 
-          const marker = new kakao.maps.Marker({ position: center });
-          marker.setMap(map);
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              (pos) => {
+                const cur = new kakao.maps.LatLng(
+                  pos.coords.latitude,
+                  pos.coords.longitude,
+                );
+                map.setCenter(cur);
+                const me = new kakao.maps.Marker({ map, position: cur });
+                markers.push(me);
+              },
+              () => {},
+            );
+          }
+
+          const storeMarkers = mockStores.map((s) => {
+            const m = new kakao.maps.Marker({
+              map,
+              position: new kakao.maps.LatLng(s.lat, s.lng),
+            });
+            kakao.maps.event.addListener(m, 'click', () => {
+              console.log('[marker click]', s.name);
+              setSelected(s);
+            });
+            return m;
+          });
+          markers.push(...storeMarkers);
         });
       })
       .catch(console.error);
+
+    return () => {
+      try {
+        markers.forEach((m) => m.setMap(null));
+      } catch {
+        // intentionally ignored
+      }
+      setSelected(null);
+    };
   }, []);
 
   return (
     <Wrap>
-      <MapBox ref={mapRef} id='map' />
-      map 페이지
+      <MapBox ref={mapRef} />
+      <SearchBar>
+        <input placeholder='매장 검색하기' aria-label='매장 검색하기' />
+      </SearchBar>
+      <SheetWrap open={!!selected}>
+        <BottomSheet
+          open={!!selected}
+          title={selected?.name}
+          subtitle={selected?.category}
+          onClose={() => setSelected(null)}
+        />
+      </SheetWrap>
     </Wrap>
   );
 }
@@ -57,12 +101,46 @@ export default MapPage;
 const Wrap = styled.div`
   position: relative;
   width: 100%;
-  height: 100dvh; /* 모바일에서도 화면 가득 */
-  max-width: 720px; /* 기존 레이아웃 폭 유지 시 사용 */
+  height: 100dvh;
+  max-width: 720px;
   margin: 0 auto;
 `;
 
 const MapBox = styled.div`
   position: absolute;
-  inset: 0; /* 상하좌우 꽉 채우기 */
+  inset: 0;
+`;
+
+const SearchBar = styled.div`
+  position: absolute;
+  z-index: 3;
+  top: ${({ theme }) => theme.spacing?.[3] ?? '12px'};
+  left: ${({ theme }) => theme.spacing?.[3] ?? '12px'};
+  right: ${({ theme }) => theme.spacing?.[3] ?? '12px'};
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing?.[2]};
+  background: ${({ theme }) => theme.colors?.default.background};
+  border-radius: 24px;
+  padding: ${({ theme }) => `${theme.spacing?.[2]} ${theme.spacing?.[3]}`};
+
+  input {
+    width: 100%;
+    pointer-events: auto;
+    border: 0;
+    outline: 0;
+    font-size: ${({ theme }) => theme.typography.body1};
+    color: ${({ theme }) => theme.colors.default};
+    background: transparent;
+  }
+`;
+
+const SheetWrap = styled.div<{ open: boolean }>`
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
 `;
