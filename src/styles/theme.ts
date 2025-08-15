@@ -20,11 +20,31 @@ export const theme = {
       // 배경 색상
       background: {
         default: '#ffffff',
+        customer: '#fafcfe',
+        owner: '#fff8f8',
+      },
+      button: {
+        customer: {
+          default: '#287EEC',
+          disabled: '#c1daf9',
+        },
+        owner: {
+          default: '#f27e76',
+          disabled: '#fbdad7',
+        },
+      },
+
+      tag: {
+        star: '#f1f436',
+        positive: '#e5ffd4',
+        improve: '#dbe9fe',
+        complain: '#ffdcda',
       },
 
       // 텍스트 색상
       text: {
         default: '#2a3038', // 기본 텍스트
+        sub: '#d1d3d8', // 보조 텍스트
       },
     },
   },
