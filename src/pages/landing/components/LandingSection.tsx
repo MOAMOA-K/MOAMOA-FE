@@ -13,7 +13,7 @@ const LandingSection = ({ step, stepLength }: LandingSectionProps) => {
     <Section>
       <Steps>
         {Array.from({ length: stepLength }, (_, index) => (
-          <Step key={index} selected={step === index} />
+          <StepIndicator key={index} selected={step === index} />
         ))}
       </Steps>
       <Title>모아모아 뀽</Title>
@@ -39,7 +39,7 @@ const Steps = styled.div`
   gap: 0.625rem;
 `;
 
-const Step = styled.div<{ selected: boolean }>`
+const StepIndicator = styled.div<{ selected: boolean }>`
   width: ${({ selected }) => (selected ? '2.5rem' : '0.625rem')};
   border-radius: 3.125rem;
   height: 0.625rem;
