@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { landingData } from '../constants/landingData';
+import LandingDescription from './LandingDescription';
 
 type LandingSectionProps = {
   step: 0 | 1 | 2;
@@ -13,6 +15,7 @@ const LandingSection = ({ step }: LandingSectionProps) => {
         ))}
       </Steps>
       <Title>모아모아 뀽</Title>
+      <LandingDescription {...landingData[step]} />
     </Section>
   );
 };
@@ -48,4 +51,5 @@ const Title = styled.h1`
   font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
   line-height: ${({ theme }) => theme.typography.title1.lineHeight};
   color: ${({ theme }) => theme.colors.text.default};
+  padding-top: ${({ theme }) => theme.spacing[2]};
 `;
