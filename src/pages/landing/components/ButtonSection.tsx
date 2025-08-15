@@ -25,8 +25,8 @@ const ButtonSection = ({
           {step === 2 ? '시작하기' : '다음'}
         </Button>
       </ButtonGroup>
-      <RouteLogin>
-        <Link to={ROUTE_PATH.LOGIN}>이미 계정이 있으신가요? 로그인</Link>
+      <RouteLogin to={ROUTE_PATH.LOGIN}>
+        이미 계정이 있으신가요? 로그인
       </RouteLogin>
     </Section>
   );
@@ -80,10 +80,10 @@ const Button = styled.button<{ variant?: 'outline' | 'fill' }>`
   }
 `;
 
-const RouteLogin = styled.div`
+const RouteLogin = styled(Link)`
   font-size: ${({ theme }) => theme.typography.body1.fontSize};
   font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
   line-height: ${({ theme }) => theme.typography.body1.lineHeight};
   color: ${({ theme }) => theme.colors.customer.main};
-  cursor: pointer;
+  text-decoration: none;
 `;
