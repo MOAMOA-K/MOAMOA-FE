@@ -3,10 +3,12 @@ import styled from '@emotion/styled';
 import type { Store } from '@/pages/map/mocks/stores';
 import { mockStores } from '@/pages/map/mocks/stores';
 import BottomSheet from '@/pages/map/components/BottomSheet';
+import SearchBar from '@/pages/map/components/SearchBar';
 
 function MapPage() {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const [selected, setSelected] = useState<Store | null>(null);
+  const [query, setQuery] = useState('');
 
   const loadScript = (src: string) =>
     new Promise<void>((resolve, reject) => {
@@ -81,9 +83,15 @@ function MapPage() {
   return (
     <Wrap>
       <MapBox ref={mapRef} />
-      <SearchBar>
-        <input placeholder='매장 검색하기' aria-label='매장 검색하기' />
-      </SearchBar>
+      <SearchBarHolder>
+        <SearchBar
+          value={query}
+          onChange={setQuery}
+          onSubmit={(v) => console.log(v)}
+        />
+        ;
+      </SearchBarHolder>
+
       <SheetWrap open={!!selected}>
         <BottomSheet
           open={!!selected}
@@ -111,28 +119,16 @@ const MapBox = styled.div`
   inset: 0;
 `;
 
-const SearchBar = styled.div`
+const SearchBarHolder = styled.div`
   position: absolute;
-  z-index: 3;
+  z-index: 5;
   top: ${({ theme }) => theme.spacing?.[3] ?? '12px'};
   left: ${({ theme }) => theme.spacing?.[3] ?? '12px'};
   right: ${({ theme }) => theme.spacing?.[3] ?? '12px'};
   pointer-events: none;
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing?.[2]};
-  background: ${({ theme }) => theme.colors?.default.background};
-  border-radius: 24px;
-  padding: ${({ theme }) => `${theme.spacing?.[2]} ${theme.spacing?.[3]}`};
 
-  input {
-    width: 100%;
+  & > * {
     pointer-events: auto;
-    border: 0;
-    outline: 0;
-    font-size: ${({ theme }) => theme.typography.body1};
-    color: ${({ theme }) => theme.colors.default};
-    background: transparent;
   }
 `;
 
