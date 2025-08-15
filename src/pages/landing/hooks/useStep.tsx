@@ -3,15 +3,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 const steps = [0, 1, 2] as const;
-type Step = (typeof steps)[number];
+export type Step = (typeof steps)[number];
 
 const useStep = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>(steps[0]);
 
   const goToNextStep = () => {
-    if (step < 2) setStep((step + 1) as Step);
-    else if (step === 2) {
+    if (step < steps.length - 1) setStep((step + 1) as Step);
+    else if (step === steps.length - 1) {
       navigate(ROUTE_PATH.LOGIN);
     }
   };
@@ -20,7 +20,7 @@ const useStep = () => {
     if (step > 0) setStep((step - 1) as Step);
   };
 
-  return { step, goToNextStep, goToPrevStep };
+  return { step, stepLength: steps.length, goToNextStep, goToPrevStep };
 };
 
 export default useStep;

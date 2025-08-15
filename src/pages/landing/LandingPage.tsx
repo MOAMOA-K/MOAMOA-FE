@@ -4,13 +4,14 @@ import ButtonSection from './components/ButtonSection';
 import useStep from './hooks/useStep';
 
 const LandingPage = () => {
-  const { step, goToNextStep, goToPrevStep } = useStep();
+  const { step, stepLength, goToNextStep, goToPrevStep } = useStep();
 
   return (
     <Container>
-      <LandingSection step={step} />
+      <LandingSection step={step} stepLength={stepLength} />
       <ButtonSection
         step={step}
+        stepLength={stepLength}
         goToNextStep={goToNextStep}
         goToPrevStep={goToPrevStep}
       />

@@ -1,15 +1,18 @@
 import { ROUTE_PATH } from '@/routes/paths';
 import styled from '@emotion/styled';
 import { Link } from 'react-router';
+import type { Step } from '../hooks/useStep';
 
 type RoutingSectionProps = {
-  step: 0 | 1 | 2;
+  step: Step;
+  stepLength: number;
   goToNextStep: () => void;
   goToPrevStep: () => void;
 };
 
 const ButtonSection = ({
   step,
+  stepLength,
   goToNextStep,
   goToPrevStep,
 }: RoutingSectionProps) => {
@@ -22,7 +25,7 @@ const ButtonSection = ({
           </Button>
         )}
         <Button onClick={goToNextStep} variant='fill'>
-          {step === 2 ? '시작하기' : '다음'}
+          {step === stepLength - 1 ? '시작하기' : '다음'}
         </Button>
       </ButtonGroup>
       <RouteLogin to={ROUTE_PATH.LOGIN}>

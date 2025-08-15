@@ -13,7 +13,7 @@ const LandingDescription = ({
 }: LandingDescriptionProps) => {
   return (
     <Container>
-      <Img src={imageUrl} alt='Landing' />
+      <Img src={imageUrl} alt={title} />
       <Title>{title}</Title>
       <Description>{description}</Description>
     </Container>

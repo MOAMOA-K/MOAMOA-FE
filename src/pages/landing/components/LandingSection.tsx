@@ -1,16 +1,18 @@
 import styled from '@emotion/styled';
 import { landingData } from '../constants/landingData';
 import LandingDescription from './LandingDescription';
+import type { Step } from '../hooks/useStep';
 
 type LandingSectionProps = {
-  step: 0 | 1 | 2;
+  step: Step;
+  stepLength: number;
 };
 
-const LandingSection = ({ step }: LandingSectionProps) => {
+const LandingSection = ({ step, stepLength }: LandingSectionProps) => {
   return (
     <Section>
       <Steps>
-        {Array.from({ length: 3 }, (_, index) => (
+        {Array.from({ length: stepLength }, (_, index) => (
           <Step key={index} selected={step === index} />
         ))}
       </Steps>
