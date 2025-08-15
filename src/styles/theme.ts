@@ -1,20 +1,20 @@
+const gray = {
+  gray00: '#ffffff', // 흰색
+  gray100: '#f7f8f9', // 가장 밝은 회색
+  gray200: '#f3f4f5',
+  gray300: '#eeeff1',
+  gray400: '#dcdee3',
+  gray500: '#d1d3d8',
+  gray600: '#b0b3ba',
+  gray700: '#868b94',
+  gray800: '#555d6d',
+  gray900: '#2a3038',
+  gray1000: '#1a1c20', // 검은색
+};
+
 export const theme = {
   colors: {
-    // 회색 계열 (Gray Scale)
-    gray: {
-      gray00: '#ffffff', // 흰색
-      gray100: '#f7f8f9', // 가장 밝은 회색
-      gray200: '#f3f4f5',
-      gray300: '#eeeff1',
-      gray400: '#dcdee3',
-      gray500: '#d1d3d8',
-      gray600: '#b0b3ba',
-      gray700: '#868b94',
-      gray800: '#555d6d',
-      gray900: '#2a3038',
-      gray1000: '#1a1c20', // 검은색
-    },
-
+    gray,
     // 시맨틱 색상 (의미 기반 컬러 토큰)
     semantic: {
       // 배경 색상
@@ -25,7 +25,7 @@ export const theme = {
       },
       button: {
         customer: {
-          default: '#287EEC',
+          default: '#287eec',
           disabled: '#c1daf9',
         },
         owner: {
@@ -43,8 +43,8 @@ export const theme = {
 
       // 텍스트 색상
       text: {
-        default: '#2a3038', // 기본 텍스트
-        sub: '#d1d3d8', // 보조 텍스트
+        default: gray.gray900, // 기본 텍스트
+        sub: gray.gray500, // 보조 텍스트
       },
     },
   },
