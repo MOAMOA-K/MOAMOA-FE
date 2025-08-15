@@ -3,7 +3,7 @@ import { ROUTE_PATH } from './paths';
 import MainPage from '@/pages/main/MainPage';
 import LandingPage from '@/pages/landing/LandingPage';
 import LoginPage from '@/pages/login/LoginPage';
-import MapPage from '@/pages/main/MapPage';
+import MapPage from '@/pages/map/MapPage';
 
 const Router = () => {
   return (
