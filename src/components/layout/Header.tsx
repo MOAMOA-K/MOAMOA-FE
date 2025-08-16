@@ -10,7 +10,7 @@ const Header = ({ title = '' }: HeaderProps) => {
     <Container>
       <Logo src={logo} alt='로고' />
       <Title>{title}</Title>
-      <div></div>
+      <Empty />
     </Container>
   );
 };
@@ -36,4 +36,8 @@ const Title = styled.h1`
   line-height: ${({ theme }) => theme.typography.title1.lineHeight};
   font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
   color: ${({ theme }) => theme.colors.text.default};
+`;
+
+const Empty = styled.div`
+  width: 30px;
 `;
