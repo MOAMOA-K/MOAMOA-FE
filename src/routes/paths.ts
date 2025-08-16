@@ -5,6 +5,7 @@ export const ROUTE_PATH = {
   MY_PAGE: '/my',
 
   MAP: '/map',
+  SEARCH: '/search',
   LETTER: '/letter',
 
   FEEDBACK: '/feedback',
