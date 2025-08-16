@@ -55,12 +55,4 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  ul {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
 `;

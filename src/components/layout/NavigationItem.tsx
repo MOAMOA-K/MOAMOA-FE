@@ -19,16 +19,19 @@ const NavigationItem = ({
   return (
     <Container to={to} active={active} type={type}>
       {icon}
-      <Title active={active} type={type}>
-        {name}
-      </Title>
+      <Title>{name}</Title>
     </Container>
   );
 };
 
 export default NavigationItem;
 
-const Container = styled(Link)<{ active: boolean; type: 'customer' | 'owner' }>`
+const Container = styled(Link, {
+  shouldForwardProp: (prop) => prop !== 'active' && prop !== 'type',
+})<{
+  active: boolean;
+  type: 'customer' | 'owner';
+}>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,10 +48,9 @@ const Container = styled(Link)<{ active: boolean; type: 'customer' | 'owner' }>`
   gap: ${({ theme }) => theme.spacing[2]};
 `;
 
-const Title = styled.p<{ active: boolean; type: 'customer' | 'owner' }>`
+const Title = styled.p`
   font-size: ${({ theme }) => theme.typography.body2.fontSize};
   line-height: ${({ theme }) => theme.typography.body2.lineHeight};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  color: ${({ active, theme, type }) =>
-    active ? theme.colors[type].main : theme.colors.text.default};
+  color: inherit;
 `;
