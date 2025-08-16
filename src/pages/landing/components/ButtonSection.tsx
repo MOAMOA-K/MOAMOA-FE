@@ -87,6 +87,6 @@ const RouteLogin = styled(Link)`
   font-size: ${({ theme }) => theme.typography.body1.fontSize};
   font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
   line-height: ${({ theme }) => theme.typography.body1.lineHeight};
-  color: ${({ theme }) => theme.colors.customer.main};
+  color: ${({ theme }) => theme.colors.default.blue};
   text-decoration: none;
 `;

@@ -3,6 +3,7 @@ import NavigationItem from './NavigationItem';
 import { CircleUserRound, House, Mails, MapPin } from 'lucide-react';
 import { ROUTE_PATH } from '@/routes/paths';
 import { useLocation } from 'react-router';
+import { NAV_HEIGHT } from '@/constants/number';
 
 const NavigationCustomer = () => {
   const { pathname } = useLocation();
@@ -44,13 +45,14 @@ const NavigationCustomer = () => {
 export default NavigationCustomer;
 
 const Nav = styled.nav`
-  position: absolute;
+  position: sticky;
   bottom: 0;
   z-index: 1;
   width: 100%;
   max-width: 720px;
-  height: 70px;
+  height: ${NAV_HEIGHT}px;
   padding: 0 ${({ theme }) => theme.spacing[10]};
+  background-color: ${({ theme }) => theme.colors.gray[0]};
 
   display: flex;
   align-items: center;

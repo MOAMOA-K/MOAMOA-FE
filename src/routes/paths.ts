@@ -6,6 +6,7 @@ export const ROUTE_PATH = {
 
   MAP: '/map',
   LETTER: '/letter',
+  COUPON: '/coupon',
 
   FEEDBACK: '/feedback',
   INTERACTION: '/interaction',
