@@ -1,9 +1,13 @@
 export type Store = {
   id: number;
   name: string;
-  category: string;
+  category?: string;
   lat: number;
   lng: number;
+  image?: string;
+  address?: string;
+  openTime?: string; // "08:00"
+  closeTime?: string; // "22:00"
 };
 
 export const mockStores: Store[] = [
