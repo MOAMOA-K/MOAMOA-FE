@@ -28,6 +28,7 @@ const Container = styled.section`
   align-items: center;
   justify-content: center;
   gap: ${({ theme }) => theme.spacing[2]};
+  padding: 0 ${({ theme }) => theme.spacing[6]};
 `;
 
 const Wrapper = styled.div`

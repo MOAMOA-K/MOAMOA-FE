@@ -44,13 +44,14 @@ const NavigationOwner = () => {
 export default NavigationOwner;
 
 const Nav = styled.nav`
-  position: absolute;
+  position: sticky;
   bottom: 0;
   z-index: 1;
   width: 100%;
   max-width: 720px;
   height: 70px;
   padding: 0 ${({ theme }) => theme.spacing[10]};
+  background-color: ${({ theme }) => theme.colors.gray[0]};
 
   display: flex;
   align-items: center;

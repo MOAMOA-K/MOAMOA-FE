@@ -18,12 +18,16 @@ const Header = ({ title = '' }: HeaderProps) => {
 export default Header;
 
 const Container = styled.header`
+  position: sticky;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 ${({ theme }) => theme.spacing[3]};
+  background-color: ${({ theme }) => theme.colors.gray[0]};
 `;
 
 const Logo = styled.img`
