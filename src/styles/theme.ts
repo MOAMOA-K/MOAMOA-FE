@@ -18,11 +18,13 @@ export const theme = {
     // 시맨틱 색상 (의미 기반 컬러 토큰)
     default: {
       background: gray[0],
+      blue: '#287eec',
     },
     customer: {
       background: '#fafcfe',
-      main: '#287eec',
-      disabled: '#c1daf9',
+      main: '#da2127',
+      disabled: '#F4BFC1',
+      dark: '#9C171C',
     },
     owner: {
       background: '#fff8f8',
