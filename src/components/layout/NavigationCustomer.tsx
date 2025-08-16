@@ -44,7 +44,7 @@ const NavigationCustomer = () => {
 export default NavigationCustomer;
 
 const Nav = styled.nav`
-  position: absolute;
+  position: sticky;
   bottom: 0;
   z-index: 1;
   width: 100%;
