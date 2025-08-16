@@ -1,15 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router';
 import styled from '@emotion/styled';
+import { ROUTE_PATH } from '@/routes/paths';
 import type { Store } from '@/pages/map/mocks/stores';
 import { mockStores } from '@/pages/map/mocks/stores';
 import BottomSheet from '@/pages/map/components/BottomSheet';
-import SearchBar from '@/pages/map/components/SearchBar';
+import SearchTrigger from '@/pages/map/components/SearchTrigger';
 import NavigationCustomer from '@/components/layout/NavigationCustomer';
 
 function MapPage() {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const [selected, setSelected] = useState<Store | null>(null);
-  const [query, setQuery] = useState('');
+  const navigate = useNavigate();
   const sheetOpen = !!selected;
 
   const loadScript = (src: string) =>
@@ -85,13 +87,9 @@ function MapPage() {
   return (
     <Wrap>
       <MapBox ref={mapRef} />
-      <SearchBarHolder>
-        <SearchBar
-          value={query}
-          onChange={setQuery}
-          onSubmit={(v) => console.log(v)}
-        />
-      </SearchBarHolder>
+      <TopBar>
+        <SearchTrigger onClick={() => navigate(ROUTE_PATH.SEARCH)} />
+      </TopBar>
 
       <SheetWrap open={sheetOpen}>
         <BottomSheet
@@ -125,14 +123,18 @@ const MapBox = styled.div`
   inset: 0;
 `;
 
-const SearchBarHolder = styled.div`
+const TopBar = styled.div`
   position: absolute;
-  z-index: 5;
-  top: ${({ theme }) => theme.spacing?.[3] ?? '12px'};
-  left: ${({ theme }) => theme.spacing?.[3] ?? '12px'};
-  right: ${({ theme }) => theme.spacing?.[3] ?? '12px'};
-  pointer-events: none;
+  z-index: 4;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
 
+  /* 화면 좌우 여백 12px 유지하면서 720px 이하로 */
+  width: min(720px, calc(100% - 24px));
+
+  /* 지도 클릭 살리기: 컨테이너는 무시, 자식만 클릭 */
+  pointer-events: none;
   & > * {
     pointer-events: auto;
   }
