@@ -121,6 +121,7 @@ const Wrap = styled.div`
 const MapBox = styled.div`
   position: absolute;
   inset: 0;
+  z-index: 1;
 `;
 
 const TopBar = styled.div`
@@ -142,7 +143,7 @@ const TopBar = styled.div`
 
 const SheetWrap = styled.div<{ open: boolean }>`
   position: absolute;
-  z-index: 4;
+  z-index: 8;
   left: 0;
   right: 0;
   bottom: 0;
