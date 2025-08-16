@@ -10,6 +10,7 @@ function MapPage() {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const [selected, setSelected] = useState<Store | null>(null);
   const [query, setQuery] = useState('');
+  const sheetOpen = !!selected;
 
   const loadScript = (src: string) =>
     new Promise<void>((resolve, reject) => {
@@ -90,18 +91,19 @@ function MapPage() {
           onChange={setQuery}
           onSubmit={(v) => console.log(v)}
         />
-        ;
       </SearchBarHolder>
 
-      <SheetWrap open={!!selected}>
+      <SheetWrap open={sheetOpen}>
         <BottomSheet
-          open={!!selected}
+          open={sheetOpen}
           title={selected?.name}
           subtitle={selected?.category}
+          //imageUrl={selected?.imageUrl}
           onClose={() => setSelected(null)}
         />
       </SheetWrap>
-      <NavHolder>
+
+      <NavHolder hidden={sheetOpen}>
         <NavigationCustomer />
       </NavHolder>
     </Wrap>
@@ -145,14 +147,18 @@ const SheetWrap = styled.div<{ open: boolean }>`
   pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
 `;
 
-const NavHolder = styled.div`
+const NavHolder = styled.div<{ hidden: boolean }>`
   position: absolute;
   z-index: 6;
   left: 0;
   right: 0;
   bottom: 0;
-
-  /* iOS 홈바 영역 보정 */
   padding-bottom: env(safe-area-inset-bottom, 0px);
-  pointer-events: auto; /* 탭 가능 */
+  pointer-events: auto;
+
+  transform: translateY(${({ hidden }) => (hidden ? '110%' : '0%')});
+  opacity: ${({ hidden }) => (hidden ? 0 : 1)};
+  transition:
+    transform 0.28s ease,
+    opacity 0.2s ease;
 `;
