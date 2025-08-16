@@ -2,17 +2,40 @@ import styled from '@emotion/styled';
 import NavigationItem from './NavigationItem';
 import { CircleUserRound, House, Mails, MapPin } from 'lucide-react';
 import { ROUTE_PATH } from '@/routes/paths';
+import { useLocation } from 'react-router';
 
 const NavigationCustomer = () => {
+  const { pathname } = useLocation();
+
   return (
     <Nav>
-      <NavigationItem to={ROUTE_PATH.HOME} icon={<House />} name='대시보드' />
-      <NavigationItem to={ROUTE_PATH.MAP} icon={<MapPin />} name='지도' />
-      <NavigationItem to={ROUTE_PATH.LETTER} icon={<Mails />} name='편지쓰기' />
+      <NavigationItem
+        to={ROUTE_PATH.HOME}
+        icon={<House />}
+        name='대시보드'
+        type='customer'
+        active={pathname === ROUTE_PATH.HOME}
+      />
+      <NavigationItem
+        to={ROUTE_PATH.MAP}
+        icon={<MapPin />}
+        name='지도'
+        type='customer'
+        active={pathname === ROUTE_PATH.MAP}
+      />
+      <NavigationItem
+        to={ROUTE_PATH.LETTER}
+        icon={<Mails />}
+        name='편지쓰기'
+        type='customer'
+        active={pathname === ROUTE_PATH.LETTER}
+      />
       <NavigationItem
         to={ROUTE_PATH.MY_PAGE}
         icon={<CircleUserRound />}
         name='설정'
+        type='customer'
+        active={pathname === ROUTE_PATH.MY_PAGE}
       />
     </Nav>
   );
@@ -32,12 +55,4 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  ul {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
 `;
