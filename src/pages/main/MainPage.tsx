@@ -5,6 +5,7 @@ import DashboardSection from './components/DashboardSection';
 import FeedbackSection from './components/FeedbackSection';
 import InformationSection from './components/InformationSection';
 import LetterSection from './components/LetterSection';
+import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 
 const MainPage = () => {
   return (
@@ -25,6 +26,6 @@ export default MainPage;
 
 const Main = styled.main`
   height: 100%;
-  min-height: calc(100dvh - 130px);
+  min-height: calc(100dvh - ${HEADER_HEIGHT}px - ${NAV_HEIGHT}px);
   background-color: #fcfcfc;
 `;

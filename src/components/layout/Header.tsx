@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import logo from '@/assets/logo.svg';
+import { HEADER_HEIGHT } from '@/constants/number';
 
 type HeaderProps = {
   title?: string;
@@ -23,7 +24,7 @@ const Container = styled.header`
   left: 0;
   z-index: 1;
   width: 100%;
-  height: 60px;
+  height: ${HEADER_HEIGHT}px;
   display: flex;
   align-items: center;
   justify-content: space-between;
