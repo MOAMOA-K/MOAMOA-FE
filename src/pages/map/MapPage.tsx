@@ -4,6 +4,7 @@ import type { Store } from '@/pages/map/mocks/stores';
 import { mockStores } from '@/pages/map/mocks/stores';
 import BottomSheet from '@/pages/map/components/BottomSheet';
 import SearchBar from '@/pages/map/components/SearchBar';
+import NavigationCustomer from '@/components/layout/NavigationCustomer';
 
 function MapPage() {
   const mapRef = useRef<HTMLDivElement | null>(null);
@@ -100,6 +101,9 @@ function MapPage() {
           onClose={() => setSelected(null)}
         />
       </SheetWrap>
+      <NavHolder>
+        <NavigationCustomer />
+      </NavHolder>
     </Wrap>
   );
 }
@@ -139,4 +143,16 @@ const SheetWrap = styled.div<{ open: boolean }>`
   right: 0;
   bottom: 0;
   pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
+`;
+
+const NavHolder = styled.div`
+  position: absolute;
+  z-index: 6;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  /* iOS 홈바 영역 보정 */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  pointer-events: auto; /* 탭 가능 */
 `;

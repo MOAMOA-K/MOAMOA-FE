@@ -51,6 +51,7 @@ const Nav = styled.nav`
   max-width: 720px;
   height: 70px;
   padding: 0 ${({ theme }) => theme.spacing[10]};
+  background-color: ${({ theme }) => theme.colors.gray[0]};
 
   display: flex;
   align-items: center;
