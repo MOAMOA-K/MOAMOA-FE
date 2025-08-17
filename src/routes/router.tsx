@@ -5,6 +5,7 @@ import LandingPage from '@/pages/landing/LandingPage';
 import LoginPage from '@/pages/login/LoginPage';
 import MapPage from '@/pages/map/MapPage';
 import SearchPage from '@/pages/search/SearchPage';
+import StoreDetailPage from '@/pages/store/StoreDetailPage';
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
       <Route path={ROUTE_PATH.LOGIN} element={<LoginPage />} />
       <Route path={ROUTE_PATH.MAP} element={<MapPage />} />
       <Route path={ROUTE_PATH.SEARCH} element={<SearchPage />} />
+      <Route path={ROUTE_PATH.STORE_DETAIL} element={<StoreDetailPage />} />
     </Routes>
   );
 };
