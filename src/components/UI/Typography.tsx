@@ -34,7 +34,10 @@ const Typography = ({
 
 export default Typography;
 
-const StyledTypography = styled.p<{
+const StyledTypography = styled('p', {
+  shouldForwardProp: (prop) =>
+    prop !== 'variant' && prop !== 'weight' && prop !== 'color',
+})<{
   variant: TypographyVariant;
   weight: TypographyWeight;
   color?: string;
