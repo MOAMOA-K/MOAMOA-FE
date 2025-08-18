@@ -5,6 +5,7 @@ import type { LetterTagType } from '../constants/letter';
 import SelectStar from './SelectStar';
 import SelectLetterTag from './SelectLetterTag';
 import LetterTextarea from './LetterTextarea';
+import { useTheme } from '@emotion/react';
 
 type LetterSendSectionProps = {
   satisfaction: number;
@@ -25,6 +26,8 @@ const LetterSendSection = ({
   letterText,
   setFormData,
 }: LetterSendSectionProps) => {
+  const theme = useTheme();
+
   return (
     <Container>
       <TextWrapper>
@@ -34,7 +37,7 @@ const LetterSendSection = ({
         <Typography
           variant='body1'
           weight='regular'
-          color='theme.colors.gray[70]'
+          color={theme.colors.gray[70]}
         >
           사장님만 볼 수 있는 익명의 편지에요
         </Typography>
@@ -42,7 +45,15 @@ const LetterSendSection = ({
       <SelectStar satisfaction={satisfaction} setFormData={setFormData} />
       <SelectLetterTag letterTag={letterTag} setFormData={setFormData} />
       <LetterTextarea letterText={letterText} setFormData={setFormData} />
-      <Button type='submit'>보내기</Button>
+      <Button type='submit'>
+        <Typography
+          variant='subtitle1'
+          weight='medium'
+          color={theme.colors.gray[0]}
+        >
+          보내기
+        </Typography>
+      </Button>
     </Container>
   );
 };
@@ -77,10 +88,5 @@ const Button = styled.button`
   padding: ${({ theme }) => theme.spacing[4]} 0;
   border-radius: 24px;
   background-color: ${({ theme }) => theme.colors.customer.main};
-
-  font-size: ${({ theme }) => theme.typography.subtitle1.fontSize};
-  line-height: ${({ theme }) => theme.typography.subtitle1.lineHeight};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  color: ${({ theme }) => theme.colors.gray[0]};
   cursor: pointer;
 `;

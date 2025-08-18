@@ -1,4 +1,6 @@
+import Typography from '@/components/UI/Typography';
 import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { UploadIcon } from 'lucide-react';
 import type { ChangeEvent } from 'react';
@@ -9,19 +11,29 @@ type UploadSectionProps = {
 };
 
 const UploadSection = ({ onFileChange, isUploaded }: UploadSectionProps) => {
+  const theme = useTheme();
+
   return (
     <Container>
       <TextWrapper>
-        <Title>영수증을 인증해주세요</Title>
-        <Content>방문객임을 확인하기 위해 필요해요</Content>
+        <Typography variant='title1' weight='bold' as='h2'>
+          영수증을 인증해주세요
+        </Typography>
+        <Typography variant='body1' color={theme.colors.gray[70]}>
+          방문객임을 확인하기 위해 필요해요
+        </Typography>
       </TextWrapper>
       <Card>
         <IconBox>
           <UploadIcon />
         </IconBox>
         <TextWrapper>
-          <SubTitle>영수증 사진을 업로드 해주세요</SubTitle>
-          <SubContent>jpg, png 파일만 업로드 가능해요</SubContent>
+          <Typography variant='subtitle1' weight='medium' as='h3'>
+            영수증 사진을 업로드 해주세요
+          </Typography>
+          <Typography variant='body2' color={theme.colors.gray[70]}>
+            jpg, png 파일만 업로드 가능해요
+          </Typography>
         </TextWrapper>
         <FileInputLabel htmlFor='file-upload'>파일 선택하기</FileInputLabel>
         <HiddenInput
@@ -57,20 +69,6 @@ const TextWrapper = styled.div`
   gap: ${({ theme }) => theme.spacing[2]};
 `;
 
-const Title = styled.h2`
-  font-size: ${({ theme }) => theme.typography.title1.fontSize};
-  line-height: ${({ theme }) => theme.typography.title1.lineHeight};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
-  color: ${({ theme }) => theme.colors.text.default};
-`;
-
-const Content = styled.p`
-  font-size: ${({ theme }) => theme.typography.body1.fontSize};
-  line-height: ${({ theme }) => theme.typography.body1.lineHeight};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
-  color: ${({ theme }) => theme.colors.gray[70]};
-`;
-
 const Card = styled.div`
   width: 100%;
   max-width: 450px;
@@ -92,20 +90,6 @@ const IconBox = styled.div`
   height: 50px;
   border-radius: 50px;
   background-color: ${({ theme }) => theme.colors.gray[30]};
-`;
-
-const SubTitle = styled.h3`
-  font-size: ${({ theme }) => theme.typography.subtitle1.fontSize};
-  line-height: ${({ theme }) => theme.typography.subtitle1.lineHeight};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  color: ${({ theme }) => theme.colors.text.default};
-`;
-
-const SubContent = styled.p`
-  font-size: ${({ theme }) => theme.typography.body2.fontSize};
-  line-height: ${({ theme }) => theme.typography.body2.lineHeight};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
-  color: ${({ theme }) => theme.colors.gray[70]};
 `;
 
 const FileInputLabel = styled.label`
