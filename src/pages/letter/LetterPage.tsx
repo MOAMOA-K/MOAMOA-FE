@@ -26,7 +26,6 @@ const LetterPage = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // 실제 서버 전송 대신 상태로 확인
-    setFormData(formData);
     console.log('폼 데이터:', uploadedFile);
     console.log('제출됨:', formData);
 
