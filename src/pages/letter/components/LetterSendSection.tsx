@@ -2,31 +2,25 @@ import Typography from '@/components/UI/Typography';
 import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import styled from '@emotion/styled';
 import { Star } from 'lucide-react';
+import { LetterTag } from '../constants/letter';
+import type { LetterTagType } from '../constants/letter';
 
 type LetterSendSectionProps = {
   satisfaction: number;
-  letterType: string;
+  letterTag: LetterTagType;
   letterText: string;
   setFormData: React.Dispatch<
     React.SetStateAction<{
       satisfaction: number;
-      letterType: string;
+      letterTag: LetterTagType;
       letterText: string;
     }>
   >;
 };
 
-const LetterType = [
-  { value: 'positive', label: '칭찬' },
-  { value: 'improve', label: '제안' },
-  { value: 'complain', label: '불만' },
-] as const;
-
-type LetterType = (typeof LetterType)[number]['value'];
-
 const LetterSendSection = ({
   satisfaction,
-  letterType,
+  letterTag,
   letterText,
   setFormData,
 }: LetterSendSectionProps) => {
@@ -67,21 +61,21 @@ const LetterSendSection = ({
         <Typography variant='title2' weight='medium' as='h3'>
           편지 유형
         </Typography>
-        <LetterTypeWrapper>
-          {LetterType.map(({ value, label }) => (
-            <TypeButton
+        <LetterTagWrapper>
+          {LetterTag.map(({ value, label }) => (
+            <TagButton
               key={value}
               type='button'
-              active={letterType === value}
+              active={letterTag === value}
               color={value}
               onClick={() =>
-                setFormData((prev) => ({ ...prev, letterType: value }))
+                setFormData((prev) => ({ ...prev, letterTag: value }))
               }
             >
               {label}
-            </TypeButton>
+            </TagButton>
           ))}
-        </LetterTypeWrapper>
+        </LetterTagWrapper>
       </SectionWrapper>
       <SectionWrapper>
         <Typography variant='title2' weight='medium' as='h3'>
@@ -135,7 +129,7 @@ const StarWrapper = styled.div`
   gap: ${({ theme }) => theme.spacing[10]};
 `;
 
-const TypeButton = styled.button<{ active: boolean; color: LetterType }>`
+const TagButton = styled.button<{ active: boolean; color: LetterTagType }>`
   padding: 6px 12px;
   border-radius: 4px;
   border: 1px solid ${({ theme }) => theme.colors.gray[70]};
@@ -144,7 +138,7 @@ const TypeButton = styled.button<{ active: boolean; color: LetterType }>`
   cursor: pointer;
 `;
 
-const LetterTypeWrapper = styled.div`
+const LetterTagWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -6,12 +6,17 @@ import UploadSection from './components/UploadSection';
 import useFile from './hooks/useFile';
 import LetterSendSection from './components/LetterSendSection';
 import { useState, type FormEvent } from 'react';
+import type { LetterTagType } from './constants/letter';
 
 const LetterPage = () => {
   const { uploadedFile, isUploaded, handleFileChange } = useFile();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    satisfaction: number;
+    letterTag: LetterTagType;
+    letterText: string;
+  }>({
     satisfaction: 0,
-    letterType: '칭찬',
+    letterTag: 'positive',
     letterText: '',
   });
 
@@ -36,7 +41,7 @@ const LetterPage = () => {
           ) : (
             <LetterSendSection
               satisfaction={formData.satisfaction}
-              letterType={formData.letterType}
+              letterTag={formData.letterTag}
               letterText={formData.letterText}
               setFormData={setFormData}
             />
