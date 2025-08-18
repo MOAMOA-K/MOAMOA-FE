@@ -7,8 +7,11 @@ import useFile from './hooks/useFile';
 import LetterSendSection from './components/LetterSendSection';
 import { useState, type FormEvent } from 'react';
 import type { LetterTagType } from './constants/letter';
+import { useNavigate } from 'react-router';
+import { ROUTE_PATH } from '@/routes/paths';
 
 const LetterPage = () => {
+  const navigate = useNavigate();
   const { uploadedFile, isUploaded, handleFileChange } = useFile();
   const [formData, setFormData] = useState<{
     satisfaction: number;
@@ -26,6 +29,8 @@ const LetterPage = () => {
     setFormData(formData);
     console.log('폼 데이터:', uploadedFile);
     console.log('제출됨:', formData);
+
+    navigate(ROUTE_PATH.HOME, { replace: true });
   };
 
   return (
