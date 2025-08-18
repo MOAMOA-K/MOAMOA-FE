@@ -49,12 +49,17 @@ const Container = styled.div`
 `;
 
 const TagButton = styled.button<{ active: boolean; color: LetterTagType }>`
-  padding: 6px 12px;
-  border-radius: 4px;
+  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
+  border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.colors.gray[70]};
   background-color: ${({ active, theme, color }) =>
     active ? theme.colors.tag[color] : 'white'};
   cursor: pointer;
+
+  font-size: ${({ theme }) => theme.typography.body2.fontSize};
+  line-height: ${({ theme }) => theme.typography.body2.lineHeight};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
+  color: ${({ theme }) => theme.colors.text.default};
 `;
 
 const LetterTagWrapper = styled.div`
