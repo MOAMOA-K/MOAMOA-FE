@@ -5,22 +5,43 @@ import styled from '@emotion/styled';
 import UploadSection from './components/UploadSection';
 import useFile from './hooks/useFile';
 import LetterSendSection from './components/LetterSendSection';
+import { useState, type FormEvent } from 'react';
 
 const LetterPage = () => {
-  const { isUploaded, handleFileChange } = useFile();
+  const { uploadedFile, isUploaded, handleFileChange } = useFile();
+  const [formData, setFormData] = useState({
+    satisfaction: 0,
+    letterType: '칭찬',
+    letterText: '',
+  });
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // 실제 서버 전송 대신 상태로 확인
+    setFormData(formData);
+    console.log('폼 데이터:', uploadedFile);
+    console.log('제출됨:', formData);
+  };
 
   return (
     <>
       <Header title='마음의 편지' />
       <Main>
-        {!isUploaded ? (
-          <UploadSection
-            isUploaded={isUploaded}
-            onFileChange={handleFileChange}
-          />
-        ) : (
-          <LetterSendSection />
-        )}
+        <Form onSubmit={handleSubmit}>
+          {!isUploaded ? (
+            <UploadSection
+              isUploaded={isUploaded}
+              onFileChange={handleFileChange}
+            />
+          ) : (
+            <LetterSendSection
+              satisfaction={formData.satisfaction}
+              letterType={formData.letterType}
+              letterText={formData.letterText}
+              setFormData={setFormData}
+            />
+          )}
+        </Form>
       </Main>
       <NavigationCustomer />
     </>
@@ -33,4 +54,11 @@ const Main = styled.main`
   height: 100%;
   min-height: calc(100dvh - ${HEADER_HEIGHT}px - ${NAV_HEIGHT}px);
   background-color: ${({ theme }) => theme.colors.customer.background};
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing[4]};
 `;

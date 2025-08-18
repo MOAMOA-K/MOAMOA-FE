@@ -39,6 +39,7 @@ const UploadSection = ({ onFileChange, isUploaded }: UploadSectionProps) => {
 export default UploadSection;
 
 const Container = styled.div`
+  width: 100%;
   height: 100%;
   min-height: calc(100dvh - ${NAV_HEIGHT}px - ${HEADER_HEIGHT}px);
   display: flex;
