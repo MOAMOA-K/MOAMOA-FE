@@ -6,7 +6,7 @@ import StatusSection from './components/StatusSection';
 import HistorySection from './components/HistorySection';
 import Typography from '@/components/UI/Typography';
 import { useTheme } from '@emotion/react';
-import { Outlet, useLocation, useNavigate } from 'react-router';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_PATH } from '@/routes/paths';
 
 const MyPage = () => {

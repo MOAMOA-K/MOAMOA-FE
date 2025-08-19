@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { LetterText, Ticket } from 'lucide-react';
 import HistoryItem from './HistoryItem';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { ROUTE_PATH } from '@/routes/paths';
 
 const HistorySection = () => {
