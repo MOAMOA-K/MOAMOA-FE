@@ -6,11 +6,12 @@ import StatusSection from './components/StatusSection';
 import HistorySection from './components/HistorySection';
 import Typography from '@/components/UI/Typography';
 import { useTheme } from '@emotion/react';
-import { Outlet, useLocation } from 'react-router';
+import { Outlet, useLocation, useNavigate } from 'react-router';
 import { ROUTE_PATH } from '@/routes/paths';
 
 const MyPage = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const location = useLocation();
   const isSubRoute =
     location.pathname !== ROUTE_PATH.MY_PAGE &&
@@ -25,7 +26,7 @@ const MyPage = () => {
             <StatusSection />
             <HistorySection />
             <LogoutSection>
-              <LogoutButton>
+              <LogoutButton onClick={() => navigate(ROUTE_PATH.LOGIN)}>
                 <Typography variant='body2' color={theme.colors.gray[0]}>
                   로그아웃
                 </Typography>
