@@ -1,12 +1,18 @@
 import Header from '@/components/layout/Header';
 import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import styled from '@emotion/styled';
+import LetterItem from '../components/LetterItem';
+import { letterItems } from '../constants/my-letter';
 
 const MyLetterPage = () => {
   return (
     <>
-      <Header title='나의 쿠폰' />
-      <Main>MyLetterPage</Main>
+      <Header title='나의 피드백' />
+      <Main>
+        {letterItems.map((item) => (
+          <LetterItem key={item.id} {...item} />
+        ))}
+      </Main>
     </>
   );
 };
