@@ -1,4 +1,5 @@
 import { mockStores } from '@/pages/map/mocks/stores';
+import { delay } from '@/mocks/utils';
 
 export type SearchItem = {
   id: string;
@@ -36,19 +37,19 @@ function filterMock(keyword: string): SearchItem[] {
   const q = keyword.trim().toLowerCase();
   if (!q) return [];
   return mockStores
-    .filter(
-      (s) =>
-        s.name.toLowerCase().includes(q) ||
-        s.category?.toLowerCase().includes(q),
-    )
-    .map((s) => ({
-      ...s,
-      id: String(s.id), // 일관성 위해 문자열로
-    }));
+    .filter((s) => {
+      const inName = s.name.toLowerCase().includes(q);
+      const inCat = s.category ? s.category.toLowerCase().includes(q) : false;
+      const inAddr = s.address ? s.address.toLowerCase().includes(q) : false;
+      return inName || inCat || inAddr;
+    })
+    .map((s) => ({ ...s, id: String(s.id) }));
 }
 
-export async function searchStores(keyword: string): Promise<SearchItem[]> {
-  // 네트워크 없이 mock 사용
-  await new Promise((r) => setTimeout(r, 200)); // UX용 딜레이
+export async function searchStores(
+  keyword: string,
+  { delayMs = 200 }: { delayMs?: number } = {},
+): Promise<SearchItem[]> {
+  await delay(delayMs);
   return filterMock(keyword);
 }
