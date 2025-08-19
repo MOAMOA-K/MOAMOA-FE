@@ -24,7 +24,7 @@ export default MyLetterPage;
 const Main = styled.main`
   height: 100%;
   min-height: calc(100dvh - ${HEADER_HEIGHT}px - ${NAV_HEIGHT}px);
-  background-color: #fcfcfc;
+  background-color: ${({ theme }) => theme.colors.customer.background};
   display: flex;
   justify-content: center;
 `;

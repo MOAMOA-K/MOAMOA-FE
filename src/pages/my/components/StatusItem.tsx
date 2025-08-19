@@ -21,7 +21,7 @@ const StatusItem = ({ value, label }: StatusItemProps) => {
 
 export default StatusItem;
 
-const Container = styled.section`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

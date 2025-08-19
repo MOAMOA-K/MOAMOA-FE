@@ -26,7 +26,7 @@ const HistoryItem = ({ icon, title, description }: HistoryItemProps) => {
 
 export default HistoryItem;
 
-const Container = styled.section`
+const Container = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing[5]};

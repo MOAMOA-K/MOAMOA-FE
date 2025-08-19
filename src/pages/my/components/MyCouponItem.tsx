@@ -23,7 +23,7 @@ const MyCouponItem = ({ name, date, content }: MyCouponItemProps) => {
       </TitleBox>
       <Typography variant='body1'>{content}</Typography>
       <ButtonBox>
-        <Button>사용하기</Button>
+        <Button type='button'>사용하기</Button>
       </ButtonBox>
     </Card>
   );
@@ -38,7 +38,7 @@ const Card = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.gray[20]};
   gap: ${({ theme }) => theme.spacing[2]};
   border-radius: 12px;
-  padding: 16px;
+  padding: ${({ theme }) => theme.spacing[4]};
 `;
 
 const TitleBox = styled.div`
