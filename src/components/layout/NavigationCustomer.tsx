@@ -36,7 +36,10 @@ const NavigationCustomer = () => {
         icon={<CircleUserRound />}
         name='설정'
         type='customer'
-        active={pathname === ROUTE_PATH.MY_PAGE}
+        active={
+          pathname === ROUTE_PATH.MY_PAGE ||
+          pathname.startsWith(`${ROUTE_PATH.MY_PAGE}/`)
+        }
       />
     </Nav>
   );

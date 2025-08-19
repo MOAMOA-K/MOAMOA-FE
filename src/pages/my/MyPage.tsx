@@ -6,24 +6,36 @@ import StatusSection from './components/StatusSection';
 import HistorySection from './components/HistorySection';
 import Typography from '@/components/UI/Typography';
 import { useTheme } from '@emotion/react';
+import { Outlet, useLocation } from 'react-router';
+import { ROUTE_PATH } from '@/routes/paths';
 
 const MyPage = () => {
   const theme = useTheme();
+  const location = useLocation();
+  const isSubRoute =
+    location.pathname !== ROUTE_PATH.MY_PAGE &&
+    location.pathname.startsWith(ROUTE_PATH.MY_PAGE);
 
   return (
     <>
-      <Header title='마이페이지' />
-      <Main>
-        <StatusSection />
-        <HistorySection />
-        <LogoutSection>
-          <LogoutButton>
-            <Typography variant='body2' color={theme.colors.gray[0]}>
-              로그아웃
-            </Typography>
-          </LogoutButton>
-        </LogoutSection>
-      </Main>
+      {!isSubRoute ? (
+        <>
+          <Header title='마이페이지' />
+          <Main>
+            <StatusSection />
+            <HistorySection />
+            <LogoutSection>
+              <LogoutButton>
+                <Typography variant='body2' color={theme.colors.gray[0]}>
+                  로그아웃
+                </Typography>
+              </LogoutButton>
+            </LogoutSection>
+          </Main>
+        </>
+      ) : (
+        <Outlet />
+      )}
       <NavigationCustomer />
     </>
   );

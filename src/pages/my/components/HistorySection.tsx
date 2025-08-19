@@ -1,22 +1,27 @@
 import styled from '@emotion/styled';
 import { LetterText, Ticket } from 'lucide-react';
 import HistoryItem from './HistoryItem';
+import { Link } from 'react-router';
 
 const HistorySection = () => {
   return (
     <Container>
       <Card>
-        <HistoryItem
-          icon={<LetterText />}
-          title='내 피드백 내역'
-          description='보낸 마음의 편지들'
-        />
+        <Link to='/my/letter'>
+          <HistoryItem
+            icon={<LetterText />}
+            title='내 피드백 내역'
+            description='보낸 마음의 편지들'
+          />
+        </Link>
         <Line />
-        <HistoryItem
-          icon={<Ticket />}
-          title='보유중인 쿠폰'
-          description='현재 가지고 있는 쿠폰'
-        />
+        <Link to='/my/coupon'>
+          <HistoryItem
+            icon={<Ticket />}
+            title='보유중인 쿠폰'
+            description='현재 가지고 있는 쿠폰'
+          />
+        </Link>
       </Card>
     </Container>
   );
