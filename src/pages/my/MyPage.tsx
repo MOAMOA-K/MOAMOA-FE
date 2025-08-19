@@ -13,9 +13,7 @@ const MyPage = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
-  const isSubRoute =
-    location.pathname !== ROUTE_PATH.MY_PAGE &&
-    location.pathname.startsWith(ROUTE_PATH.MY_PAGE);
+  const isSubRoute = location.pathname !== ROUTE_PATH.MY_PAGE;
 
   return (
     <>
@@ -47,7 +45,7 @@ export default MyPage;
 const Main = styled.main`
   height: 100%;
   min-height: calc(100dvh - ${HEADER_HEIGHT}px - ${NAV_HEIGHT}px);
-  background-color: #fcfcfc;
+  background-color: ${({ theme }) => theme.colors.customer.background};
 `;
 
 const LogoutSection = styled.div`
