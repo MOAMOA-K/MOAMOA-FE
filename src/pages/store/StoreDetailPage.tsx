@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, createSearchParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { getStoreDetail } from './apis/store';
 import type { StoreDetailDTO } from './types';
 import { MapPin } from 'lucide-react';
+import AppHeader from '@/components/layout/Header';
+import { ROUTE_PATH } from '@/routes/paths';
 
 const NAV_HEIGHT = 70;
 
@@ -16,6 +18,7 @@ export default function StoreDetailPage() {
   const [origin, setOrigin] = useState<{ lat: number; lng: number } | null>(
     null,
   );
+  const navigate = useNavigate();
 
   // 현재 위치
   useEffect(() => {
@@ -84,6 +87,7 @@ export default function StoreDetailPage() {
 
   return (
     <Page>
+      <AppHeader onBack={() => navigate(-1)} />
       <Header>
         <TitleRow>
           <h1>{data.name}</h1>
@@ -109,7 +113,17 @@ export default function StoreDetailPage() {
 
       <PrimaryButton
         onClick={() => {
-          /* 피드백 플로우 진입 */
+          if (!data) return;
+
+          // 새로고침 대비: query에도 storeId 남김
+          const qs = createSearchParams({
+            storeId: String(data.id),
+            storeName: data.name,
+          });
+          navigate(`${ROUTE_PATH.LETTER}?${qs.toString()}`, {
+            // 편한 접근용: state에도 같이 담아감 (페이지 이동 시에는 이게 더 간편)
+            state: { storeId: data.id, storeName: data.name },
+          });
         }}
       >
         피드백 보내기
@@ -178,7 +192,7 @@ function krCategory(c?: string) {
 const Page = styled.div`
   max-width: 720px;
   margin: 0 auto;
-  padding: 16px 16px calc(${NAV_HEIGHT}px + env(safe-area-inset-bottom, 0px));
+  padding: 0px 15px calc(${NAV_HEIGHT}px + env(safe-area-inset-bottom, 0px));
   background: #fff;
 `;
 
@@ -259,7 +273,7 @@ const PrimaryButton = styled.button`
 
   border: 0;
   border-radius: 20px;
-  background: #3b82f6;
+  background: ${({ theme }) => theme.colors.customer.main};
   color: #fff;
   font-weight: 700;
   cursor: pointer;
