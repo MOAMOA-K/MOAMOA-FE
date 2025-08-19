@@ -1,21 +1,29 @@
 import styled from '@emotion/styled';
 import logo from '@/assets/logo.svg';
 import { HEADER_HEIGHT } from '@/constants/number';
+import { ArrowLeft } from 'lucide-react';
 
 type HeaderProps = {
   title?: string;
+  onBack?: () => void; // ← 추가: 뒤로가기 핸들러
+  right?: React.ReactNode; // ← 추가: 우측 슬롯(공유/즐겨찾기 등)
 };
 
-const Header = ({ title = '' }: HeaderProps) => {
+const Header = ({ title = '', onBack }: HeaderProps) => {
   return (
     <Container>
-      <Logo src={logo} alt='로고' />
+      {onBack ? (
+        <IconBtn aria-label='뒤로가기' onClick={onBack}>
+          <ArrowLeft size={22} />
+        </IconBtn>
+      ) : (
+        <Logo src={logo} alt='로고' />
+      )}
       <Title>{title}</Title>
       <Empty />
     </Container>
   );
 };
-
 export default Header;
 
 const Container = styled.header`
@@ -30,6 +38,19 @@ const Container = styled.header`
   justify-content: space-between;
   padding: 0 ${({ theme }) => theme.spacing[3]};
   background-color: ${({ theme }) => theme.colors.gray[0]};
+`;
+
+const IconBtn = styled.button`
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: ${({ theme }) => theme.colors.text.default};
+  border-radius: 8px;
+  cursor: pointer;
 `;
 
 const Logo = styled.img`
