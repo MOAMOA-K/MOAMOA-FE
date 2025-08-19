@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import NavigationItem from './NavigationItem';
 import { CircleUserRound, House, Mails, MapPin } from 'lucide-react';
 import { ROUTE_PATH } from '@/routes/paths';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import { NAV_HEIGHT } from '@/constants/number';
 
 const NavigationCustomer = () => {

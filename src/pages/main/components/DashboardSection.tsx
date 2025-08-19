@@ -1,7 +1,7 @@
 import { ROUTE_PATH } from '@/routes/paths';
 import styled from '@emotion/styled';
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const DashboardSection = () => {
   return (

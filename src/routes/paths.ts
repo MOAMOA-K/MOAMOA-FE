@@ -7,6 +7,8 @@ export const ROUTE_PATH = {
   MY_LETTER: '/my/letter',
 
   MAP: '/map',
+  SEARCH: '/search',
+  STORE_DETAIL: '/store/:id',
   LETTER: '/letter',
   COUPON: '/coupon',
 
