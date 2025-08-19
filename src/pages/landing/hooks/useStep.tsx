@@ -1,6 +1,6 @@
 import { ROUTE_PATH } from '@/routes/paths';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 const steps = [0, 1, 2] as const;
 export type Step = (typeof steps)[number];

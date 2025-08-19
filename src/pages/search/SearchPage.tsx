@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
-import { useNavigate, useSearchParams, generatePath } from 'react-router';
+import { useNavigate, useSearchParams, generatePath } from 'react-router-dom';
 import SearchHeader from './components/SearchHeader';
 import SearchResults from './components/SearchResults';
 import SearchEmpty from './components/SearchEmpty';

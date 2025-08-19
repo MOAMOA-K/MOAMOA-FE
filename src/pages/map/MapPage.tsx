@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { ROUTE_PATH } from '@/routes/paths';
 import type { Store } from '@/pages/map/mocks/stores';

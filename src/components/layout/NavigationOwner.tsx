@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import NavigationItem from './NavigationItem';
 import { CircleUserRound, Handshake, House, MapPin } from 'lucide-react';
 import { ROUTE_PATH } from '@/routes/paths';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
 const NavigationOwner = () => {
   const { pathname } = useLocation();

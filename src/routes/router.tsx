@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router';
+import { Routes, Route } from 'react-router-dom';
 import { ROUTE_PATH } from './paths';
 import MainPage from '@/pages/main/MainPage';
 import LandingPage from '@/pages/landing/LandingPage';

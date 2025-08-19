@@ -1,6 +1,6 @@
 import { ROUTE_PATH } from '@/routes/paths';
 import styled from '@emotion/styled';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import type { Step } from '../hooks/useStep';
 
 type RoutingSectionProps = {
