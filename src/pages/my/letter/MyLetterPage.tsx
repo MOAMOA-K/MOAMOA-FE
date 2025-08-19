@@ -2,7 +2,7 @@ import Header from '@/components/layout/Header';
 import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import styled from '@emotion/styled';
 import LetterItem from '../components/LetterItem';
-import { letterItems } from '../constants/my-letter';
+import { letterItems } from '../constants/history-item';
 
 const MyLetterPage = () => {
   return (

@@ -25,7 +25,11 @@ const LetterItem = ({ name, satisfaction, content, date }: LetterItemProps) => {
       </TitleBox>
       <StarBox>
         {[1, 2, 3, 4, 5].map((num) => (
-          <Star fill={num <= satisfaction ? 'gold' : 'none'} stroke='black' />
+          <Star
+            key={num}
+            fill={num <= satisfaction ? 'gold' : 'none'}
+            stroke='black'
+          />
         ))}
       </StarBox>
       <Typography variant='body1'>{content}</Typography>
