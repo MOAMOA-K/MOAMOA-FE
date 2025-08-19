@@ -3,6 +3,7 @@ import Header from '@/components/layout/Header';
 import NavigationCustomer from '@/components/layout/NavigationCustomer';
 import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import StatusSection from './components/StatusSection';
+import HistorySection from './components/HistorySection';
 
 const MyPage = () => {
   return (
@@ -10,6 +11,7 @@ const MyPage = () => {
       <Header title='마이페이지' />
       <Main>
         <StatusSection />
+        <HistorySection />
       </Main>
       <NavigationCustomer />
     </>
