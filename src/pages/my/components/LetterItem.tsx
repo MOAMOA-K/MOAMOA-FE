@@ -46,7 +46,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray[40]};
-  padding: ${({ theme }) => theme.spacing[6]};
+  padding: ${({ theme }) => theme.spacing[2]};
   gap: ${({ theme }) => theme.spacing[2]};
 `;
 
