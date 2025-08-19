@@ -3,6 +3,7 @@ import NavigationItem from './NavigationItem';
 import { CircleUserRound, House, Mails, MapPin } from 'lucide-react';
 import { ROUTE_PATH } from '@/routes/paths';
 import { useLocation } from 'react-router-dom';
+import { NAV_HEIGHT } from '@/constants/number';
 
 const NavigationCustomer = () => {
   const { pathname } = useLocation();
@@ -35,7 +36,10 @@ const NavigationCustomer = () => {
         icon={<CircleUserRound />}
         name='설정'
         type='customer'
-        active={pathname === ROUTE_PATH.MY_PAGE}
+        active={
+          pathname === ROUTE_PATH.MY_PAGE ||
+          pathname.startsWith(`${ROUTE_PATH.MY_PAGE}/`)
+        }
       />
     </Nav>
   );
@@ -49,7 +53,7 @@ const Nav = styled.nav`
   z-index: 1;
   width: 100%;
   max-width: 720px;
-  height: 70px;
+  height: ${NAV_HEIGHT}px;
   padding: 0 ${({ theme }) => theme.spacing[10]};
   background-color: ${({ theme }) => theme.colors.gray[0]};
 
