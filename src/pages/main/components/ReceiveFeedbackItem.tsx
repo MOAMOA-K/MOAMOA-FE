@@ -33,9 +33,7 @@ const ReceiveFeedbackItem = ({
           </StarBox>
           <LetterTagBox variant={feedbackLetterTag}>
             <Typography variant='body2'>
-              {LetterTag.map((tag) =>
-                tag.value === feedbackLetterTag ? tag.label : null,
-              )}
+              {LetterTag.find((tag) => tag.value === feedbackLetterTag)?.label}
             </Typography>
           </LetterTagBox>
         </Wrapper>
@@ -48,7 +46,7 @@ const ReceiveFeedbackItem = ({
             답변하러 가기
           </Typography>
         </LinkButton>
-        <HeartButton>
+        <HeartButton type='button'>
           <Heart size={20} />
         </HeartButton>
       </Wrapper>
