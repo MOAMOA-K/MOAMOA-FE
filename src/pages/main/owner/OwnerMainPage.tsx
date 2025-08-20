@@ -3,6 +3,10 @@ import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import styled from '@emotion/styled';
 import InformationSection from '../components/InformationSection';
 import OwnerDashboardSection from '../components/OwnerDashboardSection';
+import ShortcutSection from '../components/ShortcutSection';
+import { ROUTE_PATH } from '@/routes/paths';
+import { Mails } from 'lucide-react';
+import ReceiveFeedbackSection from '../components/ReceiveFeedbackSection';
 
 const OwnerMainPage = () => {
   return (
@@ -13,6 +17,13 @@ const OwnerMainPage = () => {
           content='손님들의 진짜 속마음, 마음의 편지로 확인하세요'
         />
         <OwnerDashboardSection />
+        <ShortcutSection
+          icon={<Mails />}
+          title='피드백 관리'
+          description='고객 의견 확인하기'
+          link={ROUTE_PATH.FEEDBACK}
+        />
+        <ReceiveFeedbackSection />
       </Main>
       <NavigationOwner />
     </>
