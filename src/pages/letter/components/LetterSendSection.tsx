@@ -1,11 +1,10 @@
 import Typography from '@/components/UI/Typography';
 import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import styled from '@emotion/styled';
-import type { LetterTagType } from '../constants/letter';
+import type { LetterTagType } from '@/constants/letter';
 import SelectStar from './SelectStar';
 import SelectLetterTag from './SelectLetterTag';
 import LetterTextarea from './LetterTextarea';
-import { useTheme } from '@emotion/react';
 
 type LetterSendSectionProps = {
   satisfaction: number;
@@ -26,19 +25,13 @@ const LetterSendSection = ({
   letterText,
   setFormData,
 }: LetterSendSectionProps) => {
-  const theme = useTheme();
-
   return (
     <Container>
       <TextWrapper>
         <Typography variant='title1' weight='bold' as='h2'>
           솔직한 마음을 전해주세요
         </Typography>
-        <Typography
-          variant='body1'
-          weight='regular'
-          color={theme.colors.gray[70]}
-        >
+        <Typography variant='body1' weight='regular' color='sub'>
           사장님만 볼 수 있는 익명의 편지에요
         </Typography>
       </TextWrapper>
@@ -46,11 +39,7 @@ const LetterSendSection = ({
       <SelectLetterTag letterTag={letterTag} setFormData={setFormData} />
       <LetterTextarea letterText={letterText} setFormData={setFormData} />
       <Button type='submit'>
-        <Typography
-          variant='subtitle1'
-          weight='medium'
-          color={theme.colors.gray[0]}
-        >
+        <Typography variant='subtitle1' weight='medium' color='white'>
           보내기
         </Typography>
       </Button>

@@ -11,11 +11,11 @@ const NavigationOwner = () => {
   return (
     <Nav>
       <NavigationItem
-        to={ROUTE_PATH.HOME}
+        to={ROUTE_PATH.OWNER}
         icon={<House />}
         name='대시보드'
         type='owner'
-        active={pathname === ROUTE_PATH.HOME}
+        active={pathname === ROUTE_PATH.OWNER}
       />
       <NavigationItem
         to={ROUTE_PATH.FEEDBACK}

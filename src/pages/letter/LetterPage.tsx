@@ -6,7 +6,7 @@ import UploadSection from './components/UploadSection';
 import useFile from './hooks/useFile';
 import LetterSendSection from './components/LetterSendSection';
 import { useState, type FormEvent } from 'react';
-import type { LetterTagType } from './constants/letter';
+import type { LetterTagType } from '@/constants/letter';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PATH } from '@/routes/paths';
 
@@ -29,7 +29,7 @@ const LetterPage = () => {
     console.log('폼 데이터:', uploadedFile);
     console.log('제출됨:', formData);
 
-    navigate(ROUTE_PATH.HOME, { replace: true });
+    navigate(ROUTE_PATH.MAIN, { replace: true });
   };
 
   return (

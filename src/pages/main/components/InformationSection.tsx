@@ -1,10 +1,15 @@
 import styled from '@emotion/styled';
 
-const InformationSection = () => {
+type InformationSectionProps = {
+  userName: string;
+  content: string;
+};
+
+const InformationSection = ({ userName, content }: InformationSectionProps) => {
   return (
     <Container>
-      <Title>안녕하세요, 김민준님! </Title>
-      <Content>오늘도 더 나은 대학가를 함께 만들어가요</Content>
+      <Title>안녕하세요, {userName}님! </Title>
+      <Content>{content}</Content>
     </Container>
   );
 };

@@ -1,25 +1,33 @@
-import { ROUTE_PATH } from '@/routes/paths';
 import styled from '@emotion/styled';
-import { Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const LetterSection = () => {
+type ShortcutSectionProps = {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  link: string;
+};
+
+const ShortcutSection = ({
+  icon,
+  title,
+  description,
+  link,
+}: ShortcutSectionProps) => {
   return (
     <Container>
-      <Card to={ROUTE_PATH.LETTER}>
-        <IconBox>
-          <Mail />
-        </IconBox>
+      <Card to={link}>
+        <IconBox>{icon}</IconBox>
         <Flex>
-          <Title>마음의 편지</Title>
-          <Content>익명 피드백 보내기</Content>
+          <Title>{title}</Title>
+          <Content>{description}</Content>
         </Flex>
       </Card>
     </Container>
   );
 };
 
-export default LetterSection;
+export default ShortcutSection;
 
 const Container = styled.section`
   display: flex;

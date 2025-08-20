@@ -1,6 +1,5 @@
 import Typography from '@/components/UI/Typography';
 import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { UploadIcon } from 'lucide-react';
 import type { ChangeEvent } from 'react';
@@ -11,15 +10,13 @@ type UploadSectionProps = {
 };
 
 const UploadSection = ({ onFileChange, isUploaded }: UploadSectionProps) => {
-  const theme = useTheme();
-
   return (
     <Container>
       <TextWrapper>
         <Typography variant='title1' weight='bold' as='h2'>
           영수증을 인증해주세요
         </Typography>
-        <Typography variant='body1' color={theme.colors.gray[70]}>
+        <Typography variant='body1' color='sub'>
           방문객임을 확인하기 위해 필요해요
         </Typography>
       </TextWrapper>
@@ -31,7 +28,7 @@ const UploadSection = ({ onFileChange, isUploaded }: UploadSectionProps) => {
           <Typography variant='subtitle1' weight='medium' as='h3'>
             영수증 사진을 업로드 해주세요
           </Typography>
-          <Typography variant='body2' color={theme.colors.gray[70]}>
+          <Typography variant='body2' color='sub'>
             jpg, png 파일만 업로드 가능해요
           </Typography>
         </TextWrapper>

@@ -11,11 +11,11 @@ const NavigationCustomer = () => {
   return (
     <Nav>
       <NavigationItem
-        to={ROUTE_PATH.HOME}
+        to={ROUTE_PATH.CUSTOMER}
         icon={<House />}
         name='대시보드'
         type='customer'
-        active={pathname === ROUTE_PATH.HOME}
+        active={pathname === ROUTE_PATH.CUSTOMER}
       />
       <NavigationItem
         to={ROUTE_PATH.MAP}

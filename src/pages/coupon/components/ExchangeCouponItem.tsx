@@ -1,5 +1,4 @@
 import Typography from '@/components/UI/Typography';
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 type ExchangeCouponItemProps = {
@@ -17,8 +16,6 @@ const ExchangeCouponItem = ({
   point,
   updatePoint,
 }: ExchangeCouponItemProps) => {
-  const theme = useTheme();
-
   return (
     <Container>
       <Typography variant='subtitle1' weight='bold'>
@@ -37,7 +34,7 @@ const ExchangeCouponItem = ({
           disabled={point < price}
           onClick={() => updatePoint(point - price)}
         >
-          <Typography variant='body2' color={theme.colors.gray[0]}>
+          <Typography variant='body2' color='white'>
             교환하기
           </Typography>
         </Button>

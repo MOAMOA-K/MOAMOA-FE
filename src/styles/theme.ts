@@ -17,7 +17,8 @@ export const theme = {
     gray,
     // 시맨틱 색상 (의미 기반 컬러 토큰)
     default: {
-      background: gray[0],
+      background: '#fafcfe',
+      white: gray[0],
       blue: '#287eec',
     },
     customer: {
@@ -27,9 +28,10 @@ export const theme = {
       dark: '#9C171C',
     },
     owner: {
-      background: '#fff8f8',
-      main: '#f27e76',
-      disabled: '#fbdad7',
+      background: '#fafcfe',
+      main: '#34495e',
+      disabled: '#c5cbd1',
+      dark: '#1d2935',
     },
     tag: {
       star: '#f1f436',
@@ -40,7 +42,8 @@ export const theme = {
     // 텍스트 색상
     text: {
       default: gray[90], // 기본 텍스트
-      sub: gray[50], // 보조 텍스트
+      sub: gray[70], // 보조 텍스트
+      white: gray[0], // 흰색 텍스트
     },
   },
 

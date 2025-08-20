@@ -1,6 +1,6 @@
 import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
-import type { LetterTagType } from '../constants/letter';
+import type { LetterTagType } from '@/constants/letter';
 
 type LetterTextareaProps = {
   letterText: string;

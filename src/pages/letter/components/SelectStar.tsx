@@ -1,7 +1,7 @@
 import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
 import { Star } from 'lucide-react';
-import type { LetterTagType } from '../constants/letter';
+import type { LetterTagType } from '@/constants/letter';
 
 type SelectStarProps = {
   satisfaction: number;

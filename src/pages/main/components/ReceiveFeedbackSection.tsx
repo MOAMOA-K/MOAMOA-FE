@@ -1,0 +1,45 @@
+import styled from '@emotion/styled';
+import ReceiveFeedbackItem from './ReceiveFeedbackItem';
+import { receiveFeedbacks } from '../mocks/feedbacks';
+import Typography from '@/components/UI/Typography';
+
+const ReceiveFeedbackSection = () => {
+  return (
+    <Container>
+      <Wrapper>
+        <Typography variant='title2' weight='bold'>
+          최근 받은 피드백
+        </Typography>
+        {receiveFeedbacks.map((feedback) => (
+          <ReceiveFeedbackItem
+            key={feedback.id}
+            feedbackLetterTag={feedback.letterTag}
+            satisfaction={feedback.satisfaction}
+            content={feedback.content}
+            createdAt={feedback.createdAt}
+          />
+        ))}
+      </Wrapper>
+    </Container>
+  );
+};
+
+export default ReceiveFeedbackSection;
+
+const Container = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: ${({ theme }) => theme.spacing[2]};
+  padding: 0 ${({ theme }) => theme.spacing[6]};
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing[3]};
+  padding: ${({ theme }) => `${theme.spacing[5]} 0`};
+  width: 100%;
+  max-width: 450px;
+`;
