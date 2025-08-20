@@ -10,7 +10,10 @@ const CustomerMainPage = () => {
   return (
     <>
       <Main>
-        <InformationSection />
+        <InformationSection
+          userName='김민준'
+          content='오늘도 더 나은 대학가를 함께 만들어가요'
+        />
         <DashboardSection />
         <LetterSection />
         <FeedbackSection />
