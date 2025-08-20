@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import NavigationItem from './NavigationItem';
-import { CircleUserRound, House, Mails, MapPin } from 'lucide-react';
+import { CircleUserRound, House, MapPin, Ticket } from 'lucide-react';
 import { ROUTE_PATH } from '@/routes/paths';
 import { useLocation } from 'react-router-dom';
 import { NAV_HEIGHT } from '@/constants/number';
@@ -25,11 +25,11 @@ const NavigationCustomer = () => {
         active={pathname === ROUTE_PATH.MAP}
       />
       <NavigationItem
-        to={ROUTE_PATH.LETTER}
-        icon={<Mails />}
-        name='편지쓰기'
+        to={ROUTE_PATH.COUPON}
+        icon={<Ticket />}
+        name='쿠폰 교환'
         type='customer'
-        active={pathname === ROUTE_PATH.LETTER}
+        active={pathname === ROUTE_PATH.COUPON}
       />
       <NavigationItem
         to={ROUTE_PATH.MY_PAGE}
