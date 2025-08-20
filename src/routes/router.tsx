@@ -11,11 +11,16 @@ import MyPage from '@/pages/my/MyPage';
 import MyCouponPage from '@/pages/my/coupon/MyCouponPage';
 import MyLetterPage from '@/pages/my/letter/MyLetterPage';
 import CouponPage from '@/pages/coupon/CouponPage';
+import CustomerMainPage from '@/pages/main/customer/CustomerMainPage';
+import OwnerMainPage from '@/pages/main/owner/OwnerMainPage';
 
 const Router = () => {
   return (
     <Routes>
-      <Route path={ROUTE_PATH.HOME} element={<MainPage />} />
+      <Route path={ROUTE_PATH.MAIN} element={<MainPage />}>
+        <Route path={ROUTE_PATH.CUSTOMER} element={<CustomerMainPage />} />
+        <Route path={ROUTE_PATH.OWNER} element={<OwnerMainPage />} />
+      </Route>
       <Route path={ROUTE_PATH.LANDING} element={<LandingPage />} />
       <Route path={ROUTE_PATH.LOGIN} element={<LoginPage />} />
       <Route path={ROUTE_PATH.MAP} element={<MapPage />} />
