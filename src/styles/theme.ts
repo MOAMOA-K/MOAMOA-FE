@@ -42,7 +42,8 @@ export const theme = {
     // 텍스트 색상
     text: {
       default: gray[90], // 기본 텍스트
-      sub: gray[50], // 보조 텍스트
+      sub: gray[70], // 보조 텍스트
+      white: gray[0], // 흰색 텍스트
     },
   },
 
