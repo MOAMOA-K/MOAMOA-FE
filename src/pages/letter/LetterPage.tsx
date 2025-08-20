@@ -6,7 +6,7 @@ import UploadSection from './components/UploadSection';
 import useFile from './hooks/useFile';
 import LetterSendSection from './components/LetterSendSection';
 import { useState, type FormEvent } from 'react';
-import type { LetterTagType } from './constants/letter';
+import type { LetterTagType } from '@/constants/letter';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PATH } from '@/routes/paths';
 

@@ -1,7 +1,7 @@
 import Typography from '@/components/UI/Typography';
 import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import styled from '@emotion/styled';
-import type { LetterTagType } from '../constants/letter';
+import type { LetterTagType } from '@/constants/letter';
 import SelectStar from './SelectStar';
 import SelectLetterTag from './SelectLetterTag';
 import LetterTextarea from './LetterTextarea';
