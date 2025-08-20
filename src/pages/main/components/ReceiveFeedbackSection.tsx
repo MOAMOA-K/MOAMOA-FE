@@ -1,12 +1,15 @@
 import styled from '@emotion/styled';
 import ReceiveFeedbackItem from './ReceiveFeedbackItem';
 import { receiveFeedbacks } from '../mocks/feedbacks';
+import Typography from '@/components/UI/Typography';
 
 const ReceiveFeedbackSection = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>최근 받은 피드백</Title>
+        <Typography variant='title2' weight='bold'>
+          최근 받은 피드백
+        </Typography>
         {receiveFeedbacks.map((feedback) => (
           <ReceiveFeedbackItem
             key={feedback.id}
@@ -39,11 +42,4 @@ const Wrapper = styled.div`
   padding: ${({ theme }) => `${theme.spacing[5]} 0`};
   width: 100%;
   max-width: 450px;
-`;
-
-const Title = styled.p`
-  font-size: ${({ theme }) => theme.typography.title2.fontSize};
-  line-height: ${({ theme }) => theme.typography.title2.lineHeight};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
-  color: ${({ theme }) => theme.colors.text.default};
 `;
