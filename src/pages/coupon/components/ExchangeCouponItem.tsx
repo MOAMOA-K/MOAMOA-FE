@@ -33,6 +33,7 @@ const ExchangeCouponItem = ({
           {price}p
         </Typography>
         <Button
+          type='button'
           disabled={point < price}
           onClick={() => updatePoint(point - price)}
         >
