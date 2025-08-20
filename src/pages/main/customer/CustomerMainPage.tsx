@@ -1,5 +1,5 @@
 import NavigationCustomer from '@/components/layout/NavigationCustomer';
-import DashboardSection from '../components/DashboardSection';
+import CustomerDashboardSection from '../components/CustomerDashboardSection';
 import FeedbackSection from '../components/FeedbackSection';
 import InformationSection from '../components/InformationSection';
 import LetterSection from '../components/LetterSection';
@@ -14,7 +14,7 @@ const CustomerMainPage = () => {
           userName='김민준'
           content='오늘도 더 나은 대학가를 함께 만들어가요'
         />
-        <DashboardSection />
+        <CustomerDashboardSection />
         <LetterSection />
         <FeedbackSection />
       </Main>

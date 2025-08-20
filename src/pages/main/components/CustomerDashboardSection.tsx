@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const DashboardSection = () => {
+const CustomerDashboardSection = () => {
   return (
     <Container>
       <Card>
@@ -19,7 +19,7 @@ const DashboardSection = () => {
   );
 };
 
-export default DashboardSection;
+export default CustomerDashboardSection;
 
 const Container = styled.section`
   display: flex;
