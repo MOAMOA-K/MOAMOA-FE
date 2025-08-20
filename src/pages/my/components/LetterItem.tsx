@@ -1,5 +1,4 @@
 import Typography from '@/components/UI/Typography';
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Star } from 'lucide-react';
 
@@ -11,15 +10,13 @@ type LetterItemProps = {
 };
 
 const LetterItem = ({ name, satisfaction, content, date }: LetterItemProps) => {
-  const theme = useTheme();
-
   return (
     <Container>
       <TitleBox>
         <Typography variant='title2' weight='bold'>
           {name}
         </Typography>
-        <Typography variant='body2' color={theme.colors.gray[70]}>
+        <Typography variant='body2' color='sub'>
           {date}
         </Typography>
       </TitleBox>

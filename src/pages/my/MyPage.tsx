@@ -5,12 +5,10 @@ import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import StatusSection from './components/StatusSection';
 import HistorySection from './components/HistorySection';
 import Typography from '@/components/UI/Typography';
-import { useTheme } from '@emotion/react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_PATH } from '@/routes/paths';
 
 const MyPage = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const isSubRoute = location.pathname !== ROUTE_PATH.MY_PAGE;
@@ -25,7 +23,7 @@ const MyPage = () => {
             <HistorySection />
             <LogoutSection>
               <LogoutButton onClick={() => navigate(ROUTE_PATH.LOGIN)}>
-                <Typography variant='body2' color={theme.colors.gray[0]}>
+                <Typography variant='body2' color='white'>
                   로그아웃
                 </Typography>
               </LogoutButton>

@@ -1,5 +1,4 @@
 import Typography from '@/components/UI/Typography';
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 type MyCouponItemProps = {
@@ -9,15 +8,13 @@ type MyCouponItemProps = {
 };
 
 const MyCouponItem = ({ name, date, content }: MyCouponItemProps) => {
-  const theme = useTheme();
-
   return (
     <Card>
       <TitleBox>
         <Typography variant='title2' weight='bold'>
           {name}
         </Typography>
-        <Typography variant='body2' color={theme.colors.gray[70]}>
+        <Typography variant='body2' color='sub'>
           {date}
         </Typography>
       </TitleBox>

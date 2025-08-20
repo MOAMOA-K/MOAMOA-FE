@@ -9,11 +9,12 @@ type TypographyVariant =
   | 'body1'
   | 'body2';
 type TypographyWeight = 'regular' | 'medium' | 'bold';
+type TypographyColor = 'default' | 'sub' | 'white';
 
 interface TypographyProps {
   variant: TypographyVariant;
   weight?: TypographyWeight;
-  color?: string;
+  color?: TypographyColor;
   children: ReactNode;
   as?: keyof JSX.IntrinsicElements;
 }
@@ -21,7 +22,7 @@ interface TypographyProps {
 const Typography = ({
   variant,
   weight = 'regular',
-  color,
+  color = 'default',
   children,
   as = 'p',
 }: TypographyProps) => {
@@ -40,10 +41,10 @@ const StyledTypography = styled('p', {
 })<{
   variant: TypographyVariant;
   weight: TypographyWeight;
-  color?: string;
+  color: TypographyColor;
 }>`
   font-size: ${({ theme, variant }) => theme.typography[variant].fontSize};
   line-height: ${({ theme, variant }) => theme.typography[variant].lineHeight};
   font-weight: ${({ theme, weight }) => theme.typography.fontWeight[weight]};
-  color: ${({ theme, color }) => color ?? theme.colors.text.default};
+  color: ${({ theme, color }) => theme.colors.text[color]};
 `;
