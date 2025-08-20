@@ -6,11 +6,11 @@ import LoginPage from '@/pages/login/LoginPage';
 import MapPage from '@/pages/map/MapPage';
 import SearchPage from '@/pages/search/SearchPage';
 import StoreDetailPage from '@/pages/store/StoreDetailPage';
-
 import LetterPage from '@/pages/letter/LetterPage';
 import MyPage from '@/pages/my/MyPage';
 import MyCouponPage from '@/pages/my/coupon/MyCouponPage';
 import MyLetterPage from '@/pages/my/letter/MyLetterPage';
+import CouponPage from '@/pages/coupon/CouponPage';
 
 const Router = () => {
   return (
@@ -21,8 +21,8 @@ const Router = () => {
       <Route path={ROUTE_PATH.MAP} element={<MapPage />} />
       <Route path={ROUTE_PATH.SEARCH} element={<SearchPage />} />
       <Route path={ROUTE_PATH.STORE_DETAIL} element={<StoreDetailPage />} />
-
       <Route path={ROUTE_PATH.LETTER} element={<LetterPage />} />
+      <Route path={ROUTE_PATH.COUPON} element={<CouponPage />} />
       <Route path={ROUTE_PATH.MY_PAGE} element={<MyPage />}>
         <Route path={ROUTE_PATH.MY_COUPON} element={<MyCouponPage />} />
         <Route path={ROUTE_PATH.MY_LETTER} element={<MyLetterPage />} />
