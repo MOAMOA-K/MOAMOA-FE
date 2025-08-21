@@ -4,23 +4,23 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Bot, Heart, Star, Store } from 'lucide-react';
 
-type PendingItemProps = {
-  satisfaction: number;
-  tag: LetterTagType;
+type FeedbackItemProps = {
+  rating: number;
+  type: LetterTagType;
   createAt: string;
-  content: string;
+  modifiedContent: string;
   reply: string | null;
   status: 'PROCESSING' | 'DONE';
 };
 
 const FeedbackItem = ({
-  satisfaction,
-  tag,
+  rating,
+  type,
   createAt,
-  content,
+  modifiedContent,
   reply,
   status,
-}: PendingItemProps) => {
+}: FeedbackItemProps) => {
   const theme = useTheme();
 
   return (
@@ -32,15 +32,15 @@ const FeedbackItem = ({
               <Star
                 key={num}
                 size={20}
-                fill={num <= satisfaction ? 'gold' : 'none'}
+                fill={num <= rating ? 'gold' : 'none'}
                 stroke={theme.colors.gray[50]}
-                strokeWidth={num <= satisfaction ? 0 : 1}
+                strokeWidth={num <= rating ? 0 : 1}
               />
             ))}
           </StarBox>
-          <TagBox tag={tag}>
+          <TagBox tag={type}>
             <Typography variant='body2'>
-              {LetterTag.find((item) => item.value === tag)?.label}
+              {LetterTag.find((item) => item.value === type)?.label}
             </Typography>
           </TagBox>
           <StatusBox status={status}>
@@ -52,7 +52,7 @@ const FeedbackItem = ({
         <Typography variant='body2'>{createAt}</Typography>
       </LineWrapper>
       <ContentBox>
-        <Typography variant='body1'>{content}</Typography>
+        <Typography variant='body1'>{modifiedContent}</Typography>
       </ContentBox>
       {reply ? (
         <Card status='DONE'>

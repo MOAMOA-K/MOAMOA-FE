@@ -13,10 +13,10 @@ const PendingTab = () => {
       {pendingList.map((feedback) => (
         <FeedbackItem
           key={feedback.id}
-          satisfaction={feedback.rating}
-          tag={feedback.type}
+          rating={feedback.rating}
+          type={feedback.type}
           createAt={feedback.createdAt}
-          content={feedback.modifiedContent}
+          modifiedContent={feedback.modifiedContent}
           reply={feedback.reply}
           status={feedback.status}
         />
