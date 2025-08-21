@@ -4,6 +4,7 @@ import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import styled from '@emotion/styled';
 import TabNavigation from './components/TabNavigation';
 import { Outlet, useLocation } from 'react-router-dom';
+import { feedbackData } from './mocks/feedback';
 
 const FeedbackPage = () => {
   const location = useLocation();
@@ -13,7 +14,7 @@ const FeedbackPage = () => {
       <Header title='피드백 관리' />
       <Main>
         <TabNavigation selected={location.pathname} />
-        <Outlet />
+        <Outlet context={{ feedbackData }} />
       </Main>
       <NavigationOwner />
     </>
