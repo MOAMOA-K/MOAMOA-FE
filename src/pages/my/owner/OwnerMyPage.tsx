@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 import Header from '@/components/layout/Header';
-import NavigationCustomer from '@/components/layout/NavigationCustomer';
 import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_PATH } from '@/routes/paths';
 import OwnerStatusSection from '../components/OwnerStatusSection';
 import Typography from '@/components/UI/Typography';
+import NavigationOwner from '@/components/layout/NavigationOwner';
 
 const OwnerMyPage = () => {
   const location = useLocation();
@@ -31,7 +31,7 @@ const OwnerMyPage = () => {
       ) : (
         <Outlet />
       )}
-      <NavigationCustomer />
+      <NavigationOwner />
     </>
   );
 };
