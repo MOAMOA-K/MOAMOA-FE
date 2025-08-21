@@ -17,5 +17,8 @@ export const ROUTE_PATH = {
   COUPON: '/coupon',
 
   FEEDBACK: '/feedback',
+  FEEDBACK_ALL: '/feedback/all',
+  FEEDBACK_COMPLETED: '/feedback/completed',
+  FEEDBACK_PENDING: '/feedback/pending',
   INTERACTION: '/interaction',
 };
