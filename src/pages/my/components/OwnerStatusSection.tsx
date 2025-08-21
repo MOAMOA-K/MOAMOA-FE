@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { User } from 'lucide-react';
 import StatusItem from './StatusItem';
 
-const StatusSection = () => {
+const OwnerStatusSection = () => {
   return (
     <Container>
       <Card>
@@ -32,7 +32,7 @@ const StatusSection = () => {
   );
 };
 
-export default StatusSection;
+export default OwnerStatusSection;
 
 const Container = styled.section`
   display: flex;
