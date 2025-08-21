@@ -5,7 +5,7 @@ import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import Typography from '@/components/UI/Typography';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_PATH } from '@/routes/paths';
-import StatusSection from '../components/StatusSection';
+import CustomerStatusSection from '../components/CustomerStatusSection';
 import HistorySection from '../components/HistorySection';
 
 const CustomerMyPage = () => {
@@ -19,7 +19,7 @@ const CustomerMyPage = () => {
         <>
           <Header title='마이페이지' />
           <Main>
-            <StatusSection />
+            <CustomerStatusSection />
             <HistorySection />
             <LogoutSection>
               <LogoutButton onClick={() => navigate(ROUTE_PATH.LOGIN)}>
