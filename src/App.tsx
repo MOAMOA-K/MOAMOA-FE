@@ -4,15 +4,19 @@ import { GlobalTypographyStyle } from '@/styles/typography';
 import { theme } from './styles/theme';
 import Router from '@/routes/router';
 import AppLayout from '@/components/layout/AppLayout';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from '@/util/queryClient';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <Global styles={GlobalResetStyle} />
       <Global styles={GlobalTypographyStyle} />
-      <AppLayout>
-        <Router />
-      </AppLayout>
+      <QueryClientProvider client={queryClient}>
+        <AppLayout>
+          <Router />
+        </AppLayout>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }
