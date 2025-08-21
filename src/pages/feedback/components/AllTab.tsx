@@ -1,10 +1,10 @@
 import { useOutletContext } from 'react-router-dom';
-import type { FeedbackData } from '../mocks/feedback';
 import FeedbackItem from './FeedbackItem';
 import styled from '@emotion/styled';
+import type { FeedbackContextType } from '../FeedbackPage';
 
 const AllTab = () => {
-  const { feedbackData } = useOutletContext<{ feedbackData: FeedbackData[] }>();
+  const { feedbackData } = useOutletContext<FeedbackContextType>();
 
   return (
     <Container>

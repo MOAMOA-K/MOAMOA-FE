@@ -4,7 +4,13 @@ import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import styled from '@emotion/styled';
 import TabNavigation from './components/TabNavigation';
 import { Outlet, useLocation } from 'react-router-dom';
-import { feedbackData } from './mocks/feedback';
+import { feedbackData, type FeedbackData } from './mocks/feedback';
+
+export type FeedbackContextType = {
+  feedbackData: FeedbackData[];
+  pendingList: FeedbackData[];
+  completedList: FeedbackData[];
+};
 
 const FeedbackPage = () => {
   const location = useLocation();
