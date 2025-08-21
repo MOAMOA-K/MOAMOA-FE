@@ -57,11 +57,14 @@ export default TabNavigation;
 
 const TabSection = styled.section`
   display: flex;
+  align-items: center;
+  justify-content: center;
   padding: ${({ theme }) => `${theme.spacing[2]} ${theme.spacing[5]}`};
 `;
 
 const TabContainer = styled.div`
   width: 100%;
+  max-width: 550px;
   display: flex;
   padding: ${({ theme }) => theme.spacing[2]};
   gap: ${({ theme }) => theme.spacing[3]};
