@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { ROUTE_PATH } from './paths';
 import MainPage from '@/pages/main/MainPage';
 import LandingPage from '@/pages/landing/LandingPage';
@@ -15,6 +15,10 @@ import CustomerMyPage from '@/pages/my/customer/CustomerMyPage';
 import OwnerMyPage from '@/pages/my/owner/OwnerMyPage';
 import MyCouponPage from '@/pages/my/customer/coupon/MyCouponPage';
 import MyLetterPage from '@/pages/my/customer/letter/MyLetterPage';
+import FeedbackPage from '@/pages/feedback/FeedbackPage';
+import CompletedTab from '@/pages/feedback/components/CompletedTab';
+import AllTab from '@/pages/feedback/components/AllTab';
+import PendingTab from '@/pages/feedback/components/PendingTab';
 
 const Router = () => {
   return (
@@ -36,6 +40,18 @@ const Router = () => {
           <Route path={ROUTE_PATH.MY_LETTER} element={<MyLetterPage />} />
         </Route>
         <Route path={ROUTE_PATH.MY_OWNER} element={<OwnerMyPage />} />
+      </Route>
+      <Route path={ROUTE_PATH.FEEDBACK} element={<FeedbackPage />}>
+        <Route
+          index
+          element={<Navigate to={ROUTE_PATH.FEEDBACK_ALL} replace />}
+        />
+        <Route path={ROUTE_PATH.FEEDBACK_ALL} element={<AllTab />} />
+        <Route
+          path={ROUTE_PATH.FEEDBACK_COMPLETED}
+          element={<CompletedTab />}
+        />
+        <Route path={ROUTE_PATH.FEEDBACK_PENDING} element={<PendingTab />} />
       </Route>
     </Routes>
   );
