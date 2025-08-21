@@ -4,10 +4,9 @@ import FeedbackItem from './FeedbackItem';
 import styled from '@emotion/styled';
 
 const PendingTab = () => {
-  const { feedbackData } = useOutletContext<{ feedbackData: FeedbackData[] }>();
-  const pendingList = feedbackData.filter(
-    (feedback) => feedback.status === 'PROCESSING',
-  );
+  const { pendingList } = useOutletContext<{
+    pendingList: FeedbackData[];
+  }>();
 
   return (
     <Container>

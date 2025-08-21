@@ -4,10 +4,9 @@ import FeedbackItem from './FeedbackItem';
 import styled from '@emotion/styled';
 
 const CompletedTab = () => {
-  const { feedbackData } = useOutletContext<{ feedbackData: FeedbackData[] }>();
-  const completedList = feedbackData.filter(
-    (feedback) => feedback.status === 'DONE',
-  );
+  const { completedList } = useOutletContext<{
+    completedList: FeedbackData[];
+  }>();
 
   return (
     <Container>

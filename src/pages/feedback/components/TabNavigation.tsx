@@ -5,9 +5,17 @@ import { Link } from 'react-router-dom';
 
 type TabNavigationProps = {
   selected: string;
+  allCount: number;
+  pendingCount: number;
+  completedCount: number;
 };
 
-const TabNavigation = ({ selected }: TabNavigationProps) => {
+const TabNavigation = ({
+  selected,
+  allCount,
+  pendingCount,
+  completedCount,
+}: TabNavigationProps) => {
   return (
     <TabSection>
       <TabContainer>
@@ -19,7 +27,7 @@ const TabNavigation = ({ selected }: TabNavigationProps) => {
             variant='subtitle2'
             color={selected === ROUTE_PATH.FEEDBACK_ALL ? 'white' : 'default'}
           >
-            전체
+            전체({allCount})
           </Typography>
         </TabItem>
         <TabItem
@@ -32,7 +40,7 @@ const TabNavigation = ({ selected }: TabNavigationProps) => {
               selected === ROUTE_PATH.FEEDBACK_PENDING ? 'white' : 'default'
             }
           >
-            대기 중
+            대기 중({pendingCount})
           </Typography>
         </TabItem>
         <TabItem
@@ -45,7 +53,7 @@ const TabNavigation = ({ selected }: TabNavigationProps) => {
               selected === ROUTE_PATH.FEEDBACK_COMPLETED ? 'white' : 'default'
             }
           >
-            완료
+            완료({completedCount})
           </Typography>
         </TabItem>
       </TabContainer>

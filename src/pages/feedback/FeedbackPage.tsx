@@ -8,13 +8,24 @@ import { feedbackData } from './mocks/feedback';
 
 const FeedbackPage = () => {
   const location = useLocation();
+  const pendingList = feedbackData.filter(
+    (feedback) => feedback.status === 'PROCESSING',
+  );
+  const completedList = feedbackData.filter(
+    (feedback) => feedback.status === 'DONE',
+  );
 
   return (
     <>
       <Header title='피드백 관리' />
       <Main>
-        <TabNavigation selected={location.pathname} />
-        <Outlet context={{ feedbackData }} />
+        <TabNavigation
+          selected={location.pathname}
+          allCount={feedbackData.length}
+          pendingCount={pendingList.length}
+          completedCount={completedList.length}
+        />
+        <Outlet context={{ feedbackData, pendingList, completedList }} />
       </Main>
       <NavigationOwner />
     </>

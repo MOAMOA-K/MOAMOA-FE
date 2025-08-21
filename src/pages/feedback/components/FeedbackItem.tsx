@@ -31,6 +31,7 @@ const FeedbackItem = ({
             {[1, 2, 3, 4, 5].map((num) => (
               <Star
                 key={num}
+                size={20}
                 fill={num <= satisfaction ? 'gold' : 'none'}
                 stroke={theme.colors.gray[50]}
                 strokeWidth={num <= satisfaction ? 0 : 1}
@@ -50,7 +51,9 @@ const FeedbackItem = ({
         </Wrapper>
         <Typography variant='body2'>{createAt}</Typography>
       </LineWrapper>
-      <Typography variant='body1'>{content}</Typography>
+      <ContentBox>
+        <Typography variant='body1'>{content}</Typography>
+      </ContentBox>
       {reply ? (
         <Card status='DONE'>
           <Wrapper>
@@ -99,7 +102,7 @@ const Card = styled.div<{ status?: 'PROCESSING' | 'DONE' }>`
       : theme.colors.gray[0]};
   border-radius: 16px;
   gap: ${({ theme }) => theme.spacing[3]};
-  padding: ${({ theme }) => `${theme.spacing[4]} ${theme.spacing[6]}`};
+  padding: ${({ theme }) => `${theme.spacing[4]} ${theme.spacing[5]}`};
   width: 100%;
   max-width: 550px;
 `;
@@ -135,6 +138,10 @@ const StatusBox = styled.div<{ status: 'PROCESSING' | 'DONE' }>`
   padding: ${({ theme }) => theme.spacing[1]} ${({ theme }) => theme.spacing[2]};
   border-radius: 16px;
   background-color: ${({ theme, status }) => theme.colors.feedback[status]};
+`;
+
+const ContentBox = styled.div`
+  margin-bottom: ${({ theme }) => theme.spacing[2]};
 `;
 
 const LinkButton = styled.button`
