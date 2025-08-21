@@ -13,7 +13,6 @@ import CustomerMainPage from '@/pages/main/customer/CustomerMainPage';
 import OwnerMainPage from '@/pages/main/owner/OwnerMainPage';
 import CustomerMyPage from '@/pages/my/customer/CustomerMyPage';
 import OwnerMyPage from '@/pages/my/owner/OwnerMyPage';
-import MyMarketPage from '@/pages/my/owner/market/MyMarketPage';
 import MyCouponPage from '@/pages/my/customer/coupon/MyCouponPage';
 import MyLetterPage from '@/pages/my/customer/letter/MyLetterPage';
 
@@ -36,9 +35,7 @@ const Router = () => {
           <Route path={ROUTE_PATH.MY_COUPON} element={<MyCouponPage />} />
           <Route path={ROUTE_PATH.MY_LETTER} element={<MyLetterPage />} />
         </Route>
-        <Route path={ROUTE_PATH.MY_OWNER} element={<OwnerMyPage />}>
-          <Route path={ROUTE_PATH.MY_MARKET} element={<MyMarketPage />} />
-        </Route>
+        <Route path={ROUTE_PATH.MY_OWNER} element={<OwnerMyPage />} />
       </Route>
     </Routes>
   );

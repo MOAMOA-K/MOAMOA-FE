@@ -9,7 +9,6 @@ export const ROUTE_PATH = {
   MY_COUPON: '/my/customer/coupon',
   MY_LETTER: '/my/customer/letter',
   MY_OWNER: '/my/owner',
-  MY_MARKET: '/my/owner/market',
 
   MAP: '/map',
   SEARCH: '/search',
