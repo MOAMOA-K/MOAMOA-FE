@@ -39,6 +39,10 @@ export const theme = {
       improve: '#dbe9fe',
       complain: '#ffdcda',
     },
+    feedback: {
+      PROCESSING: '#FFF7ED',
+      DONE: '#EEF7FF',
+    },
     // 텍스트 색상
     text: {
       default: gray[90], // 기본 텍스트
