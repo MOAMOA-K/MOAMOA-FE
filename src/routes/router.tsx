@@ -13,6 +13,7 @@ import MyLetterPage from '@/pages/my/letter/MyLetterPage';
 import CouponPage from '@/pages/coupon/CouponPage';
 import CustomerMainPage from '@/pages/main/customer/CustomerMainPage';
 import OwnerMainPage from '@/pages/main/owner/OwnerMainPage';
+import InteractionPage from '@/pages/Interaction/InteractionPage';
 
 const Router = () => {
   return (
@@ -32,6 +33,8 @@ const Router = () => {
         <Route path={ROUTE_PATH.MY_COUPON} element={<MyCouponPage />} />
         <Route path={ROUTE_PATH.MY_LETTER} element={<MyLetterPage />} />
       </Route>
+
+      <Route path={ROUTE_PATH.INTERACTION} element={<InteractionPage />} />
     </Routes>
   );
 };
