@@ -3,14 +3,25 @@ import { ROUTE_PATH } from '@/routes/paths';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import FormItem from './components/FormItem';
+import useLogin from './hooks/useLogin';
 
 const LoginPage = () => {
+  const { login } = useLogin();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+    login({ email, password });
+  };
+
   return (
     <Main>
       <Typography variant='title1' weight='bold' as='h1'>
         모아모아뀽
       </Typography>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <FormItem
           label='이메일'
           type='email'
