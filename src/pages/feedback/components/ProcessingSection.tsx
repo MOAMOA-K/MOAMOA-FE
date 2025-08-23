@@ -8,7 +8,7 @@ const ProcessingSection = () => {
   const [reply, setReply] = useState('');
   const handleClickAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setProcessing(!processing);
+    setProcessing(true);
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -97,7 +97,6 @@ const LinkButton = styled.button`
   align-items: center;
   justify-content: center;
   flex-grow: 1;
-  align-items: center;
   padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.owner.main};
