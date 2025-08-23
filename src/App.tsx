@@ -6,6 +6,7 @@ import Router from '@/routes/router';
 import AppLayout from '@/components/layout/AppLayout';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@/util/queryClient';
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
   return (
@@ -13,9 +14,11 @@ function App() {
       <Global styles={GlobalResetStyle} />
       <Global styles={GlobalTypographyStyle} />
       <QueryClientProvider client={queryClient}>
-        <AppLayout>
-          <Router />
-        </AppLayout>
+        <AuthProvider>
+          <AppLayout>
+            <Router />
+          </AppLayout>
+        </AuthProvider>
       </QueryClientProvider>
     </ThemeProvider>
   );
