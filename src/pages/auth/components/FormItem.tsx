@@ -2,18 +2,32 @@ import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
 
 type FormItemProps = {
+  value: string;
   label: string;
   type: string;
   placeholder: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const FormItem = ({ label, type, placeholder }: FormItemProps) => {
+const FormItem = ({
+  value,
+  label,
+  type,
+  placeholder,
+  onChange,
+}: FormItemProps) => {
   return (
     <Container>
       <Typography variant='subtitle1' weight='medium' as='label'>
         {label}
       </Typography>
-      <Input id={type} type={type} placeholder={placeholder} />
+      <Input
+        id={type}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+      />
     </Container>
   );
 };

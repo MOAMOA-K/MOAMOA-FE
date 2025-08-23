@@ -5,14 +5,20 @@ import { Link } from 'react-router-dom';
 import FormItem from './components/FormItem';
 import FormRadioItem from './components/FormRadioItem';
 import { useState } from 'react';
+import useSignup from './hooks/useSignup';
 
 const SignUpPage = () => {
-  const [role, setRole] = useState<string>('ROLE_CUSTOMER');
+  const [nickname, setNickname] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [role, setRole] = useState<
+    'ROLE_CUSTOMER' | 'ROLE_OWNER' | 'ROLE_ADMIN'
+  >('ROLE_CUSTOMER');
+  const { signup } = useSignup();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(role);
-    // Handle form submission
+    signup({ nickname, email, password, role });
   };
 
   return (
@@ -25,16 +31,22 @@ const SignUpPage = () => {
           label='닉네임'
           type='text'
           placeholder='닉네임을 입력해주세요'
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
         />
         <FormItem
           label='이메일'
           type='email'
           placeholder='이메일을 입력해주세요'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <FormItem
           label='비밀번호'
           type='password'
           placeholder='비밀번호를 입력해주세요'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <FormRadioItem role={role} setRole={setRole} />
         <Button type='submit'>

@@ -2,8 +2,8 @@ import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
 
 type FormSelectItemProps = {
-  role: string;
-  setRole: (role: string) => void;
+  role: 'ROLE_CUSTOMER' | 'ROLE_OWNER' | 'ROLE_ADMIN';
+  setRole: (role: 'ROLE_CUSTOMER' | 'ROLE_OWNER' | 'ROLE_ADMIN') => void;
 };
 
 const FormRadioItem = ({ role, setRole }: FormSelectItemProps) => {
@@ -19,7 +19,7 @@ const FormRadioItem = ({ role, setRole }: FormSelectItemProps) => {
             name='role'
             value='ROLE_CUSTOMER'
             checked={role === 'ROLE_CUSTOMER'}
-            onChange={(e) => setRole(e.target.value)}
+            onChange={() => setRole('ROLE_CUSTOMER')}
           />
           손님
         </RadioLabel>
@@ -29,7 +29,7 @@ const FormRadioItem = ({ role, setRole }: FormSelectItemProps) => {
             name='role'
             value='ROLE_OWNER'
             checked={role === 'ROLE_OWNER'}
-            onChange={(e) => setRole(e.target.value)}
+            onChange={() => setRole('ROLE_OWNER')}
           />
           사장님
         </RadioLabel>
