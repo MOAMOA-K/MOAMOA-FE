@@ -2,7 +2,11 @@ import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
 import { Store } from 'lucide-react';
 
-const DoneSection = ({ reply }: { reply: string }) => (
+type DoneSectionProps = {
+  reply: string;
+};
+
+const DoneSection = ({ reply }: DoneSectionProps) => (
   <Card>
     <Wrapper>
       <Store />
