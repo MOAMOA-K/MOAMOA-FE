@@ -30,7 +30,7 @@ const ProcessingSection = () => {
       <form onSubmit={handleSubmit}>
         {processing && (
           <Textarea
-            placeholder='피드백을 입력해주세요.'
+            placeholder='답변을 입력해주세요.'
             value={reply}
             onChange={(e) => setReply(e.target.value)}
           />
