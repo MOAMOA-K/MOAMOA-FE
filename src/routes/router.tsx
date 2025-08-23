@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { ROUTE_PATH } from './paths';
 import MainPage from '@/pages/main/MainPage';
 import LandingPage from '@/pages/landing/LandingPage';
-import LoginPage from '@/pages/login/LoginPage';
+import LoginPage from '@/pages/auth/LoginPage';
 import MapPage from '@/pages/map/MapPage';
 import SearchPage from '@/pages/search/SearchPage';
 import StoreDetailPage from '@/pages/store/StoreDetailPage';
@@ -21,6 +21,7 @@ import FeedbackPage from '@/pages/feedback/FeedbackPage';
 import CompletedTab from '@/pages/feedback/components/CompletedTab';
 import AllTab from '@/pages/feedback/components/AllTab';
 import PendingTab from '@/pages/feedback/components/PendingTab';
+import SignInPage from '@/pages/auth/SignUpPage';
 
 const Router = () => {
   return (
@@ -31,6 +32,7 @@ const Router = () => {
       </Route>
       <Route path={ROUTE_PATH.LANDING} element={<LandingPage />} />
       <Route path={ROUTE_PATH.LOGIN} element={<LoginPage />} />
+      <Route path={ROUTE_PATH.SIGN_UP} element={<SignInPage />} />
       <Route path={ROUTE_PATH.MAP} element={<MapPage />} />
       <Route path={ROUTE_PATH.SEARCH} element={<SearchPage />} />
       <Route path={ROUTE_PATH.STORE_DETAIL} element={<StoreDetailPage />} />

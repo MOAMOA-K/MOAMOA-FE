@@ -4,6 +4,8 @@ export const ROUTE_PATH = {
   OWNER: '/owner',
   LANDING: '/landing',
   LOGIN: '/login',
+  SIGN_UP: '/signup',
+
   MY: '/my',
   MY_CUSTOMER: '/my/customer',
   MY_COUPON: '/my/customer/coupon',
