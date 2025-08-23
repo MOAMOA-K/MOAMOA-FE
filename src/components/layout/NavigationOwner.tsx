@@ -22,7 +22,10 @@ const NavigationOwner = () => {
         icon={<MapPin />}
         name='피드백'
         type='owner'
-        active={pathname === ROUTE_PATH.FEEDBACK}
+        active={
+          pathname === ROUTE_PATH.FEEDBACK ||
+          pathname.startsWith(`${ROUTE_PATH.FEEDBACK}/`)
+        }
       />
       <NavigationItem
         to={ROUTE_PATH.INTERACTION}
@@ -32,11 +35,11 @@ const NavigationOwner = () => {
         active={pathname === ROUTE_PATH.INTERACTION}
       />
       <NavigationItem
-        to={ROUTE_PATH.MY_PAGE}
+        to={ROUTE_PATH.MY_OWNER}
         icon={<CircleUserRound />}
         name='설정'
         type='owner'
-        active={pathname === ROUTE_PATH.MY_PAGE}
+        active={pathname === ROUTE_PATH.MY_OWNER}
       />
     </Nav>
   );

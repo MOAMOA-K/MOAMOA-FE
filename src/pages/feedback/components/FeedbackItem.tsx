@@ -2,7 +2,9 @@ import Typography from '@/components/UI/Typography';
 import { LetterTag, type LetterTagType } from '@/constants/letter';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Bot, Heart, Star, Store } from 'lucide-react';
+import { Star } from 'lucide-react';
+import DoneSection from './DoneSection';
+import ProcessingSection from './ProcessingSection';
 
 type FeedbackItemProps = {
   rating: number;
@@ -54,39 +56,7 @@ const FeedbackItem = ({
       <ContentBox>
         <Typography variant='body1'>{modifiedContent}</Typography>
       </ContentBox>
-      {reply ? (
-        <Card status='DONE'>
-          <Wrapper>
-            <Store />
-            <Typography variant='body1' weight='medium'>
-              사장님 답변
-            </Typography>
-          </Wrapper>
-          <Typography variant='body1'>{reply}</Typography>
-        </Card>
-      ) : (
-        <>
-          <Card status='PROCESSING'>
-            <Wrapper>
-              <Bot />
-              <Typography variant='body1' weight='medium'>
-                AI 추천 개선 방안
-              </Typography>
-            </Wrapper>
-            <Typography variant='body1'>~~~ 이렇게 개선해보세요</Typography>
-          </Card>
-          <Wrapper>
-            <LinkButton>
-              <Typography variant='body2' weight='medium' color='white'>
-                답변하기
-              </Typography>
-            </LinkButton>
-            <HeartButton type='button'>
-              <Heart size={20} />
-            </HeartButton>
-          </Wrapper>
-        </>
-      )}
+      {reply ? <DoneSection reply={reply} /> : <ProcessingSection />}
     </Card>
   );
 };
@@ -142,25 +112,4 @@ const StatusBox = styled.div<{ status: 'PROCESSING' | 'DONE' }>`
 
 const ContentBox = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing[2]};
-`;
-
-const LinkButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-  align-items: center;
-  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
-  border-radius: 12px;
-  background-color: ${({ theme }) => theme.colors.owner.main};
-`;
-
-const HeartButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: ${({ theme }) => theme.spacing[2]};
-  border-radius: 12px;
-  border: 1px solid ${({ theme }) => theme.colors.gray[70]};
-  cursor: pointer;
 `;
