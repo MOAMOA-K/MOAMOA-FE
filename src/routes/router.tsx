@@ -11,6 +11,8 @@ import MyPage from '@/pages/my/MyPage';
 import CouponPage from '@/pages/coupon/CouponPage';
 import CustomerMainPage from '@/pages/main/customer/CustomerMainPage';
 import OwnerMainPage from '@/pages/main/owner/OwnerMainPage';
+import InteractionPage from '@/pages/Interaction/InteractionPage';
+
 import CustomerMyPage from '@/pages/my/customer/CustomerMyPage';
 import OwnerMyPage from '@/pages/my/owner/OwnerMyPage';
 import MyCouponPage from '@/pages/my/customer/coupon/MyCouponPage';
@@ -53,6 +55,7 @@ const Router = () => {
         />
         <Route path={ROUTE_PATH.FEEDBACK_PENDING} element={<PendingTab />} />
       </Route>
+      <Route path={ROUTE_PATH.INTERACTION} element={<InteractionPage />} />
     </Routes>
   );
 };
