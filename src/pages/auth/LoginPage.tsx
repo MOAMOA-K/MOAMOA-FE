@@ -4,15 +4,15 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import FormItem from './components/FormItem';
 import useLogin from './hooks/useLogin';
+import { useState } from 'react';
 
 const LoginPage = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const { login } = useLogin();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
     login({ email, password });
   };
 
@@ -23,14 +23,18 @@ const LoginPage = () => {
       </Typography>
       <Form onSubmit={handleSubmit}>
         <FormItem
+          value={email}
           label='이메일'
           type='email'
           placeholder='이메일을 입력해주세요'
+          onChange={(e) => setEmail(e.target.value)}
         />
         <FormItem
+          value={password}
           label='비밀번호'
           type='password'
           placeholder='비밀번호를 입력해주세요'
+          onChange={(e) => setPassword(e.target.value)}
         />
         <Button type='submit'>
           <Typography variant='subtitle1' weight='bold' color='white'>
