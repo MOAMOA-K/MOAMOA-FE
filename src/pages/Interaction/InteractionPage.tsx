@@ -32,7 +32,7 @@ export default function InteractionPage() {
           </TabsInner>
         </TabsBar>
 
-        {tab === 'announce' && <AnnounceSection />}
+        {tab === 'announce' ? <AnnounceSection /> : <CouponSection />}
       </Inner>
     </Main>
   );
@@ -57,6 +57,31 @@ function AnnounceSection() {
       </Card>
 
       <PrimaryButton type='button'>+ 새 개선사항 등록</PrimaryButton>
+    </Section>
+  );
+}
+
+function CouponSection() {
+  return (
+    <Section>
+      <Guide>고객들에게 제공하는 쿠폰과 혜택을 관리해보세요.</Guide>
+
+      <CouponCard>
+        <div className='head'>
+          <strong>단골 고객 10% 할인</strong>
+          <span className='usage'>23/50 사용됨</span>
+        </div>
+        <Meta>유효기간: 2025-08-21</Meta>
+        <Bar>
+          <i style={{ width: '46%' }} />
+        </Bar>
+        <RowActions>
+          <SecondaryButton type='button'>수정</SecondaryButton>
+          <GhostButton type='button'>일시중지</GhostButton>
+        </RowActions>
+      </CouponCard>
+
+      <PrimaryButton type='button'>+ 새 쿠폰 만들기</PrimaryButton>
     </Section>
   );
 }
@@ -194,5 +219,62 @@ const PrimaryButton = styled.button`
   background: ${({ theme }) => theme.colors.owner.main};
   color: #fff;
   font-weight: 700;
+  cursor: pointer;
+`;
+
+const CouponCard = styled(Card)`
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    strong {
+      font-size: 16px;
+    }
+    .usage {
+      color: #6b7280;
+      font-size: 12px;
+    }
+  }
+`;
+
+const Bar = styled.div`
+  height: 8px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  overflow: hidden;
+  margin: 10px 0;
+
+  i {
+    display: block;
+    height: 100%;
+    background: ${({ theme }) => theme.colors.owner.main};
+  }
+`;
+
+const RowActions = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+
+const SecondaryButton = styled.button`
+  flex: none;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 16px;
+  border: 1px solid #cfd6de;
+  background: #fff;
+  color: #111;
+  cursor: pointer;
+`;
+
+const GhostButton = styled.button`
+  flex: none;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 0;
+  background: transparent;
+  color: #6b7280;
   cursor: pointer;
 `;
