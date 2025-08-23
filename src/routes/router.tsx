@@ -21,7 +21,7 @@ import FeedbackPage from '@/pages/feedback/FeedbackPage';
 import CompletedTab from '@/pages/feedback/components/CompletedTab';
 import AllTab from '@/pages/feedback/components/AllTab';
 import PendingTab from '@/pages/feedback/components/PendingTab';
-import SignInPage from '@/pages/auth/SignUpPage';
+import SignUpPage from '@/pages/auth/SignUpPage';
 
 const Router = () => {
   return (
@@ -32,7 +32,7 @@ const Router = () => {
       </Route>
       <Route path={ROUTE_PATH.LANDING} element={<LandingPage />} />
       <Route path={ROUTE_PATH.LOGIN} element={<LoginPage />} />
-      <Route path={ROUTE_PATH.SIGN_UP} element={<SignInPage />} />
+      <Route path={ROUTE_PATH.SIGN_UP} element={<SignUpPage />} />
       <Route path={ROUTE_PATH.MAP} element={<MapPage />} />
       <Route path={ROUTE_PATH.SEARCH} element={<SearchPage />} />
       <Route path={ROUTE_PATH.STORE_DETAIL} element={<StoreDetailPage />} />
