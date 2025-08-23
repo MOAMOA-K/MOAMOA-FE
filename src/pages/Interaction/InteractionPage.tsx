@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from '@emotion/styled';
 import Header from '@/components/layout/Header';
 import { HEADER_HEIGHT } from '@/constants/number';
+import NavigationOwner from '@/components/layout/NavigationOwner';
 
 type Tab = 'announce' | 'coupon';
 
@@ -9,32 +10,35 @@ export default function InteractionPage() {
   const [tab, setTab] = useState<Tab>('announce');
 
   return (
-    <Main>
-      <Header title='고객소통' />
-      <Inner>
-        <TabsBar role='tablist' aria-label='고객소통 탭'>
-          <TabsInner>
-            <TabButton
-              role='tab'
-              aria-selected={tab === 'announce'}
-              onClick={() => setTab('announce')}
-            >
-              개선사항 공유
-            </TabButton>
-            <TabButton
-              role='tab'
-              aria-selected={tab === 'coupon'}
-              onClick={() => setTab('coupon')}
-            >
-              쿠폰 관리
-            </TabButton>
-            <Indicator data-tab={tab} />
-          </TabsInner>
-        </TabsBar>
+    <>
+      <Main>
+        <Header title='고객소통' />
+        <Inner>
+          <TabsBar role='tablist' aria-label='고객소통 탭'>
+            <TabsInner>
+              <TabButton
+                role='tab'
+                aria-selected={tab === 'announce'}
+                onClick={() => setTab('announce')}
+              >
+                개선사항 공유
+              </TabButton>
+              <TabButton
+                role='tab'
+                aria-selected={tab === 'coupon'}
+                onClick={() => setTab('coupon')}
+              >
+                쿠폰 관리
+              </TabButton>
+              <Indicator data-tab={tab} />
+            </TabsInner>
+          </TabsBar>
 
-        {tab === 'announce' ? <AnnounceSection /> : <CouponSection />}
-      </Inner>
-    </Main>
+          {tab === 'announce' ? <AnnounceSection /> : <CouponSection />}
+        </Inner>
+      </Main>
+      <NavigationOwner />
+    </>
   );
 }
 
