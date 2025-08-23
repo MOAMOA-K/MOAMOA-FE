@@ -22,7 +22,10 @@ const NavigationOwner = () => {
         icon={<MapPin />}
         name='피드백'
         type='owner'
-        active={pathname === ROUTE_PATH.FEEDBACK}
+        active={
+          pathname === ROUTE_PATH.FEEDBACK ||
+          pathname.startsWith(`${ROUTE_PATH.FEEDBACK}/`)
+        }
       />
       <NavigationItem
         to={ROUTE_PATH.INTERACTION}
