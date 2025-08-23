@@ -4,9 +4,11 @@ export const ROUTE_PATH = {
   OWNER: '/owner',
   LANDING: '/landing',
   LOGIN: '/login',
-  MY_PAGE: '/my',
-  MY_COUPON: '/my/coupon',
-  MY_LETTER: '/my/letter',
+  MY: '/my',
+  MY_CUSTOMER: '/my/customer',
+  MY_COUPON: '/my/customer/coupon',
+  MY_LETTER: '/my/customer/letter',
+  MY_OWNER: '/my/owner',
 
   MAP: '/map',
   SEARCH: '/search',
@@ -15,5 +17,8 @@ export const ROUTE_PATH = {
   COUPON: '/coupon',
 
   FEEDBACK: '/feedback',
+  FEEDBACK_ALL: '/feedback/all',
+  FEEDBACK_COMPLETED: '/feedback/completed',
+  FEEDBACK_PENDING: '/feedback/pending',
   INTERACTION: '/interaction',
 };

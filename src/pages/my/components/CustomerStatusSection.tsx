@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { User } from 'lucide-react';
 import StatusItem from './StatusItem';
 
-const StatusSection = () => {
+const CustomerStatusSection = () => {
   return (
     <Container>
       <Card>
@@ -12,7 +12,7 @@ const StatusSection = () => {
             <User size={32} />
           </IconBox>
           <InformationBox>
-            <Typography variant='subtitle1' weight='bold'>
+            <Typography variant='title2' weight='bold'>
               김민준
             </Typography>
             <Typography variant='body2'>kim03@knu.ac.kr</Typography>
@@ -29,7 +29,7 @@ const StatusSection = () => {
   );
 };
 
-export default StatusSection;
+export default CustomerStatusSection;
 
 const Container = styled.section`
   display: flex;

@@ -1,25 +1,25 @@
 import Header from '@/components/layout/Header';
 import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import styled from '@emotion/styled';
-import MyCouponItem from '../components/MyCouponItem';
-import { couponItems } from '../constants/history-item';
+import { letterItems } from '../../constants/history-item';
+import LetterItem from '../../components/LetterItem';
 
-const MyCouponPage = () => {
+const MyLetterPage = () => {
   return (
     <>
-      <Header title='보유중인 쿠폰' />
+      <Header title='나의 피드백' />
       <Main>
-        <MyCouponSection>
-          {couponItems.map((item) => (
-            <MyCouponItem key={item.id} {...item} />
+        <MyLetterSection>
+          {letterItems.map((item) => (
+            <LetterItem key={item.id} {...item} />
           ))}
-        </MyCouponSection>
+        </MyLetterSection>
       </Main>
     </>
   );
 };
 
-export default MyCouponPage;
+export default MyLetterPage;
 
 const Main = styled.main`
   height: 100%;
@@ -29,7 +29,7 @@ const Main = styled.main`
   justify-content: center;
 `;
 
-const MyCouponSection = styled.section`
+const MyLetterSection = styled.section`
   width: 100%;
   max-width: 550px;
   display: flex;

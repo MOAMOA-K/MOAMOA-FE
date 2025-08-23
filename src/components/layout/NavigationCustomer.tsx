@@ -32,13 +32,13 @@ const NavigationCustomer = () => {
         active={pathname === ROUTE_PATH.COUPON}
       />
       <NavigationItem
-        to={ROUTE_PATH.MY_PAGE}
+        to={ROUTE_PATH.MY_CUSTOMER}
         icon={<CircleUserRound />}
         name='설정'
         type='customer'
         active={
-          pathname === ROUTE_PATH.MY_PAGE ||
-          pathname.startsWith(`${ROUTE_PATH.MY_PAGE}/`)
+          pathname === ROUTE_PATH.MY_CUSTOMER ||
+          pathname.startsWith(`${ROUTE_PATH.MY_CUSTOMER}/`)
         }
       />
     </Nav>

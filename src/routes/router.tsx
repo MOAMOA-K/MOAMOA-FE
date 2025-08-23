@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { ROUTE_PATH } from './paths';
 import MainPage from '@/pages/main/MainPage';
 import LandingPage from '@/pages/landing/LandingPage';
@@ -8,12 +8,19 @@ import SearchPage from '@/pages/search/SearchPage';
 import StoreDetailPage from '@/pages/store/StoreDetailPage';
 import LetterPage from '@/pages/letter/LetterPage';
 import MyPage from '@/pages/my/MyPage';
-import MyCouponPage from '@/pages/my/coupon/MyCouponPage';
-import MyLetterPage from '@/pages/my/letter/MyLetterPage';
 import CouponPage from '@/pages/coupon/CouponPage';
 import CustomerMainPage from '@/pages/main/customer/CustomerMainPage';
 import OwnerMainPage from '@/pages/main/owner/OwnerMainPage';
 import InteractionPage from '@/pages/Interaction/InteractionPage';
+
+import CustomerMyPage from '@/pages/my/customer/CustomerMyPage';
+import OwnerMyPage from '@/pages/my/owner/OwnerMyPage';
+import MyCouponPage from '@/pages/my/customer/coupon/MyCouponPage';
+import MyLetterPage from '@/pages/my/customer/letter/MyLetterPage';
+import FeedbackPage from '@/pages/feedback/FeedbackPage';
+import CompletedTab from '@/pages/feedback/components/CompletedTab';
+import AllTab from '@/pages/feedback/components/AllTab';
+import PendingTab from '@/pages/feedback/components/PendingTab';
 
 const Router = () => {
   return (
@@ -29,11 +36,25 @@ const Router = () => {
       <Route path={ROUTE_PATH.STORE_DETAIL} element={<StoreDetailPage />} />
       <Route path={ROUTE_PATH.LETTER} element={<LetterPage />} />
       <Route path={ROUTE_PATH.COUPON} element={<CouponPage />} />
-      <Route path={ROUTE_PATH.MY_PAGE} element={<MyPage />}>
-        <Route path={ROUTE_PATH.MY_COUPON} element={<MyCouponPage />} />
-        <Route path={ROUTE_PATH.MY_LETTER} element={<MyLetterPage />} />
+      <Route path={ROUTE_PATH.MY} element={<MyPage />}>
+        <Route path={ROUTE_PATH.MY_CUSTOMER} element={<CustomerMyPage />}>
+          <Route path={ROUTE_PATH.MY_COUPON} element={<MyCouponPage />} />
+          <Route path={ROUTE_PATH.MY_LETTER} element={<MyLetterPage />} />
+        </Route>
+        <Route path={ROUTE_PATH.MY_OWNER} element={<OwnerMyPage />} />
       </Route>
-
+      <Route path={ROUTE_PATH.FEEDBACK} element={<FeedbackPage />}>
+        <Route
+          index
+          element={<Navigate to={ROUTE_PATH.FEEDBACK_ALL} replace />}
+        />
+        <Route path={ROUTE_PATH.FEEDBACK_ALL} element={<AllTab />} />
+        <Route
+          path={ROUTE_PATH.FEEDBACK_COMPLETED}
+          element={<CompletedTab />}
+        />
+        <Route path={ROUTE_PATH.FEEDBACK_PENDING} element={<PendingTab />} />
+      </Route>
       <Route path={ROUTE_PATH.INTERACTION} element={<InteractionPage />} />
     </Routes>
   );
