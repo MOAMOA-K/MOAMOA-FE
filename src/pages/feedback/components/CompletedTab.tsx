@@ -13,7 +13,7 @@ const CompletedTab = () => {
           key={feedback.id}
           rating={feedback.rating}
           type={feedback.type}
-          createAt={feedback.createdAt}
+          createdAt={feedback.createdAt}
           modifiedContent={feedback.modifiedContent}
           reply={feedback.reply}
           status={feedback.status}

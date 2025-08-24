@@ -4,12 +4,12 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Star } from 'lucide-react';
 import DoneSection from './DoneSection';
-import UnReadSection from './ProcessingSection';
+import UnReadSection from './UnReadSection';
 
 type FeedbackItemProps = {
   rating: number;
   type: LetterTagType;
-  createAt: string;
+  createdAt: string;
   modifiedContent: string;
   reply: string | null;
   status: 'UNREAD' | 'DONE';
@@ -20,7 +20,7 @@ type FeedbackItemProps = {
 const FeedbackItem = ({
   rating,
   type,
-  createAt,
+  createdAt,
   modifiedContent,
   reply,
   status,
@@ -55,7 +55,7 @@ const FeedbackItem = ({
             </Typography>
           </StatusBox>
         </Wrapper>
-        <Typography variant='body2'>{createAt}</Typography>
+        <Typography variant='body2'>{createdAt}</Typography>
       </LineWrapper>
       <ContentBox>
         <Typography variant='body1'>{modifiedContent}</Typography>
