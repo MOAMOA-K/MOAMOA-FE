@@ -19,7 +19,7 @@ const LetterPage = () => {
     letterText: string;
   }>({
     satisfaction: 0,
-    letterTag: 'positive',
+    letterTag: 'COMPLIMENT',
     letterText: '',
   });
 
