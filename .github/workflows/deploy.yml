@@ -1,0 +1,60 @@
+name: S3 deploy
+
+on:
+  push:
+    branches: ['main'] # main으로 push되었을 때 실행
+env:
+  AWS_REGION: ap-northeast-2
+  S3_BUCKET_NAME: moamoa-k
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code.
+        uses: actions/checkout@master
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+
+      - name: Install pnpm # package manager 설치
+        run: |
+          npm install -g pnpm
+
+      - name: Create .env file # 환경변수 넣기
+        run: |
+          echo "VITE_KAKAO_MAP_KEY=${{ secrets.VITE_KAKAO_MAP_KEY }}" >> .env
+          echo "VITE_USE_MOCK=${{ secrets.VITE_USE_MOCK }}" >> .env
+          echo "VITE_BASE_API_URL=${{ secrets.VITE_BASE_API_URL }}" >> .env
+
+      - name: Install Dependencies
+        run: pnpm install --no-frozen-lockfile --force
+
+      - name: Lint Code # ESLint 실행하기
+        run: pnpm lint
+
+      - name: Build # Build 실행하기
+        run: CI='' pnpm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Upload to AWS S3
+        run: |
+          aws s3 cp \
+            --recursive \
+            --region ap-northeast-2 \
+            ./dist s3://${{env.S3_BUCKET_NAME}}
