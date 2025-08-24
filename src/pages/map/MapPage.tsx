@@ -6,7 +6,6 @@ import BottomSheet from '@/pages/map/components/BottomSheet';
 import SearchTrigger from '@/pages/map/components/SearchTrigger';
 import NavigationCustomer from '@/components/layout/NavigationCustomer';
 import { fetchStoreList, type StoreListItem } from '@/api/store/store';
-import { SESSION_AUTH_KEY } from '@/constants/storageKeys';
 
 type MarkerLike = { setMap: (m: unknown | null) => void };
 
@@ -27,6 +26,9 @@ export default function MapPage() {
     }
 
     let destroyed = false;
+
+    const KNU_LAT = 35.8889; // 경북대 위도
+    const KNU_LNG = 128.6109; // 경북대 경도
 
     const loadScript = (src: string) =>
       new Promise<void>((resolve, reject) => {
@@ -56,53 +58,23 @@ export default function MapPage() {
         kakao.maps.load(async () => {
           if (destroyed || !mapRef.current) return;
 
-          const defaultCenter = new kakao.maps.LatLng(35.8889, 128.6109);
+          // 지도 기본 중심도 경북대
+          const defaultCenter = new kakao.maps.LatLng(KNU_LAT, KNU_LNG);
           const map = new kakao.maps.Map(mapRef.current, {
             center: defaultCenter,
             level: 4,
           });
 
-          // 현재 위치(가능 시)
-          let lat = 35.8889;
-          let lng = 128.6109;
-          if (navigator.geolocation) {
-            try {
-              const pos = await new Promise<GeolocationPosition>((res, rej) =>
-                navigator.geolocation.getCurrentPosition(res, rej, {
-                  enableHighAccuracy: true,
-                  maximumAge: 10_000,
-                }),
-              );
-              lat = pos.coords.latitude;
-              lng = pos.coords.longitude;
-
-              const cur = new kakao.maps.LatLng(lat, lng);
-              map.setCenter(cur);
-              const me = new kakao.maps.Marker({ map, position: cur });
-              markersRef.current.push(me);
-            } catch (geoErr) {
-              if (import.meta.env.DEV) {
-                console.debug('[MapPage] geolocation error:', geoErr);
-              }
-            }
-          }
-
-          // (옵션) 세션 토큰 존재 여부만 확인 로그
-          if (import.meta.env.DEV) {
-            const t = sessionStorage.getItem(SESSION_AUTH_KEY);
-            console.log(
-              '[MapPage] session token:',
-              t ? '(present)' : '(missing)',
-            );
-          }
-
-          // 리스트 호출(토큰은 axios 인터셉터가 자동 주입)
+          // 1. 서버에서 경북대 좌표로 가게 리스트 요청
           let stores: StoreListItem[] = [];
           try {
-            stores = await fetchStoreList({ latitude: lat, longitude: lng });
+            stores = await fetchStoreList({
+              latitude: KNU_LAT,
+              longitude: KNU_LNG,
+            });
 
             if (import.meta.env.DEV) {
-              console.group('[MapPage] /store/list result');
+              console.group('[MapPage] /store/list result @KNU');
               console.log('count:', stores.length);
               console.log('first:', stores[0]);
               console.groupEnd();
@@ -115,15 +87,45 @@ export default function MapPage() {
             return;
           }
 
-          // 마커 렌더
+          // 2. 마커 + bounds
+          const bounds = new kakao.maps.LatLngBounds();
           stores.forEach((s) => {
-            const marker = new kakao.maps.Marker({
-              map,
-              position: new kakao.maps.LatLng(s.latitude, s.longitude),
-            });
+            if (!Number.isFinite(s.latitude) || !Number.isFinite(s.longitude))
+              return;
+            const pos = new kakao.maps.LatLng(s.latitude, s.longitude);
+            const marker = new kakao.maps.Marker({ map, position: pos });
             kakao.maps.event.addListener(marker, 'click', () => setSelected(s));
             markersRef.current.push(marker);
+            bounds.extend(pos);
           });
+
+          if (stores.length > 0) {
+            map.setBounds(bounds); // 전체 마커가 보이도록
+          } else {
+            map.setCenter(defaultCenter); // 없으면 기본(경북대) 유지
+          }
+
+          // 3. (선택) 현재 위치 마커만 표시 (화면 이동 X)
+          if (navigator.geolocation) {
+            try {
+              const pos = await new Promise<GeolocationPosition>((res, rej) =>
+                navigator.geolocation.getCurrentPosition(res, rej, {
+                  enableHighAccuracy: true,
+                  maximumAge: 10_000,
+                }),
+              );
+              const cur = new kakao.maps.LatLng(
+                pos.coords.latitude,
+                pos.coords.longitude,
+              );
+              const me = new kakao.maps.Marker({ map, position: cur });
+              markersRef.current.push(me);
+              // map.setCenter(cur); // 필요하면 주석 해제
+            } catch (geoErr) {
+              if (import.meta.env.DEV)
+                console.debug('[MapPage] geolocation error:', geoErr);
+            }
+          }
 
           setLoading(false);
         });
@@ -135,17 +137,14 @@ export default function MapPage() {
     };
 
     init();
-
     return () => {
       destroyed = true;
       try {
         markersRef.current.forEach((m) => m.setMap?.(null));
-      } catch (cleanupErr) {
-        if (import.meta.env.DEV)
-          console.debug('[MapPage] cleanup error:', cleanupErr);
+      } finally {
+        markersRef.current = [];
+        setSelected(null);
       }
-      markersRef.current = [];
-      setSelected(null);
     };
   }, []);
 
@@ -176,7 +175,6 @@ export default function MapPage() {
   );
 }
 
-/* --- styles 동일 --- */
 const Wrap = styled.div`
   position: relative;
   width: 100%;
