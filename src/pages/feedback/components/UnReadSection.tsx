@@ -2,7 +2,7 @@ import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
 import { Bot } from 'lucide-react';
 import { useState } from 'react';
-import useAnnouncement from '../hooks/useAnnouncement';
+import useFeedbackReply from '../hooks/useFeedbackReply';
 
 type UnReadSectionProps = {
   storeId: string;
@@ -12,7 +12,7 @@ type UnReadSectionProps = {
 const UnReadSection = ({ feedbackId }: UnReadSectionProps) => {
   const [processing, setProcessing] = useState(false);
   const [reply, setReply] = useState('');
-  const { postReply } = useAnnouncement({
+  const { postReply } = useFeedbackReply({
     feedbackId,
     description: reply,
   });
