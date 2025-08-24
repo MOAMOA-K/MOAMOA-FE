@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
 import { feedbacks } from '../mocks/feedbacks';
 import FeedbackItem from './FeedbackItem';
+import useCustomerFeedback from '../hooks/useCustomerFeedback';
 
 const FeedbackSection = () => {
+  const { feedbackData } = useCustomerFeedback();
+  console.log(feedbackData);
   return (
     <Container>
       <Wrapper>

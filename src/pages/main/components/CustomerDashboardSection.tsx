@@ -3,12 +3,16 @@ import styled from '@emotion/styled';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const CustomerDashboardSection = () => {
+type CustomerDashboardSectionProps = {
+  point: number;
+};
+
+const CustomerDashboardSection = ({ point }: CustomerDashboardSectionProps) => {
   return (
     <Container>
       <Card>
         <SubTitle>내 포인트</SubTitle>
-        <Point>1250P</Point>
+        <Point>{point}P</Point>
         <UpdateInfo>이번 주 + 120P 적립</UpdateInfo>
         <Button to={ROUTE_PATH.COUPON}>
           쿠폰 교환하기
