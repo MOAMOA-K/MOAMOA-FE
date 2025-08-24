@@ -1,17 +1,15 @@
 import { getStoreFeedbacks } from '@/api/feedback/getStoreFeedback';
 import { useQuery } from '@tanstack/react-query';
 
-type useFeedbackParams = {
+type useStoreFeedbackParams = {
   storeId: string;
   type?: 'UNREAD' | 'DONE';
-  enabled?: boolean;
 };
 
-const useFeedback = ({ storeId, type, enabled }: useFeedbackParams) => {
+const useStoreFeedback = ({ storeId, type }: useStoreFeedbackParams) => {
   const { data, isLoading } = useQuery<Feedback[]>({
     queryKey: ['feedback', storeId, type],
     queryFn: () => getStoreFeedbacks({ storeId, type }),
-    enabled,
   });
 
   return {
@@ -20,4 +18,4 @@ const useFeedback = ({ storeId, type, enabled }: useFeedbackParams) => {
   };
 };
 
-export default useFeedback;
+export default useStoreFeedback;

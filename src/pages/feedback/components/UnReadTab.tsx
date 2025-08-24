@@ -4,7 +4,7 @@ import { useOutletContext } from 'react-router-dom';
 import type { FeedbackContextType } from '../FeedbackPage';
 
 const UnReadTab = () => {
-  const { unReadData } = useOutletContext<FeedbackContextType>();
+  const { unReadData, storeId } = useOutletContext<FeedbackContextType>();
 
   return (
     <Container>
@@ -18,7 +18,7 @@ const UnReadTab = () => {
           reply={feedback.reply}
           status={feedback.status}
           feedbackId={feedback.id.toString()}
-          storeId={'1'}
+          storeId={storeId}
         />
       ))}
     </Container>

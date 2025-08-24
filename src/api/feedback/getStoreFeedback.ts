@@ -8,8 +8,10 @@ type CustomAxiosResponse<T> = {
 };
 
 export type getStoreFeedbackParams = {
-  storeId: string;
+  storeId?: string;
+  userId?: string;
   type?: 'UNREAD' | 'DONE';
+  size?: number;
 };
 
 export type getStoreFeedbackResult = Feedback[];
