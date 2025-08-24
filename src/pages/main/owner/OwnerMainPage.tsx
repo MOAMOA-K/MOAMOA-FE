@@ -7,13 +7,20 @@ import ShortcutSection from '../components/ShortcutSection';
 import { ROUTE_PATH } from '@/routes/paths';
 import { Mails } from 'lucide-react';
 import ReceiveFeedbackSection from '../components/ReceiveFeedbackSection';
+import useUserDetail from '../hooks/useUserDetail';
 
 const OwnerMainPage = () => {
+  const { userData, isLoading } = useUserDetail();
+
+  if (isLoading || !userData) {
+    return null;
+  }
+
   return (
     <>
       <Main>
         <InformationSection
-          userName='김사장'
+          userName={userData.nickname}
           content='손님들의 진짜 속마음, 마음의 편지로 확인하세요'
         />
         <OwnerDashboardSection />
