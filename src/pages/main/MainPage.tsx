@@ -19,23 +19,23 @@ const MainPage = () => {
   }, []);
 
   useEffect(() => {
-    if (userData?.role) {
-      user?.updateRole(userData.role);
-      if (userData.role === 'ROLE_CUSTOMER') {
-        navigate(ROUTE_PATH.CUSTOMER);
-      } else if (userData.role === 'ROLE_OWNER') {
-        navigate(ROUTE_PATH.OWNER);
+    if (!isLoading) {
+      if (isError || !userData) {
+        navigate(ROUTE_PATH.LANDING);
+        return;
+      }
+      if (userData?.role) {
+        user?.updateRole(userData.role);
+        if (userData.role === 'ROLE_CUSTOMER') {
+          navigate(ROUTE_PATH.CUSTOMER);
+        } else if (userData.role === 'ROLE_OWNER') {
+          navigate(ROUTE_PATH.OWNER);
+        }
       }
     }
-  }, [userData, user, navigate]);
+  }, [userData, user, navigate, isLoading, isError]);
 
-  useEffect(() => {
-    if (isError || !userData) {
-      navigate(ROUTE_PATH.LANDING);
-    }
-  }, [isError, userData, navigate]);
-
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return null;
 
   if (isError || !userData) {
     return null;
