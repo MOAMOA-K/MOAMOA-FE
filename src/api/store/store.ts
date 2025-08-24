@@ -25,7 +25,7 @@ export type StoreListItem = {
 
 export type StoreDetailDTO = StoreListItem & {
   userId: number;
-  menus: Array<{
+  menuList: Array<{
     id: number;
     storeId: number;
     name: string;
@@ -33,7 +33,8 @@ export type StoreDetailDTO = StoreListItem & {
     description?: string;
     imageUrl?: string;
   }>;
-  storeAnnouncements: Array<{
+  announcementList: Array<{
+    description?: string;
     id: number;
     storeId: number;
     feedbackId: number;
