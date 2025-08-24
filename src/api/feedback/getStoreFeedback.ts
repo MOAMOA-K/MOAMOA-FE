@@ -9,7 +9,6 @@ type CustomAxiosResponse<T> = {
 
 export type getStoreFeedbackParams = {
   storeId: string;
-  accessToken: string;
   type?: 'UNREAD' | 'DONE';
 };
 
