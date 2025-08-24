@@ -78,7 +78,9 @@ const TabContainer = styled.div`
   gap: ${({ theme }) => theme.spacing[3]};
 `;
 
-const TabItem = styled(Link)<{ isSelected: boolean }>`
+const TabItem = styled(Link, {
+  shouldForwardProp: (prop) => prop !== 'isSelected',
+})<{ isSelected: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
