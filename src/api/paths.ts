@@ -9,4 +9,7 @@ export const API_PATHS = {
   FEEDBACK: `/api/feedbacks`,
   FEEDBACK_MY: `/api/feedbacks/my`,
   FEEDBACK_REPLY: (feedbackId: string) => `/api/feedbacks/${feedbackId}/reply`,
+
+  STORE: (storeId: string) => `/api/store/${storeId}`,
+  STORE_RATING: (storeId: string) => `/api/store/${storeId}/ratings`,
 };

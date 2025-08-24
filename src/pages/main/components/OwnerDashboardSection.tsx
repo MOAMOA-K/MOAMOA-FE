@@ -2,8 +2,15 @@ import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
 import { Star } from 'lucide-react';
 import DashboardItem from './DashboardItem';
+import useStoreRating from '../hooks/useStoreRating';
 
 const OwnerDashboardSection = () => {
+  const { storeRating, isLoading } = useStoreRating('1');
+
+  if (isLoading || !storeRating) {
+    return null;
+  }
+
   return (
     <Container>
       <Card>
@@ -20,7 +27,7 @@ const OwnerDashboardSection = () => {
             <StarWrapper>
               <Star fill='gold' strokeWidth={0} />
               <Typography variant='subtitle1' color='white' weight='medium'>
-                4.8
+                {storeRating.toFixed(1)}
               </Typography>
             </StarWrapper>
             <Typography variant='body2' color='white'>
