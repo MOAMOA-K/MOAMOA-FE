@@ -12,7 +12,7 @@ type FeedbackItemProps = {
   createAt: string;
   modifiedContent: string;
   reply: string | null;
-  status: 'PROCESSING' | 'DONE';
+  status: 'UNREAD' | 'DONE';
 };
 
 const FeedbackItem = ({
@@ -47,7 +47,7 @@ const FeedbackItem = ({
           </TagBox>
           <StatusBox status={status}>
             <Typography variant='body2'>
-              {status === 'PROCESSING' ? '처리 중' : '완료'}
+              {status === 'UNREAD' ? '처리 중' : '완료'}
             </Typography>
           </StatusBox>
         </Wrapper>
@@ -63,7 +63,7 @@ const FeedbackItem = ({
 
 export default FeedbackItem;
 
-const Card = styled.div<{ status?: 'PROCESSING' | 'DONE' }>`
+const Card = styled.div<{ status?: 'UNREAD' | 'DONE' }>`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme, status }) =>
@@ -102,7 +102,7 @@ const TagBox = styled.div<{ tag: LetterTagType }>`
   background-color: ${({ theme, tag }) => theme.colors.tag[tag]};
 `;
 
-const StatusBox = styled.div<{ status: 'PROCESSING' | 'DONE' }>`
+const StatusBox = styled.div<{ status: 'UNREAD' | 'DONE' }>`
   display: flex;
   align-items: center;
   padding: ${({ theme }) => theme.spacing[1]} ${({ theme }) => theme.spacing[2]};
