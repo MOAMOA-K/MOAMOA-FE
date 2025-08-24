@@ -21,9 +21,6 @@ export const getStoreFeedbacks = async (
   const response: CustomAxiosResponse<Feedback[]> = await axiosInstance.get(
     API_PATHS.FEEDBACK,
     {
-      headers: {
-        Authorization: `Bearer ${params.accessToken}`,
-      },
       params: {
         storeId: params.storeId,
         ...(params.type && { type: params.type }),
