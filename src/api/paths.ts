@@ -4,4 +4,5 @@ export const API_PATHS = {
   SIGNUP: '/api/auth/signup',
 
   FEEDBACK: `/api/feedbacks`,
+  ANNOUNCEMENT: `/api/announcement`,
 };

@@ -2,17 +2,28 @@ import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
 import { Bot, Heart } from 'lucide-react';
 import { useState } from 'react';
+import useAnnouncement from '../hooks/useAnnouncement';
 
-const ProcessingSection = () => {
+type UnReadSectionProps = {
+  storeId: string;
+  feedbackId: string;
+};
+
+const UnReadSection = ({ storeId, feedbackId }: UnReadSectionProps) => {
   const [processing, setProcessing] = useState(false);
   const [reply, setReply] = useState('');
+  const { postAnnouncement } = useAnnouncement({
+    feedbackId,
+    storeId,
+    description: reply,
+  });
   const handleClickAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setProcessing(true);
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setReply('');
+    postAnnouncement();
     setProcessing(false);
   };
 
@@ -58,12 +69,12 @@ const ProcessingSection = () => {
   );
 };
 
-export default ProcessingSection;
+export default UnReadSection;
 
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.feedback.PROCESSING};
+  background-color: ${({ theme }) => theme.colors.feedback.UNREAD};
   border-radius: 16px;
   gap: ${({ theme }) => theme.spacing[3]};
   padding: ${({ theme }) => `${theme.spacing[4]} ${theme.spacing[5]}`};
