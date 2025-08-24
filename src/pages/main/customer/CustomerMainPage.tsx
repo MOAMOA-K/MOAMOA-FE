@@ -27,8 +27,8 @@ const CustomerMainPage = () => {
         <ShortcutSection
           icon={<Mails />}
           title='마음의 편지'
-          description='익명 피드백 보내기'
-          link={ROUTE_PATH.LETTER}
+          description='피드백 보내러 가기'
+          link={ROUTE_PATH.MAP}
         />
         <FeedbackSection />
       </Main>
