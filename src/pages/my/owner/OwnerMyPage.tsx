@@ -1,15 +1,16 @@
 import styled from '@emotion/styled';
 import Header from '@/components/layout/Header';
 import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useOutletContext } from 'react-router-dom';
 import { ROUTE_PATH } from '@/routes/paths';
 import OwnerStatusSection from '../components/OwnerStatusSection';
 import Typography from '@/components/UI/Typography';
 import NavigationOwner from '@/components/layout/NavigationOwner';
+import type { LogoutType } from '../MyPage';
 
 const OwnerMyPage = () => {
+  const { logout } = useOutletContext<LogoutType>();
   const location = useLocation();
-  const navigate = useNavigate();
   const isSubRoute = location.pathname !== ROUTE_PATH.MY_OWNER;
 
   return (
@@ -20,7 +21,7 @@ const OwnerMyPage = () => {
           <Main>
             <OwnerStatusSection />
             <LogoutSection>
-              <LogoutButton onClick={() => navigate(ROUTE_PATH.LOGIN)}>
+              <LogoutButton onClick={logout}>
                 <Typography variant='body2' color='white'>
                   로그아웃
                 </Typography>
