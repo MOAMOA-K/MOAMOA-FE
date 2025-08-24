@@ -2,15 +2,25 @@ import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
 import { ArrowRight, Star } from 'lucide-react';
 import useStoreRating from '../hooks/useStoreRating';
-import useStoreMy from '../hooks/useStoreMy';
 import { ROUTE_PATH } from '@/routes/paths';
 import { Link } from 'react-router-dom';
 
-const OwnerDashboardSection = () => {
-  const { store } = useStoreMy();
-  const { storeRating, isLoading } = useStoreRating('1');
+type OwnerDashboardSectionProps = {
+  storeId: string;
+  name: string;
+  category: string;
+  address: string;
+};
 
-  if (isLoading || !storeRating || !store) {
+const OwnerDashboardSection = ({
+  storeId,
+  name,
+  category,
+  address,
+}: OwnerDashboardSectionProps) => {
+  const { storeRating, isLoading } = useStoreRating(storeId);
+
+  if (isLoading || !storeRating) {
     return null;
   }
 
@@ -20,13 +30,13 @@ const OwnerDashboardSection = () => {
         <StoreWrapper>
           <FlexColWrapper>
             <Typography variant='title2' weight='bold' color='white'>
-              {store.name}
+              {name}
             </Typography>
             <Typography variant='body2' color='white'>
-              {store.category}
+              {category}
             </Typography>
             <Typography variant='body2' color='white'>
-              {store.address}
+              {address}
             </Typography>
           </FlexColWrapper>
           <FlexColWrapper>

@@ -5,20 +5,24 @@ import styled from '@emotion/styled';
 import TabNavigation from './components/TabNavigation';
 import { Outlet, useLocation } from 'react-router-dom';
 import useFeedback from './hooks/useFeedback';
+import useStoreMy from '../main/hooks/useStoreMy';
 
 export type FeedbackContextType = {
   feedbackData: Feedback[];
   unReadData: Feedback[];
   completedData: Feedback[];
+  storeId: string;
 };
 
 const FeedbackPage = () => {
   const location = useLocation();
+  const { store } = useStoreMy();
   const { feedbackData, isLoading } = useFeedback({
-    storeId: '1',
+    storeId: store?.id?.toString() ?? '',
+    enabled: !!store,
   });
 
-  if (isLoading || !feedbackData) {
+  if (isLoading || !feedbackData || !store) {
     return <div>Loading...</div>;
   }
 
@@ -39,7 +43,14 @@ const FeedbackPage = () => {
           pendingCount={unReadData.length}
           completedCount={completedData.length}
         />
-        <Outlet context={{ feedbackData, unReadData, completedData }} />
+        <Outlet
+          context={{
+            feedbackData,
+            unReadData,
+            completedData,
+            storeId: store.id,
+          }}
+        />
       </Main>
       <NavigationOwner />
     </>

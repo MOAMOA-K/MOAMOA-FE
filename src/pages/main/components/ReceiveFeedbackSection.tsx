@@ -3,8 +3,12 @@ import ReceiveFeedbackItem from './ReceiveFeedbackItem';
 import Typography from '@/components/UI/Typography';
 import useStoreFeedback from '../hooks/useStoreFeedback';
 
-const ReceiveFeedbackSection = () => {
-  const { feedbackData, isLoading } = useStoreFeedback({ storeId: '1' });
+type ReceiveFeedbackSectionProps = {
+  storeId: string;
+};
+
+const ReceiveFeedbackSection = ({ storeId }: ReceiveFeedbackSectionProps) => {
+  const { feedbackData, isLoading } = useStoreFeedback({ storeId });
 
   if (isLoading || !feedbackData) {
     return null;
