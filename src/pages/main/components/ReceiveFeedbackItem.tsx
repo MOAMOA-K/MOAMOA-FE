@@ -1,23 +1,24 @@
 import Typography from '@/components/UI/Typography';
 import { LetterTag, type LetterTagType } from '@/constants/letter';
-import { ROUTE_PATH } from '@/routes/paths';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 type ReceiveFeedbackItemProps = {
-  feedbackLetterTag: LetterTagType;
-  satisfaction: number;
+  type: LetterTagType;
+  rating: number;
   content: string;
   createdAt: string;
 };
 
 const ReceiveFeedbackItem = ({
-  feedbackLetterTag,
-  satisfaction,
+  type,
+  rating,
   content,
   createdAt,
 }: ReceiveFeedbackItemProps) => {
+  const theme = useTheme();
+
   return (
     <Card>
       <ScoreWrapper>
@@ -26,27 +27,21 @@ const ReceiveFeedbackItem = ({
             {[1, 2, 3, 4, 5].map((num) => (
               <Star
                 key={num}
-                fill={num <= satisfaction ? 'gold' : 'none'}
-                strokeWidth={0}
+                fill={num <= rating ? 'gold' : 'none'}
+                strokeWidth={num <= rating ? 0 : 1}
+                stroke={theme.colors.gray[50]}
               />
             ))}
           </StarBox>
-          <LetterTagBox variant={feedbackLetterTag}>
+          <LetterTagBox variant={type}>
             <Typography variant='body2'>
-              {LetterTag.find((tag) => tag.value === feedbackLetterTag)?.label}
+              {LetterTag.find((tag) => tag.value === type)?.label}
             </Typography>
           </LetterTagBox>
         </Wrapper>
         <Typography variant='body2'>{createdAt}</Typography>
       </ScoreWrapper>
       <Typography variant='body1'>{content}</Typography>
-      <Wrapper>
-        <LinkButton to={ROUTE_PATH.FEEDBACK}>
-          <Typography variant='body2' weight='medium' color='white'>
-            답변하러 가기
-          </Typography>
-        </LinkButton>
-      </Wrapper>
     </Card>
   );
 };
@@ -88,15 +83,4 @@ const LetterTagBox = styled.div<{ variant: LetterTagType }>`
   padding: ${({ theme }) => theme.spacing[1]} ${({ theme }) => theme.spacing[2]};
   border-radius: 12px;
   background-color: ${({ theme, variant }) => theme.colors.tag[variant]};
-`;
-
-const LinkButton = styled(Link)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-  align-items: center;
-  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
-  border-radius: 12px;
-  background-color: ${({ theme }) => theme.colors.owner.main};
 `;
