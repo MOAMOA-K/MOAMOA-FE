@@ -14,6 +14,7 @@ const MainPage = () => {
 
   useEffect(() => {
     queryClient.invalidateQueries({ queryKey: ['user'] });
+    queryClient.invalidateQueries({ queryKey: ['user-detail'] });
   }, [queryClient]);
 
   useEffect(() => {
