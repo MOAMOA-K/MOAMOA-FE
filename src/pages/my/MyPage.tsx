@@ -12,6 +12,7 @@ const MyPage = () => {
   const user = useAuth();
   const logout = () => {
     user?.removeAccessToken();
+    user?.removeRole();
   };
   useEffect(() => {
     if (!user?.accessToken) {
