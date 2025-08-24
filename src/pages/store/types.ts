@@ -21,6 +21,7 @@ export interface StoreAnnouncementDTO {
   feedbackId: number;
   feedbackContent: string;
   content: string;
+  description?: string;
 }
 
 export interface StoreDetailDTO {
@@ -35,6 +36,6 @@ export interface StoreDetailDTO {
   category?: Category;
   imageUrl?: string;
   openingTime?: string;
-  menus: MenuDTO[];
-  storeAnnouncements: StoreAnnouncementDTO[];
+  menuList: MenuDTO[];
+  announcementList: StoreAnnouncementDTO[];
 }
