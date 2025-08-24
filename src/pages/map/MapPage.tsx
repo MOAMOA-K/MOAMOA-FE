@@ -6,7 +6,7 @@ import BottomSheet from '@/pages/map/components/BottomSheet';
 import SearchTrigger from '@/pages/map/components/SearchTrigger';
 import NavigationCustomer from '@/components/layout/NavigationCustomer';
 import { fetchStoreList, type StoreListItem } from '@/api/store/store';
-import { useAuth } from '@/contexts/AuthContext';
+import { SESSION_AUTH_KEY } from '@/constants/storageKeys';
 
 type MarkerLike = { setMap: (m: unknown | null) => void };
 
@@ -17,11 +17,8 @@ export default function MapPage() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);
   const navigate = useNavigate();
-  const auth = useAuth();
-  const accessToken = auth?.accessToken ?? null; // string | null
 
   useEffect(() => {
-    if (!accessToken) return;
     const KEY = import.meta.env.VITE_KAKAO_MAP_KEY;
     if (!KEY) {
       setErr('Kakao API Key가 설정되지 않았습니다.');
@@ -65,7 +62,7 @@ export default function MapPage() {
             level: 4,
           });
 
-          // 1) 현재 위치(가능하면)
+          // 현재 위치(가능 시)
           let lat = 35.8889;
           let lng = 128.6109;
           if (navigator.geolocation) {
@@ -90,26 +87,19 @@ export default function MapPage() {
             }
           }
 
-          if (!accessToken) {
-            setErr('로그인 후 이용해주세요.');
-            setLoading(false);
-            return;
+          // (옵션) 세션 토큰 존재 여부만 확인 로그
+          if (import.meta.env.DEV) {
+            const t = sessionStorage.getItem(SESSION_AUTH_KEY);
+            console.log(
+              '[MapPage] session token:',
+              t ? '(present)' : '(missing)',
+            );
           }
 
-          // 3) 가게 리스트 호출 (헤더에 토큰 포함)
+          // 리스트 호출(토큰은 axios 인터셉터가 자동 주입)
           let stores: StoreListItem[] = [];
           try {
-            if (import.meta.env.DEV) {
-              console.log(
-                '[MapPage] calling /api/store/list with header.Authorization',
-              );
-            }
-            stores = await fetchStoreList(
-              { latitude: lat, longitude: lng },
-              accessToken,
-            );
-
-            // dev 확인용
+            stores = await fetchStoreList({ latitude: lat, longitude: lng });
 
             if (import.meta.env.DEV) {
               console.group('[MapPage] /store/list result');
@@ -117,7 +107,7 @@ export default function MapPage() {
               console.log('first:', stores[0]);
               console.groupEnd();
             }
-          } catch (apiErr: unknown) {
+          } catch (apiErr) {
             if (import.meta.env.DEV)
               console.error('[MapPage] fetchStoreList error:', apiErr);
             setErr('가게 목록을 불러오지 못했습니다. (권한/네트워크 확인)');
@@ -125,7 +115,7 @@ export default function MapPage() {
             return;
           }
 
-          // 4) 마커 렌더링
+          // 마커 렌더
           stores.forEach((s) => {
             const marker = new kakao.maps.Marker({
               map,
@@ -157,7 +147,7 @@ export default function MapPage() {
       markersRef.current = [];
       setSelected(null);
     };
-  }, [accessToken]);
+  }, []);
 
   return (
     <Wrap>
@@ -186,7 +176,7 @@ export default function MapPage() {
   );
 }
 
-/* --- styles --- */
+/* --- styles 동일 --- */
 const Wrap = styled.div`
   position: relative;
   width: 100%;

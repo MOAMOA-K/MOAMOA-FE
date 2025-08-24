@@ -6,5 +6,5 @@ export const API_PATHS = {
   ANNOUNCEMENT: `/api/announcement`,
 
   STORE_LIST: '/api/store/list',
-  STORE_DETAIL: (id: string | number) => `/api/store/${id}`,
+  STORE_DETAIL: (id: number) => `/api/store/${id}`,
 };

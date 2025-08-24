@@ -1,6 +1,7 @@
 import axiosInstance from '@/api/axiosInstance';
 import { API_PATHS } from '@/api/paths';
 
+/** 리스트 아이템 타입 */
 export type StoreListItem = {
   id: number;
   name: string;
@@ -41,26 +42,21 @@ export type StoreDetailDTO = StoreListItem & {
   }>;
 };
 
-// 리스트 조회 (토큰 필요)
-
-export async function fetchStoreList(
-  params: { keyword?: string; latitude?: number; longitude?: number },
-  accessToken: string, // ← 반드시 필요하도록 명시
-) {
-  const res = await axiosInstance.get('/api/store/list', {
-    params,
-    headers: { Authorization: `Bearer ${accessToken}` },
-  });
-  return res.data;
+export async function fetchStoreList(params: {
+  keyword?: string;
+  latitude?: number;
+  longitude?: number;
+}): Promise<StoreListItem[]> {
+  const data = await axiosInstance.get<StoreListItem[], StoreListItem[]>(
+    API_PATHS.STORE_LIST ?? '/api/store/list',
+    { params },
+  );
+  return data; // <- 이미 T로 언랩됨
 }
 
-export async function fetchStoreDetail(
-  id: number,
-  accessToken: string,
-): Promise<StoreDetailDTO> {
-  const res = await axiosInstance.get<StoreDetailDTO>(
-    API_PATHS.STORE_DETAIL(id),
-    { headers: { Authorization: `Bearer ${accessToken}` } },
+export async function fetchStoreDetail(id: number): Promise<StoreDetailDTO> {
+  const data = await axiosInstance.get<StoreDetailDTO, StoreDetailDTO>(
+    API_PATHS.STORE_DETAIL ? API_PATHS.STORE_DETAIL(id) : `/api/store/${id}`,
   );
-  return res.data;
+  return data; // <- 이미 T로 언랩됨
 }
