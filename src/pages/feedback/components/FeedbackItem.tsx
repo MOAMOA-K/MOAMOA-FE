@@ -4,24 +4,28 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Star } from 'lucide-react';
 import DoneSection from './DoneSection';
-import ProcessingSection from './ProcessingSection';
+import UnReadSection from './UnReadSection';
 
 type FeedbackItemProps = {
   rating: number;
   type: LetterTagType;
-  createAt: string;
+  createdAt: string;
   modifiedContent: string;
   reply: string | null;
-  status: 'PROCESSING' | 'DONE';
+  status: 'UNREAD' | 'DONE';
+  feedbackId: string;
+  storeId: string;
 };
 
 const FeedbackItem = ({
   rating,
   type,
-  createAt,
+  createdAt,
   modifiedContent,
   reply,
   status,
+  feedbackId,
+  storeId,
 }: FeedbackItemProps) => {
   const theme = useTheme();
 
@@ -47,23 +51,27 @@ const FeedbackItem = ({
           </TagBox>
           <StatusBox status={status}>
             <Typography variant='body2'>
-              {status === 'PROCESSING' ? '처리 중' : '완료'}
+              {status === 'UNREAD' ? '대기 중' : '완료'}
             </Typography>
           </StatusBox>
         </Wrapper>
-        <Typography variant='body2'>{createAt}</Typography>
+        <Typography variant='body2'>{createdAt}</Typography>
       </LineWrapper>
       <ContentBox>
         <Typography variant='body1'>{modifiedContent}</Typography>
       </ContentBox>
-      {reply ? <DoneSection reply={reply} /> : <ProcessingSection />}
+      {reply ? (
+        <DoneSection reply={reply} />
+      ) : (
+        <UnReadSection storeId={storeId} feedbackId={feedbackId} />
+      )}
     </Card>
   );
 };
 
 export default FeedbackItem;
 
-const Card = styled.div<{ status?: 'PROCESSING' | 'DONE' }>`
+const Card = styled.div<{ status?: 'UNREAD' | 'DONE' }>`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme, status }) =>
@@ -102,7 +110,7 @@ const TagBox = styled.div<{ tag: LetterTagType }>`
   background-color: ${({ theme, tag }) => theme.colors.tag[tag]};
 `;
 
-const StatusBox = styled.div<{ status: 'PROCESSING' | 'DONE' }>`
+const StatusBox = styled.div<{ status: 'UNREAD' | 'DONE' }>`
   display: flex;
   align-items: center;
   padding: ${({ theme }) => theme.spacing[1]} ${({ theme }) => theme.spacing[2]};

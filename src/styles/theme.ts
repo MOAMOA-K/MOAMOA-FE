@@ -35,12 +35,12 @@ export const theme = {
     },
     tag: {
       star: '#f1f436',
-      positive: '#e5ffd4',
-      improve: '#dbe9fe',
-      complain: '#ffdcda',
+      COMPLIMENT: '#e5ffd4',
+      SUGGESTION: '#dbe9fe',
+      COMPLAINT: '#ffdcda',
     },
     feedback: {
-      PROCESSING: '#FFF7ED',
+      UNREAD: '#FFF7ED',
       DONE: '#EEF7FF',
     },
     // 텍스트 색상

@@ -1,29 +1,31 @@
-import { useOutletContext } from 'react-router-dom';
 import FeedbackItem from './FeedbackItem';
 import styled from '@emotion/styled';
+import { useOutletContext } from 'react-router-dom';
 import type { FeedbackContextType } from '../FeedbackPage';
 
-const PendingTab = () => {
-  const { pendingList } = useOutletContext<FeedbackContextType>();
+const UnReadTab = () => {
+  const { unReadData } = useOutletContext<FeedbackContextType>();
 
   return (
     <Container>
-      {pendingList.map((feedback) => (
+      {unReadData?.map((feedback) => (
         <FeedbackItem
           key={feedback.id}
           rating={feedback.rating}
           type={feedback.type}
-          createAt={feedback.createdAt}
+          createdAt={feedback.createdAt}
           modifiedContent={feedback.modifiedContent}
           reply={feedback.reply}
           status={feedback.status}
+          feedbackId={feedback.id.toString()}
+          storeId={'1'}
         />
       ))}
     </Container>
   );
 };
 
-export default PendingTab;
+export default UnReadTab;
 
 const Container = styled.div`
   display: flex;

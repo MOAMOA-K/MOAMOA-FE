@@ -1,7 +1,7 @@
-import { useOutletContext } from 'react-router-dom';
 import FeedbackItem from './FeedbackItem';
 import styled from '@emotion/styled';
 import type { FeedbackContextType } from '../FeedbackPage';
+import { useOutletContext } from 'react-router-dom';
 
 const AllTab = () => {
   const { feedbackData } = useOutletContext<FeedbackContextType>();
@@ -13,10 +13,12 @@ const AllTab = () => {
           key={feedback.id}
           rating={feedback.rating}
           type={feedback.type}
-          createAt={feedback.createdAt}
+          createdAt={feedback.createdAt}
           modifiedContent={feedback.modifiedContent}
           reply={feedback.reply}
           status={feedback.status}
+          feedbackId={feedback.id.toString()}
+          storeId={'1'}
         />
       ))}
     </Container>
