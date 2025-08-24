@@ -3,14 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 
 type useFeedbackParams = {
   storeId: string;
-  accessToken: string;
   type?: 'UNREAD' | 'DONE';
 };
 
-const useFeedback = ({ storeId, accessToken, type }: useFeedbackParams) => {
+const useFeedback = ({ storeId, type }: useFeedbackParams) => {
   const { data, isLoading } = useQuery<Feedback[]>({
     queryKey: ['feedback', storeId, type],
-    queryFn: () => getStoreFeedbacks({ storeId, accessToken, type }),
+    queryFn: () => getStoreFeedbacks({ storeId, type }),
   });
 
   return {

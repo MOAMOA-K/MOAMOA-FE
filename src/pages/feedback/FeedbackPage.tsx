@@ -5,7 +5,6 @@ import styled from '@emotion/styled';
 import TabNavigation from './components/TabNavigation';
 import { Outlet, useLocation } from 'react-router-dom';
 import useFeedback from './hooks/useFeedback';
-import { useAuth } from '@/contexts/AuthContext';
 
 export type FeedbackContextType = {
   feedbackData: Feedback[];
@@ -15,10 +14,8 @@ export type FeedbackContextType = {
 
 const FeedbackPage = () => {
   const location = useLocation();
-  const user = useAuth();
   const { feedbackData, isLoading } = useFeedback({
     storeId: '1',
-    accessToken: user?.accessToken || '',
   });
 
   if (isLoading || !feedbackData) {

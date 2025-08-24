@@ -23,8 +23,12 @@ const UnReadSection = ({ storeId, feedbackId }: UnReadSectionProps) => {
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postAnnouncement();
-    setProcessing(false);
+    postAnnouncement(undefined, {
+      onSuccess: () => {
+        setReply('');
+        setProcessing(false);
+      },
+    });
   };
 
   return (

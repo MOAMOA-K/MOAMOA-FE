@@ -21,7 +21,7 @@ import FeedbackPage from '@/pages/feedback/FeedbackPage';
 import CompletedTab from '@/pages/feedback/components/CompletedTab';
 import AllTab from '@/pages/feedback/components/AllTab';
 import SignUpPage from '@/pages/auth/SignUpPage';
-import UnReadTab from '@/pages/feedback/components/unReadTab';
+import UnReadTab from '@/pages/feedback/components/UnReadTab';
 
 const Router = () => {
   return (
