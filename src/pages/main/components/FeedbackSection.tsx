@@ -2,10 +2,24 @@ import styled from '@emotion/styled';
 import { feedbacks } from '../mocks/feedbacks';
 import FeedbackItem from './FeedbackItem';
 import useCustomerFeedback from '../hooks/useCustomerFeedback';
+import Typography from '@/components/UI/Typography';
 
 const FeedbackSection = () => {
-  const { feedbackData } = useCustomerFeedback();
-  console.log(feedbackData);
+  const { feedbackData, isLoading, isError } = useCustomerFeedback();
+
+  if (isLoading) return null;
+  if (isError || !feedbackData)
+    return (
+      <Container>
+        <Wrapper>
+          <Title>최근 피드백</Title>
+          <ErrorBox>
+            <Typography variant='body1'>최근 피드백이 없습니다.</Typography>
+          </ErrorBox>
+        </Wrapper>
+      </Container>
+    );
+
   return (
     <Container>
       <Wrapper>
@@ -48,4 +62,10 @@ const Title = styled.p`
   line-height: ${({ theme }) => theme.typography.title2.lineHeight};
   font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
   color: ${({ theme }) => theme.colors.text.default};
+`;
+
+const ErrorBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

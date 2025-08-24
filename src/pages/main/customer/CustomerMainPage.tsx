@@ -13,7 +13,7 @@ const CustomerMainPage = () => {
   const { userData, isLoading } = useUserDetail();
 
   if (isLoading || !userData) {
-    return <div>Loading...</div>;
+    return null;
   }
 
   return (

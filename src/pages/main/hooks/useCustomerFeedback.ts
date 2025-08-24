@@ -2,7 +2,7 @@ import { getFeedbackMy } from '@/api/feedback/getFeedbackMy';
 import { useQuery } from '@tanstack/react-query';
 
 const useCustomerFeedback = () => {
-  const { data, isLoading } = useQuery<MyFeedback[]>({
+  const { data, isLoading, isError } = useQuery<MyFeedback[]>({
     queryKey: ['feedback-my'],
     queryFn: () => getFeedbackMy(),
   });
@@ -10,6 +10,7 @@ const useCustomerFeedback = () => {
   return {
     feedbackData: data,
     isLoading,
+    isError,
   };
 };
 
