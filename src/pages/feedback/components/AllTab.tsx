@@ -17,6 +17,8 @@ const AllTab = () => {
           modifiedContent={feedback.modifiedContent}
           reply={feedback.reply}
           status={feedback.status}
+          feedbackId={feedback.id.toString()}
+          storeId={'1'}
         />
       ))}
     </Container>

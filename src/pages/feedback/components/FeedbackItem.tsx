@@ -4,7 +4,7 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Star } from 'lucide-react';
 import DoneSection from './DoneSection';
-import ProcessingSection from './ProcessingSection';
+import UnReadSection from './ProcessingSection';
 
 type FeedbackItemProps = {
   rating: number;
@@ -13,6 +13,8 @@ type FeedbackItemProps = {
   modifiedContent: string;
   reply: string | null;
   status: 'UNREAD' | 'DONE';
+  feedbackId: string;
+  storeId: string;
 };
 
 const FeedbackItem = ({
@@ -22,6 +24,8 @@ const FeedbackItem = ({
   modifiedContent,
   reply,
   status,
+  feedbackId,
+  storeId,
 }: FeedbackItemProps) => {
   const theme = useTheme();
 
@@ -47,7 +51,7 @@ const FeedbackItem = ({
           </TagBox>
           <StatusBox status={status}>
             <Typography variant='body2'>
-              {status === 'UNREAD' ? '처리 중' : '완료'}
+              {status === 'UNREAD' ? '대기 중' : '완료'}
             </Typography>
           </StatusBox>
         </Wrapper>
@@ -56,7 +60,11 @@ const FeedbackItem = ({
       <ContentBox>
         <Typography variant='body1'>{modifiedContent}</Typography>
       </ContentBox>
-      {reply ? <DoneSection reply={reply} /> : <ProcessingSection />}
+      {reply ? (
+        <DoneSection reply={reply} />
+      ) : (
+        <UnReadSection storeId={storeId} feedbackId={feedbackId} />
+      )}
     </Card>
   );
 };
