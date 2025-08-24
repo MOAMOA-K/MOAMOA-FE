@@ -2,7 +2,7 @@ import Typography from '@/components/UI/Typography';
 import { LetterTag, type LetterTagType } from '@/constants/letter';
 import { ROUTE_PATH } from '@/routes/paths';
 import styled from '@emotion/styled';
-import { Heart, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 type ReceiveFeedbackItemProps = {
@@ -46,9 +46,6 @@ const ReceiveFeedbackItem = ({
             답변하러 가기
           </Typography>
         </LinkButton>
-        <HeartButton type='button'>
-          <Heart size={20} />
-        </HeartButton>
       </Wrapper>
     </Card>
   );
@@ -102,14 +99,4 @@ const LinkButton = styled(Link)`
   padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.owner.main};
-`;
-
-const HeartButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: ${({ theme }) => theme.spacing[2]};
-  border-radius: 12px;
-  border: 1px solid ${({ theme }) => theme.colors.gray[70]};
-  cursor: pointer;
 `;
