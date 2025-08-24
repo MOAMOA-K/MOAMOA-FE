@@ -1,21 +1,20 @@
-import { postAnnouncement } from '@/api/announcement/postAnnouncement';
+import { postFeedbackReply } from '@/api/feedback/postFeedbackReply';
 import { useMutation } from '@tanstack/react-query';
 type useAnnouncementParams = {
   feedbackId: string;
-  storeId: string;
   description: string;
 };
 
 const useAnnouncement = ({
   feedbackId,
-  storeId,
   description,
 }: useAnnouncementParams) => {
   const { mutate } = useMutation({
-    mutationFn: () => postAnnouncement({ storeId, feedbackId, description }),
+    mutationFn: () =>
+      postFeedbackReply({ feedbackId, replyContent: description }),
   });
 
-  return { postAnnouncement: mutate };
+  return { postReply: mutate };
 };
 
 export default useAnnouncement;

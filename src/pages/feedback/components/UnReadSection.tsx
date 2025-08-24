@@ -9,12 +9,11 @@ type UnReadSectionProps = {
   feedbackId: string;
 };
 
-const UnReadSection = ({ storeId, feedbackId }: UnReadSectionProps) => {
+const UnReadSection = ({ feedbackId }: UnReadSectionProps) => {
   const [processing, setProcessing] = useState(false);
   const [reply, setReply] = useState('');
-  const { postAnnouncement } = useAnnouncement({
+  const { postReply } = useAnnouncement({
     feedbackId,
-    storeId,
     description: reply,
   });
   const handleClickAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -23,7 +22,7 @@ const UnReadSection = ({ storeId, feedbackId }: UnReadSectionProps) => {
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postAnnouncement(undefined, {
+    postReply(undefined, {
       onSuccess: () => {
         setReply('');
         setProcessing(false);
