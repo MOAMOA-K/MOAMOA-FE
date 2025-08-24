@@ -4,11 +4,11 @@ import styled from '@emotion/styled';
 import type { FeedbackContextType } from '../FeedbackPage';
 
 const CompletedTab = () => {
-  const { completedList } = useOutletContext<FeedbackContextType>();
+  const { completedData } = useOutletContext<FeedbackContextType>();
 
   return (
     <Container>
-      {completedList.map((feedback) => (
+      {completedData.map((feedback) => (
         <FeedbackItem
           key={feedback.id}
           rating={feedback.rating}

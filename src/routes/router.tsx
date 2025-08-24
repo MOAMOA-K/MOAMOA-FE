@@ -20,8 +20,8 @@ import MyLetterPage from '@/pages/my/customer/letter/MyLetterPage';
 import FeedbackPage from '@/pages/feedback/FeedbackPage';
 import CompletedTab from '@/pages/feedback/components/CompletedTab';
 import AllTab from '@/pages/feedback/components/AllTab';
-import PendingTab from '@/pages/feedback/components/PendingTab';
 import SignUpPage from '@/pages/auth/SignUpPage';
+import UnReadTab from '@/pages/feedback/components/unReadTab';
 
 const Router = () => {
   return (
@@ -55,7 +55,7 @@ const Router = () => {
           path={ROUTE_PATH.FEEDBACK_COMPLETED}
           element={<CompletedTab />}
         />
-        <Route path={ROUTE_PATH.FEEDBACK_PENDING} element={<PendingTab />} />
+        <Route path={ROUTE_PATH.FEEDBACK_PENDING} element={<UnReadTab />} />
       </Route>
       <Route path={ROUTE_PATH.INTERACTION} element={<InteractionPage />} />
     </Routes>

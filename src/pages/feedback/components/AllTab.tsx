@@ -1,7 +1,7 @@
-import { useOutletContext } from 'react-router-dom';
 import FeedbackItem from './FeedbackItem';
 import styled from '@emotion/styled';
 import type { FeedbackContextType } from '../FeedbackPage';
+import { useOutletContext } from 'react-router-dom';
 
 const AllTab = () => {
   const { feedbackData } = useOutletContext<FeedbackContextType>();
