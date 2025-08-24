@@ -12,9 +12,9 @@ import useStoreMy from '../hooks/useStoreMy';
 
 const OwnerMainPage = () => {
   const { userData, isLoading } = useUserDetail();
-  const { store } = useStoreMy();
+  const { store, isLoading: isLoadingStore } = useStoreMy();
 
-  if (isLoading || !userData || !store) {
+  if (isLoading || !userData || !store || isLoadingStore) {
     return null;
   }
 

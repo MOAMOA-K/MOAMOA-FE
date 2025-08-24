@@ -16,7 +16,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [role, setRole] = useState<Role | undefined>(() => {
-    const role = sessionStorage.getItem(SESSION_AUTH_KEY);
+    const role = sessionStorage.getItem(SESSION_ROLE_KEY);
     return role ? (role as Role) : undefined;
   });
   const [accessToken, setAccessToken] = useState<string | undefined>(() => {

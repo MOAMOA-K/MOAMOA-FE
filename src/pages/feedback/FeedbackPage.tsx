@@ -16,14 +16,14 @@ export type FeedbackContextType = {
 
 const FeedbackPage = () => {
   const location = useLocation();
-  const { store } = useStoreMy();
+  const { store, isLoading: isLoadingStore } = useStoreMy();
   const { feedbackData, isLoading } = useFeedback({
     storeId: store?.id?.toString() ?? '',
     enabled: !!store,
   });
 
-  if (isLoading || !feedbackData || !store) {
-    return <div>Loading...</div>;
+  if (isLoading || !feedbackData || !store || isLoadingStore) {
+    return null;
   }
 
   const unReadData = feedbackData.filter(
@@ -48,7 +48,7 @@ const FeedbackPage = () => {
             feedbackData,
             unReadData,
             completedData,
-            storeId: store.id,
+            storeId: store.id.toString(),
           }}
         />
       </Main>

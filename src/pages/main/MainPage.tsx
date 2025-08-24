@@ -15,21 +15,30 @@ const MainPage = () => {
   useEffect(() => {
     queryClient.invalidateQueries({ queryKey: ['user'] });
     queryClient.invalidateQueries({ queryKey: ['user-detail'] });
-  }, [queryClient]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
-    if (userData?.role) user?.updateRole(userData.role);
-    if (user?.role === 'ROLE_CUSTOMER') {
-      navigate(ROUTE_PATH.CUSTOMER);
-    } else if (user?.role === 'ROLE_OWNER') {
-      navigate(ROUTE_PATH.OWNER);
+    if (userData?.role) {
+      user?.updateRole(userData.role);
+      if (userData.role === 'ROLE_CUSTOMER') {
+        navigate(ROUTE_PATH.CUSTOMER);
+      } else if (userData.role === 'ROLE_OWNER') {
+        navigate(ROUTE_PATH.OWNER);
+      }
     }
-  }, [user?.role, userData?.role, user, navigate]);
+  }, [userData, user, navigate]);
+
+  useEffect(() => {
+    if (isError || !userData) {
+      navigate(ROUTE_PATH.LANDING);
+    }
+  }, [isError, userData, navigate]);
 
   if (isLoading) return <div>Loading...</div>;
 
   if (isError || !userData) {
-    navigate(ROUTE_PATH.LANDING);
+    return null;
   }
 
   return (
