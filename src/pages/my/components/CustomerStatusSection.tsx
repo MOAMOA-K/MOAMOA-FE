@@ -2,8 +2,13 @@ import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
 import { User } from 'lucide-react';
 import StatusItem from './StatusItem';
+import useUserDetail from '../hooks/useUserDetail';
 
 const CustomerStatusSection = () => {
+  const { userDetail, isLoading } = useUserDetail();
+
+  if (isLoading || !userDetail) return null;
+
   return (
     <Container>
       <Card>
@@ -13,16 +18,16 @@ const CustomerStatusSection = () => {
           </IconBox>
           <InformationBox>
             <Typography variant='title2' weight='bold'>
-              김민준
+              {userDetail.nickname}
             </Typography>
-            <Typography variant='body2'>kim03@knu.ac.kr</Typography>
+            <Typography variant='body2'>{userDetail.email}</Typography>
           </InformationBox>
         </Information>
         <Line />
         <StatusBox>
-          <StatusItem value={1250} label='보유 포인트' />
-          <StatusItem value={23} label='피드백 수' />
-          <StatusItem value={7} label='보유 쿠폰수' />
+          <StatusItem value={userDetail.points} label='보유 포인트' />
+          <StatusItem value={userDetail.feedbackCount} label='피드백 수' />
+          <StatusItem value={userDetail.couponCount} label='보유 쿠폰수' />
         </StatusBox>
       </Card>
     </Container>
