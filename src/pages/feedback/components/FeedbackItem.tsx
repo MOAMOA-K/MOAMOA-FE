@@ -30,7 +30,6 @@ const FeedbackItem = ({
   storeId,
 }: FeedbackItemProps) => {
   const theme = useTheme();
-  console.log(improvements);
 
   return (
     <Card>
