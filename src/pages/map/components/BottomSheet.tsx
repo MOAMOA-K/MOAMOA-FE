@@ -6,6 +6,7 @@ type Props = {
   subtitle?: string;
   imageUrl?: string;
   onClose: () => void;
+  onClickDetail?: () => void;
 };
 
 export default function BottomSheet({
@@ -14,6 +15,7 @@ export default function BottomSheet({
   subtitle,
   imageUrl,
   onClose,
+  onClickDetail,
 }: Props) {
   return (
     <Dim open={open} onClick={onClose} aria-hidden={!open}>
@@ -23,7 +25,12 @@ export default function BottomSheet({
         aria-modal='true'
         aria-labelledby='bs-title'
         aria-describedby='bs-subtitle'
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClickDetail?.();
+        }}
+        tabIndex={0}
+        aria-label='가게 상세로 이동'
       >
         <Grab />
         <Header>
@@ -64,6 +71,7 @@ const Panel = styled.div<OpenProp>`
   box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
   transform: translateY(${({ open }) => (open ? '0' : '8px')});
   transition: transform 0.24s ease;
+  cursor: pointer;
 `;
 
 const Grab = styled.div`
