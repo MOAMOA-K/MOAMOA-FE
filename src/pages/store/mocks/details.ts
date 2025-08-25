@@ -13,7 +13,7 @@ export const mockStoreDetails: Record<number, StoreDetailDTO> = {
     category: 'KOREAN',
     imageUrl: 'https://picsum.photos/seed/moa/800/480',
     openingTime: '매일 11:00 - 22:00',
-    menus: [
+    menuList: [
       {
         id: 101,
         storeId: 1,
@@ -31,7 +31,7 @@ export const mockStoreDetails: Record<number, StoreDetailDTO> = {
         imageUrl: 'https://picsum.photos/seed/menu2/400/300',
       },
     ],
-    storeAnnouncements: [
+    announcementList: [
       {
         id: 1,
         storeId: 1,
