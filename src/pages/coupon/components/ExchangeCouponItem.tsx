@@ -1,7 +1,9 @@
 import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
+import useUserCoupon from '../hooks/useUserCoupon';
 
 type ExchangeCouponItemProps = {
+  id: number;
   storeName: string;
   name: string;
   description: string;
@@ -11,6 +13,7 @@ type ExchangeCouponItemProps = {
 };
 
 const ExchangeCouponItem = ({
+  id,
   storeName,
   name,
   description,
@@ -18,6 +21,11 @@ const ExchangeCouponItem = ({
   validUntil,
   point,
 }: ExchangeCouponItemProps) => {
+  const { postUserCoupon } = useUserCoupon();
+
+  const buyCoupon = () => {
+    postUserCoupon({ couponId: id.toString() });
+  };
   return (
     <Container>
       <CouponBox>
@@ -36,7 +44,7 @@ const ExchangeCouponItem = ({
       </CouponBox>
       <PriceButton
         type='button'
-        onClick={() => {}}
+        onClick={() => buyCoupon()}
         disabled={point < pointCost}
       >
         <Typography variant='title2' weight='medium' color='white'>

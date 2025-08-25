@@ -14,4 +14,6 @@ export const API_PATHS = {
   STORE_RATING: (storeId: string) => `/api/store/${storeId}/ratings`,
 
   COUPONS: `/api/coupons`,
+
+  USER_COUPON: '/api/user-coupon',
 };
