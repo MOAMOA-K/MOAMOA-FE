@@ -84,7 +84,7 @@ const TypoBox = styled.div`
   justify-content: center;
   padding: ${({ theme }) => theme.spacing[1]} ${({ theme }) => theme.spacing[3]};
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.tag.complain};
+  background-color: ${({ theme }) => theme.colors.tag.COMPLAINT};
 `;
 
 const Line = styled.div`

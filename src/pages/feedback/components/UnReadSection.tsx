@@ -1,20 +1,18 @@
 import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
-import { Bot, Heart } from 'lucide-react';
+import { Bot } from 'lucide-react';
 import { useState } from 'react';
-import useAnnouncement from '../hooks/useAnnouncement';
+import useFeedbackReply from '../hooks/useFeedbackReply';
 
 type UnReadSectionProps = {
   storeId: string;
   feedbackId: string;
 };
-
-const UnReadSection = ({ storeId, feedbackId }: UnReadSectionProps) => {
+const UnReadSection = ({ feedbackId }: UnReadSectionProps) => {
   const [processing, setProcessing] = useState(false);
   const [reply, setReply] = useState('');
-  const { postAnnouncement } = useAnnouncement({
+  const { postReply } = useFeedbackReply({
     feedbackId,
-    storeId,
     description: reply,
   });
   const handleClickAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -23,7 +21,7 @@ const UnReadSection = ({ storeId, feedbackId }: UnReadSectionProps) => {
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postAnnouncement(undefined, {
+    postReply(undefined, {
       onSuccess: () => {
         setReply('');
         setProcessing(false);
@@ -64,9 +62,6 @@ const UnReadSection = ({ storeId, feedbackId }: UnReadSectionProps) => {
               </Typography>
             </LinkButton>
           )}
-          <HeartButton type='button'>
-            <Heart size={20} />
-          </HeartButton>
         </Wrapper>
       </form>
     </>
@@ -115,14 +110,4 @@ const LinkButton = styled.button`
   padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.owner.main};
-`;
-
-const HeartButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: ${({ theme }) => theme.spacing[2]};
-  border-radius: 12px;
-  border: 1px solid ${({ theme }) => theme.colors.gray[70]};
-  cursor: pointer;
 `;

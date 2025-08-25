@@ -1,21 +1,31 @@
 import styled from '@emotion/styled';
 import ReceiveFeedbackItem from './ReceiveFeedbackItem';
-import { receiveFeedbacks } from '../mocks/feedbacks';
 import Typography from '@/components/UI/Typography';
+import useStoreFeedback from '../hooks/useStoreFeedback';
 
-const ReceiveFeedbackSection = () => {
+type ReceiveFeedbackSectionProps = {
+  storeId: string;
+};
+
+const ReceiveFeedbackSection = ({ storeId }: ReceiveFeedbackSectionProps) => {
+  const { feedbackData, isLoading } = useStoreFeedback({ storeId });
+
+  if (isLoading || !feedbackData) {
+    return null;
+  }
+
   return (
     <Container>
       <Wrapper>
         <Typography variant='title2' weight='bold'>
           최근 받은 피드백
         </Typography>
-        {receiveFeedbacks.map((feedback) => (
+        {feedbackData.slice(0, 3).map((feedback) => (
           <ReceiveFeedbackItem
             key={feedback.id}
-            feedbackLetterTag={feedback.letterTag}
-            satisfaction={feedback.satisfaction}
-            content={feedback.content}
+            type={feedback.type}
+            rating={feedback.rating}
+            content={feedback.modifiedContent}
             createdAt={feedback.createdAt}
           />
         ))}

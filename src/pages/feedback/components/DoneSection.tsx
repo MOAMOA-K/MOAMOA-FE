@@ -6,17 +6,21 @@ type DoneSectionProps = {
   reply: string;
 };
 
-const DoneSection = ({ reply }: DoneSectionProps) => (
-  <Card>
-    <Wrapper>
-      <Store />
-      <Typography variant='body1' weight='medium'>
-        사장님 답변
-      </Typography>
-    </Wrapper>
-    <Typography variant='body1'>{reply}</Typography>
-  </Card>
-);
+const DoneSection = ({ reply }: DoneSectionProps) => {
+  const replyJson = JSON.parse(reply);
+
+  return (
+    <Card>
+      <Wrapper>
+        <Store />
+        <Typography variant='body1' weight='medium'>
+          사장님 답변
+        </Typography>
+      </Wrapper>
+      <Typography variant='body1'>{replyJson.replyContent}</Typography>
+    </Card>
+  );
+};
 
 export default DoneSection;
 

@@ -3,14 +3,15 @@ import Header from '@/components/layout/Header';
 import NavigationCustomer from '@/components/layout/NavigationCustomer';
 import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import Typography from '@/components/UI/Typography';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useOutletContext } from 'react-router-dom';
 import { ROUTE_PATH } from '@/routes/paths';
 import CustomerStatusSection from '../components/CustomerStatusSection';
 import HistorySection from '../components/HistorySection';
+import type { LogoutType } from '../MyPage';
 
 const CustomerMyPage = () => {
-  const navigate = useNavigate();
   const location = useLocation();
+  const { logout } = useOutletContext<LogoutType>();
   const isSubRoute = location.pathname !== ROUTE_PATH.MY_CUSTOMER;
 
   return (
@@ -22,7 +23,7 @@ const CustomerMyPage = () => {
             <CustomerStatusSection />
             <HistorySection />
             <LogoutSection>
-              <LogoutButton onClick={() => navigate(ROUTE_PATH.LOGIN)}>
+              <LogoutButton onClick={logout}>
                 <Typography variant='body2' color='white'>
                   로그아웃
                 </Typography>

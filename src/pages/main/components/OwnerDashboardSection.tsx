@@ -1,26 +1,49 @@
 import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
-import { Star } from 'lucide-react';
-import DashboardItem from './DashboardItem';
+import { ArrowRight, Star } from 'lucide-react';
+import useStoreRating from '../hooks/useStoreRating';
+import { ROUTE_PATH } from '@/routes/paths';
+import { Link } from 'react-router-dom';
 
-const OwnerDashboardSection = () => {
+type OwnerDashboardSectionProps = {
+  storeId: string;
+  name: string;
+  category: string;
+  address: string;
+};
+
+const OwnerDashboardSection = ({
+  storeId,
+  name,
+  category,
+  address,
+}: OwnerDashboardSectionProps) => {
+  const { storeRating, isLoading } = useStoreRating(storeId);
+
+  if (isLoading || !storeRating) {
+    return null;
+  }
+
   return (
     <Container>
       <Card>
         <StoreWrapper>
           <FlexColWrapper>
             <Typography variant='title2' weight='bold' color='white'>
-              카페 달빛
+              {name}
             </Typography>
             <Typography variant='body2' color='white'>
-              카페
+              {category}
+            </Typography>
+            <Typography variant='body2' color='white'>
+              {address}
             </Typography>
           </FlexColWrapper>
           <FlexColWrapper>
             <StarWrapper>
               <Star fill='gold' strokeWidth={0} />
               <Typography variant='subtitle1' color='white' weight='medium'>
-                4.8
+                {storeRating.toFixed(1)}
               </Typography>
             </StarWrapper>
             <Typography variant='body2' color='white'>
@@ -28,12 +51,12 @@ const OwnerDashboardSection = () => {
             </Typography>
           </FlexColWrapper>
         </StoreWrapper>
-        <Line />
-        <ItemBox>
-          <DashboardItem value={23} label='총 피드백' />
-          <DashboardItem value={156} label='이번달 방문' />
-          <DashboardItem value={12} label='개선 완료' />
-        </ItemBox>
+        <Button to={ROUTE_PATH.INTERACTION}>
+          <Typography variant='body1' weight='bold' color='white'>
+            쿠폰 관리하기
+          </Typography>
+          <ArrowRight />
+        </Button>
       </Card>
     </Container>
   );
@@ -71,7 +94,6 @@ const StoreWrapper = styled.div`
 const FlexColWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: ${({ theme }) => theme.spacing[1]};
 `;
 
@@ -82,14 +104,23 @@ const StarWrapper = styled.div`
   justify-content: center;
 `;
 
-const Line = styled.div`
-  height: 1px;
-  background-color: ${({ theme }) => theme.colors.default.white};
-`;
-
-const ItemBox = styled.div`
+const Button = styled(Link)`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: ${({ theme }) => `${theme.spacing[3]} ${theme.spacing[6]}`};
+  width: fit-content;
+  background-color: ${({ theme }) => theme.colors.owner.dark};
+  border-radius: 16px;
+  color: ${({ theme }) => theme.colors.gray[0]};
+  font-size: ${({ theme }) => theme.typography.body1.fontSize};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+  line-height: ${({ theme }) => theme.typography.body1.lineHeight};
+  gap: ${({ theme }) => theme.spacing[1]};
+  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
+  cursor: pointer;
+
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
 `;

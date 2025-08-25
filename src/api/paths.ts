@@ -2,9 +2,17 @@ export const API_PATHS = {
   LOGIN: '/api/auth/login',
   LOGOUT: '/api/auth/logout',
   SIGNUP: '/api/auth/signup',
-  FEEDBACK: `/api/feedbacks`,
   RECEIPT: '/api/receipt/ocr',
   ANNOUNCEMENT: `/api/announcement`,
   STORE_LIST: '/api/store/list',
   STORE_DETAIL: (id: number) => `/api/store/${id}`,
+  USER: '/api/user',
+  USER_DETAIL: '/api/user/my',
+
+  FEEDBACK: `/api/feedbacks`,
+  FEEDBACK_MY: `/api/feedbacks/my`,
+  FEEDBACK_REPLY: (feedbackId: string) => `/api/feedbacks/${feedbackId}/reply`,
+
+  STORE_MY: `/api/store/my`,
+  STORE_RATING: (storeId: string) => `/api/store/${storeId}/ratings`,
 };
