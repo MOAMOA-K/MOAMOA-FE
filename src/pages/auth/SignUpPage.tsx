@@ -23,7 +23,7 @@ const SignUpPage = () => {
 
   return (
     <Main>
-      <Logo src='public/logo.svg' alt='MOAMOA 로고' />
+      <Logo src='/logo.svg' alt='MOAMOA 로고' />
       <Form onSubmit={handleSubmit}>
         <FormItem
           label='닉네임'
