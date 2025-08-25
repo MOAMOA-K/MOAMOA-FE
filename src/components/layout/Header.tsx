@@ -54,8 +54,9 @@ const IconBtn = styled.button`
 `;
 
 const Logo = styled.img`
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
+  padding-left: 6px;
 `;
 
 const Title = styled.h1`
