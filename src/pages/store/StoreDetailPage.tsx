@@ -17,6 +17,9 @@ export default function StoreDetailPage() {
     null,
   );
   const navigate = useNavigate();
+  const heroSrc = `/assets/store/${data?.id}.jpg`;
+  const menuImgSrc = (storeId: number, menuId: number) =>
+    `/assets/menu/${storeId}_${menuId}.jpg`;
 
   useEffect(() => {
     const fb = { lat: 35.8889, lng: 128.6109 };
@@ -37,7 +40,6 @@ export default function StoreDetailPage() {
     const ac = new AbortController();
     setLoading(true);
 
-    // ✅ 여기만 변경
     fetchStoreDetail(Number(id))
       .then((d) => setData(d))
       .catch(() => setErr('불러오기에 실패했어요.'))
@@ -89,11 +91,15 @@ export default function StoreDetailPage() {
       </Header>
 
       <Hero>
-        {data.imageUrl ? (
-          <img src={data.imageUrl} alt={data.name} />
-        ) : (
-          <Placeholder />
-        )}
+        <img
+          src={heroSrc}
+          alt={data.name}
+          onError={(e) => {
+            // 해당 파일이 없으면 기본 이미지로 대체
+            (e.currentTarget as HTMLImageElement).src =
+              '/assets/store/default.jpg';
+          }}
+        />
       </Hero>
 
       <MetaRow>
@@ -146,19 +152,25 @@ export default function StoreDetailPage() {
         <SectionTitle>메뉴</SectionTitle>
         <MenuGrid>
           {menus.length === 0 && <Empty>등록된 메뉴가 없습니다.</Empty>}
-          {menus.map((m) => (
-            <MenuCard key={m.id}>
-              <Thumb>
-                {m.imageUrl ? (
-                  <img src={m.imageUrl} alt={m.name} />
-                ) : (
-                  <Placeholder />
-                )}
-              </Thumb>
-              <strong>{m.name}</strong>
-              <span>{m.price.toLocaleString()}원</span>
-            </MenuCard>
-          ))}
+          {menus.map((m) => {
+            const localSrc = menuImgSrc(data.id, m.id);
+            return (
+              <MenuCard key={m.id}>
+                <Thumb>
+                  <img
+                    src={localSrc}
+                    alt={m.name}
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src =
+                        '/assets/menu/default.jpg';
+                    }}
+                  />
+                </Thumb>
+                <strong>{m.name}</strong>
+                <span>{m.price.toLocaleString()}원</span>
+              </MenuCard>
+            );
+          })}
         </MenuGrid>
       </Section>
 
@@ -230,17 +242,17 @@ const Hero = styled.div`
     display: block;
   }
 `;
-const Placeholder = styled.div`
-  width: 100%;
-  height: 100%;
-  background: repeating-linear-gradient(
-    45deg,
-    #f3f4f6,
-    #f3f4f6 10px,
-    #e5e7eb 10px,
-    #e5e7eb 20px
-  );
-`;
+// const Placeholder = styled.div`
+//   width: 100%;
+//   height: 100%;
+//   background: repeating-linear-gradient(
+//     45deg,
+//     #f3f4f6,
+//     #f3f4f6 10px,
+//     #e5e7eb 10px,
+//     #e5e7eb 20px
+//   );
+// `;
 const MetaRow = styled.div`
   display: flex;
   gap: 16px;
