@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import NavigationItem from './NavigationItem';
-import { CircleUserRound, Handshake, House, MapPin } from 'lucide-react';
+import { CircleUserRound, Handshake, House, Mails } from 'lucide-react';
 import { ROUTE_PATH } from '@/routes/paths';
 import { useLocation } from 'react-router-dom';
 import { NAV_HEIGHT } from '@/constants/number';
@@ -19,7 +19,7 @@ const NavigationOwner = () => {
       />
       <NavigationItem
         to={ROUTE_PATH.FEEDBACK}
-        icon={<MapPin />}
+        icon={<Mails />}
         name='피드백'
         type='owner'
         active={
