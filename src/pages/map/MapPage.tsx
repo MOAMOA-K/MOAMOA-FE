@@ -163,7 +163,7 @@ export default function MapPage() {
           open={!!selected}
           title={selected?.name}
           subtitle={selected?.category}
-          imageUrl={`/store/${selected?.id}`}
+          imageUrl={`store/${selected?.id}`}
           onClose={() => setSelected(null)}
           onClickDetail={() => {
             if (!selected) return;
