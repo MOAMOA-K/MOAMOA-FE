@@ -4,9 +4,11 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import FormItem from './components/FormItem';
 import useLogin from './hooks/useLogin';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 
 const LoginPage = () => {
+  const queryClient = useQueryClient();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const { login } = useLogin();
@@ -15,6 +17,10 @@ const LoginPage = () => {
     e.preventDefault();
     login({ email, password });
   };
+
+  useEffect(() => {
+    queryClient.removeQueries();
+  }, [queryClient]);
 
   return (
     <Main>
