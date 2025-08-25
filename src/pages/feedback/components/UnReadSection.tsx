@@ -8,10 +8,11 @@ type UnReadSectionProps = {
   storeId: string;
   feedbackId: string;
 };
-const UnReadSection = ({ feedbackId }: UnReadSectionProps) => {
+const UnReadSection = ({ storeId, feedbackId }: UnReadSectionProps) => {
   const [processing, setProcessing] = useState(false);
   const [reply, setReply] = useState('');
   const { postReply } = useFeedbackReply({
+    storeId,
     feedbackId,
     description: reply,
   });
