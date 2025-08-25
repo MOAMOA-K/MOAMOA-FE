@@ -47,10 +47,6 @@ export default function BottomSheet({
               src={`assets/${finalSrc}.jpg`}
               alt={title ?? 'store image'}
               loading='lazy'
-              onError={(e) => {
-                // 자산/백엔드 경로 모두 실패하면 기본 이미지로 폴백
-                e.currentTarget.src = '/assets/store/default.jpg';
-              }}
             />
           ) : (
             <Placeholder />

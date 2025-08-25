@@ -149,14 +149,7 @@ export default function StoreDetailPage() {
             return (
               <MenuCard key={m.id}>
                 <Thumb>
-                  <img
-                    src={localSrc}
-                    alt={m.name}
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src =
-                        '/assets/menu/default.jpg';
-                    }}
-                  />
+                  <img src={localSrc} alt={m.name} />
                 </Thumb>
                 <strong>{m.name}</strong>
                 <span>{m.price.toLocaleString()}원</span>
