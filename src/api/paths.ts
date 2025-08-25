@@ -2,7 +2,10 @@ export const API_PATHS = {
   LOGIN: '/api/auth/login',
   LOGOUT: '/api/auth/logout',
   SIGNUP: '/api/auth/signup',
-
+  RECEIPT: '/api/receipt/ocr',
+  ANNOUNCEMENT: `/api/announcement`,
+  STORE_LIST: '/api/store/list',
+  STORE_DETAIL: (id: number) => `/api/store/${id}`,
   USER: '/api/user',
   USER_DETAIL: '/api/user/my',
 

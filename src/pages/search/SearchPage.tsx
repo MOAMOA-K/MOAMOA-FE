@@ -69,14 +69,11 @@ export default function SearchPage() {
         onSubmit={() => submit()}
         onBack={() => navigate(-1)}
       />
-
       {loading && <Empty>검색 중…</Empty>}
       {!loading && error && <Empty>{error}</Empty>}
-
       {!loading && !error && keyword.trim().length === 0 && (
         <SearchEmpty message='검색어를 입력해보세요.' navHeight={NAV_HEIGHT} />
       )}
-
       {!loading &&
         !error &&
         keyword.trim().length > 0 &&
@@ -86,11 +83,21 @@ export default function SearchPage() {
             navHeight={NAV_HEIGHT}
           />
         )}
-
       {!loading && !error && items.length > 0 && (
         <SearchResults
           results={items.map((s) => ({
-            store: { ...s, id: Number(s.id) },
+            store: {
+              id: Number(s.id),
+              name: s.name,
+              canonicalName: s.canonicalName,
+              address: s.address,
+              lat: s.latitude,
+              lng: s.longitude,
+              description: s.description,
+              category: s.category,
+              imageUrl: s.imageUrl,
+              openingTime: s.openingTime,
+            },
             distanceM: null,
           }))}
           onSelect={(s) => goDetail(s.id)}

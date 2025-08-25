@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams, useNavigate, createSearchParams } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { getStoreDetail } from './apis/store';
-import type { StoreDetailDTO } from './types';
+import { fetchStoreDetail, type StoreDetailDTO } from '@/api/store/store';
 import { MapPin } from 'lucide-react';
 import AppHeader from '@/components/layout/Header';
 import { ROUTE_PATH } from '@/routes/paths';
@@ -11,7 +10,6 @@ const NAV_HEIGHT = 70;
 
 export default function StoreDetailPage() {
   const { id } = useParams<{ id: string }>();
-  console.log('detail id =', id, typeof id);
   const [data, setData] = useState<StoreDetailDTO | null>(null);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);
@@ -20,7 +18,6 @@ export default function StoreDetailPage() {
   );
   const navigate = useNavigate();
 
-  // 현재 위치
   useEffect(() => {
     const fb = { lat: 35.8889, lng: 128.6109 };
     if (!navigator.geolocation) return setOrigin(fb);
@@ -31,31 +28,19 @@ export default function StoreDetailPage() {
     );
   }, []);
 
-  console.log('[Detail] param id =', id, typeof id);
-
   useEffect(() => {
-    // ⬇️ effect 진입 시점에도 확인
-    console.log('[Detail effect] id =', id);
-
     if (!id) {
-      // id가 없을 때 로딩만 계속되는 문제 방지
       setErr('잘못된 경로입니다.');
       setLoading(false);
       return;
     }
-
     const ac = new AbortController();
     setLoading(true);
 
-    getStoreDetail(Number(id))
-      .then((d) => {
-        console.log('[Detail] loaded storeId =', d.id);
-        setData(d);
-      })
-      .catch((e) => {
-        console.error('[Detail] load error:', e);
-        setErr('불러오기에 실패했어요.');
-      })
+    // ✅ 여기만 변경
+    fetchStoreDetail(Number(id))
+      .then((d) => setData(d))
+      .catch(() => setErr('불러오기에 실패했어요.'))
       .finally(() => setLoading(false));
 
     return () => ac.abort();
@@ -75,6 +60,7 @@ export default function StoreDetailPage() {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return Math.round(R * c);
   }, [data, origin]);
+
   const fmtDist =
     distance == null
       ? ''
@@ -85,6 +71,12 @@ export default function StoreDetailPage() {
   if (loading) return <Page>로딩 중…</Page>;
   if (err || !data) return <Page>가게 정보를 불러오지 못했어요.</Page>;
 
+  // 백엔드 필드명에 맞춤
+  const menus = Array.isArray(data.menuList) ? data.menuList : [];
+  const announcements = Array.isArray(data.announcementList)
+    ? data.announcementList
+    : [];
+
   return (
     <Page>
       <AppHeader onBack={() => navigate(-1)} />
@@ -93,7 +85,7 @@ export default function StoreDetailPage() {
           <h1>{data.name}</h1>
           {data.category && <Category>{krCategory(data.category)}</Category>}
         </TitleRow>
-        <Actions>{/* 알림/공유 아이콘 등 들어갈 자리 */}</Actions>
+        <Actions>{/* 알림/공유 자리 */}</Actions>
       </Header>
 
       <Hero>
@@ -113,15 +105,11 @@ export default function StoreDetailPage() {
 
       <PrimaryButton
         onClick={() => {
-          if (!data) return;
-
-          // 새로고침 대비: query에도 storeId 남김
           const qs = createSearchParams({
             storeId: String(data.id),
             storeName: data.name,
           });
           navigate(`${ROUTE_PATH.LETTER}?${qs.toString()}`, {
-            // 편한 접근용: state에도 같이 담아감 (페이지 이동 시에는 이게 더 간편)
             state: { storeId: data.id, storeName: data.name },
           });
         }}
@@ -132,17 +120,23 @@ export default function StoreDetailPage() {
       <Section>
         <SectionTitle>개선사항</SectionTitle>
         <Column>
-          {data.storeAnnouncements.length === 0 && (
+          {announcements.length === 0 && (
             <Empty>아직 등록된 개선사항이 없어요.</Empty>
           )}
-          {data.storeAnnouncements.map((a) => (
+          {announcements.map((a) => (
             <Card key={a.id}>
-              <Label>고객 의견</Label>
-              <p>{a.feedbackContent}</p>
-              <Reply>
-                <Label>사장님 개선</Label>
-                <p>{a.content}</p>
-              </Reply>
+              {a.feedbackContent && (
+                <>
+                  <Label>고객 의견</Label>
+                  <p>{a.feedbackContent}</p>
+                </>
+              )}
+              {(a.content || a.description) && (
+                <Reply>
+                  <Label>사장님 개선</Label>
+                  <p>{a.content || a.description}</p>
+                </Reply>
+              )}
             </Card>
           ))}
         </Column>
@@ -151,7 +145,8 @@ export default function StoreDetailPage() {
       <Section>
         <SectionTitle>메뉴</SectionTitle>
         <MenuGrid>
-          {data.menus.map((m) => (
+          {menus.length === 0 && <Empty>등록된 메뉴가 없습니다.</Empty>}
+          {menus.map((m) => (
             <MenuCard key={m.id}>
               <Thumb>
                 {m.imageUrl ? (
@@ -195,7 +190,6 @@ const Page = styled.div`
   padding: 0px 15px calc(${NAV_HEIGHT}px + env(safe-area-inset-bottom, 0px));
   background: #fff;
 `;
-
 const Header = styled.header`
   display: flex;
   align-items: center;
@@ -223,7 +217,6 @@ const Actions = styled.div`
   display: flex;
   gap: 8px;
 `;
-
 const Hero = styled.div`
   width: 100%;
   height: 180px;
@@ -248,7 +241,6 @@ const Placeholder = styled.div`
     #e5e7eb 20px
   );
 `;
-
 const MetaRow = styled.div`
   display: flex;
   gap: 16px;
@@ -262,7 +254,6 @@ const MetaRow = styled.div`
     font-size: 14px;
   }
 `;
-
 const PrimaryButton = styled.button`
   box-sizing: border-box;
   display: block;
@@ -270,7 +261,6 @@ const PrimaryButton = styled.button`
   height: 44px;
   padding: 0 20px;
   margin: 8px 0;
-
   border: 0;
   border-radius: 20px;
   background: ${({ theme }) => theme.colors.customer.main};
@@ -278,7 +268,6 @@ const PrimaryButton = styled.button`
   font-weight: 700;
   cursor: pointer;
 `;
-
 const Section = styled.section`
   margin-top: 12px;
 `;
@@ -301,7 +290,6 @@ const Card = styled.div`
     color: #111;
   }
 `;
-
 const Empty = styled.div`
   color: #9ca3af;
   font-size: 14px;
@@ -320,7 +308,6 @@ const Reply = styled.div`
     margin: 4px 0 0;
   }
 `;
-
 const MenuGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -352,7 +339,6 @@ const Thumb = styled.div`
     display: block;
   }
 `;
-
 const BottomSpacer = styled.div`
   height: ${NAV_HEIGHT}px;
 `;
