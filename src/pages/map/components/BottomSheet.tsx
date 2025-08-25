@@ -4,6 +4,8 @@ type Props = {
   open: boolean;
   title?: string;
   subtitle?: string;
+  storeId?: number;
+  /** (옵션) 백엔드에서 온 URL은 폴백으로만 사용 */
   imageUrl?: string;
   onClose: () => void;
   onClickDetail?: () => void;
@@ -17,6 +19,8 @@ export default function BottomSheet({
   onClose,
   onClickDetail,
 }: Props) {
+  const finalSrc = imageUrl;
+
   return (
     <Dim open={open} onClick={onClose} aria-hidden={!open}>
       <Panel
@@ -38,8 +42,16 @@ export default function BottomSheet({
           {subtitle && <Subtitle id='bs-subtitle'>{subtitle}</Subtitle>}
         </Header>
         <ImgBox>
-          {imageUrl ? (
-            <img src={imageUrl} alt={title ?? 'store image'} />
+          {finalSrc ? (
+            <img
+              src={`assets/${finalSrc}.jpg`}
+              alt={title ?? 'store image'}
+              loading='lazy'
+              onError={(e) => {
+                // 자산/백엔드 경로 모두 실패하면 기본 이미지로 폴백
+                e.currentTarget.src = '/assets/store/default.jpg';
+              }}
+            />
           ) : (
             <Placeholder />
           )}
