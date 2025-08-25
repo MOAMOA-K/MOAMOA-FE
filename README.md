@@ -1,69 +1,32 @@
-# React + TypeScript + Vite
+# 📌 모아모아 뀽 Backend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **대학 상권을 살리는 AI 기반 소통 플랫폼**  
+학생들은 솔직한 피드백을 통해 포인트와 쿠폰을 얻고, 사장님은 학생들의 피드백을 바탕으로 매장을 개선할 수 있는 상생형 서비스입니다.
 
-Currently, two official plugins are available:
+- 배포 주소: http://moamoa-k.s3-website.ap-northeast-2.amazonaws.com/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 서비스 개요
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🎯 문제 정의
+- 기존 공개 리뷰 시스템(네이버/카카오 지도 등)은 평판 부담 때문에 **광고성 리뷰**만 양산됨  
+- **학생들의 솔직한 피드백 기회 상실** → 사장님은 개선 방향을 파악하지 못함  
+- 결과적으로 **대학 상권 침체와 학생들의 상권 이탈이 가속화됨**  
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🛠 해결 방식
+- **영수증 기반 인증 + OCR**: 진짜 방문자만 피드백 가능  
+- **익명 피드백**: 평판 부담 없이 솔직한 의견 가능  
+- **AI 필터링**: 비방/욕설 제거 + 개선점 요약 전달  
+- **리워드 시스템**: 학생은 포인트/쿠폰 보상, 사장님은 "개선 공지" 홍보  
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🛠 기술 스택
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Backend
+- **Language**: Typescript / react
+- **Framework**: emotion / axios / tanstack Query
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Infra & DevOps
+- **Deployment**: AWS S3
