@@ -1,9 +1,17 @@
 import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
 import { User } from 'lucide-react';
-import StatusItem from './StatusItem';
+import useStoreMy from '@/pages/main/hooks/useStoreMy';
+import useUser from '@/pages/main/hooks/useUser';
+import StatusBox from './StatusBox';
 
 const OwnerStatusSection = () => {
+  const { userData, isLoading: userLoading } = useUser();
+  const { store, isLoading } = useStoreMy();
+  if (isLoading || !store || userLoading || !userData) {
+    return null;
+  }
+
   return (
     <Container>
       <Card>
@@ -13,20 +21,16 @@ const OwnerStatusSection = () => {
           </IconBox>
           <InformationBox>
             <Typography variant='title2' weight='bold'>
-              김사장
+              {userData.nickname}
             </Typography>
-            <Typography variant='body1'>카페 달빛</Typography>
+            <Typography variant='body1'>{store.name}</Typography>
             <TypoBox>
-              <Typography variant='body2'>카페</Typography>
+              <Typography variant='body2'>{store.category}</Typography>
             </TypoBox>
           </InformationBox>
         </Information>
         <Line />
-        <StatusBox>
-          <StatusItem value={23} label='총 피드백' />
-          <StatusItem value={156} label='이번달 방문' />
-          <StatusItem value={12} label='개선 완료' />
-        </StatusBox>
+        <StatusBox storeId={store.id.toString()} />
       </Card>
     </Container>
   );
@@ -90,11 +94,4 @@ const TypoBox = styled.div`
 const Line = styled.div`
   height: 1px;
   background-color: ${({ theme }) => theme.colors.owner.main};
-`;
-
-const StatusBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: ${({ theme }) => theme.spacing[2]};
 `;
