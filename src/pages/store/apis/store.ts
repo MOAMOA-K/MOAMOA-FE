@@ -28,8 +28,8 @@ export async function getStoreDetail(id: number): Promise<StoreDetailDTO> {
         base.openTime && base.closeTime
           ? `${base.openTime} - ${base.closeTime}`
           : '',
-      menus: [],
-      storeAnnouncements: [],
+      menuList: [],
+      announcementList: [],
     };
   }
 
