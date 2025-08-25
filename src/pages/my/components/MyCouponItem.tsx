@@ -27,7 +27,7 @@ const MyCouponItem = ({
   };
 
   return (
-    <form>
+    <form onSubmit={useCoupon}>
       <Card>
         <CouponBox>
           <Typography variant='title2' weight='bold'>
@@ -50,11 +50,7 @@ const MyCouponItem = ({
             유효기간: {validUntil}
           </Typography>
         </CouponBox>
-        <PriceButton
-          type='button'
-          disabled={password.length === 0}
-          onClick={useCoupon}
-        >
+        <PriceButton type='submit' disabled={password.length === 0}>
           <Typography variant='subtitle1' color='white'>
             교환하기
           </Typography>
