@@ -24,7 +24,7 @@ const LoginPage = () => {
 
   return (
     <Main>
-      <Logo src='@/assets/logo.svg' alt='MOAMOA 로고' />
+      <Logo src='public/logo.svg' alt='MOAMOA 로고' />
       <Form onSubmit={handleSubmit}>
         <FormItem
           value={email}
