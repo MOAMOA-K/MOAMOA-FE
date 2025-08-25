@@ -13,7 +13,7 @@ const CustomerDashboardSection = ({ point }: CustomerDashboardSectionProps) => {
       <Card>
         <SubTitle>내 포인트</SubTitle>
         <Point>{point}P</Point>
-        <UpdateInfo>이번 주 + 120P 적립</UpdateInfo>
+        <UpdateInfo>이번 주 + 0P 적립</UpdateInfo>
         <Button to={ROUTE_PATH.COUPON}>
           쿠폰 교환하기
           <ArrowRight />
