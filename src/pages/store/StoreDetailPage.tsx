@@ -91,15 +91,7 @@ export default function StoreDetailPage() {
       </Header>
 
       <Hero>
-        <img
-          src={heroSrc}
-          alt={data.name}
-          onError={(e) => {
-            // 해당 파일이 없으면 기본 이미지로 대체
-            (e.currentTarget as HTMLImageElement).src =
-              '/assets/store/default.jpg';
-          }}
-        />
+        <img src={heroSrc} alt={data.name} />
       </Hero>
 
       <MetaRow>
