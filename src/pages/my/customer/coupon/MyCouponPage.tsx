@@ -1,17 +1,28 @@
 import Header from '@/components/layout/Header';
 import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import styled from '@emotion/styled';
-import { couponItems } from '../../constants/history-item';
 import MyCouponItem from '../../components/MyCouponItem';
+import useMyCoupon from '../../hooks/useMyCoupon';
 
 const MyCouponPage = () => {
+  const { myCoupon, isLoading } = useMyCoupon();
+
+  if (isLoading || !myCoupon) {
+    return (
+      <>
+        <Header title='보유중인 쿠폰' />
+        <Main></Main>
+      </>
+    );
+  }
+
   return (
     <>
       <Header title='보유중인 쿠폰' />
       <Main>
         <MyCouponSection>
-          {couponItems.map((item) => (
-            <MyCouponItem key={item.id} {...item} />
+          {myCoupon.map((item) => (
+            <MyCouponItem key={item.userCouponId} {...item} />
           ))}
         </MyCouponSection>
       </Main>
