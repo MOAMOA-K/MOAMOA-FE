@@ -3,8 +3,8 @@ export const API_PATHS = {
   LOGOUT: '/api/auth/logout',
   SIGNUP: '/api/auth/signup',
   FEEDBACK: `/api/feedbacks`,
+  RECEIPT: '/api/receipt/ocr',
   ANNOUNCEMENT: `/api/announcement`,
-
   STORE_LIST: '/api/store/list',
   STORE_DETAIL: (id: number) => `/api/store/${id}`,
 };
