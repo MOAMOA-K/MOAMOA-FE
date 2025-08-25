@@ -1,44 +1,59 @@
 import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
+import useUserCoupon from '../hooks/useUserCoupon';
 
 type ExchangeCouponItemProps = {
-  title: string;
+  id: number;
+  storeName: string;
+  name: string;
   description: string;
-  price: number;
+  pointCost: number;
+  validUntil: string;
   point: number;
-  updatePoint: (point: number) => void;
 };
 
 const ExchangeCouponItem = ({
-  title,
+  id,
+  storeName,
+  name,
   description,
-  price,
+  pointCost,
+  validUntil,
   point,
-  updatePoint,
 }: ExchangeCouponItemProps) => {
+  const { postUserCoupon } = useUserCoupon();
+
+  const buyCoupon = () => {
+    postUserCoupon({ couponId: id.toString() });
+  };
   return (
     <Container>
-      <Typography variant='subtitle1' weight='bold'>
-        {title}
-      </Typography>
-      <DescriptionBox>
-        <Typography variant='body2'>{description}</Typography>
-      </DescriptionBox>
-      <ImageDiv />
-      <PriceBox>
-        <Typography variant='subtitle1' weight='medium'>
-          {price}p
+      <CouponBox>
+        <Typography variant='title2' weight='bold'>
+          {storeName}
         </Typography>
-        <Button
-          type='button'
-          disabled={point < price}
-          onClick={() => updatePoint(point - price)}
-        >
-          <Typography variant='body2' color='white'>
-            교환하기
-          </Typography>
-        </Button>
-      </PriceBox>
+        <Typography variant='subtitle2' weight='medium'>
+          {name}
+        </Typography>
+        <DescriptionBox>
+          <Typography variant='body2'>{description}</Typography>
+        </DescriptionBox>
+        <Typography variant='body2' color='sub'>
+          유효기간: {validUntil}
+        </Typography>
+      </CouponBox>
+      <PriceButton
+        type='button'
+        onClick={() => buyCoupon()}
+        disabled={point < pointCost}
+      >
+        <Typography variant='title2' weight='medium' color='white'>
+          {pointCost}p
+        </Typography>
+        <Typography variant='subtitle1' color='white'>
+          교환하기
+        </Typography>
+      </PriceButton>
     </Container>
   );
 };
@@ -46,34 +61,39 @@ const ExchangeCouponItem = ({
 export default ExchangeCouponItem;
 
 const Container = styled.div`
+  min-height: 150px;
   display: flex;
-  flex-direction: column;
-  padding: ${({ theme }) => theme.spacing[4]};
+  justify-content: space-between;
   background-color: ${({ theme }) => theme.colors.gray[0]};
-  gap: ${({ theme }) => theme.spacing[1]};
+  gap: ${({ theme }) => theme.spacing[3]};
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  box-sizing: border-box;
 `;
 
 const DescriptionBox = styled.div`
-  flex-grow: 1;
+  flex: 1;
 `;
 
-const ImageDiv = styled.div`
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  background-color: ${({ theme }) => theme.colors.gray[20]};
-`;
-
-const PriceBox = styled.div`
+const CouponBox = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: ${({ theme }) => theme.spacing[1]};
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing[1]};
+  padding: ${({ theme }) => theme.spacing[4]};
 `;
 
-const Button = styled.button<{ disabled: boolean }>`
+const PriceButton = styled.button<{ disabled: boolean }>`
+  min-height: 100%;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing[3]};
+  padding: ${({ theme }) => `${theme.spacing[6]} ${theme.spacing[2]}`};
   background-color: ${({ theme, disabled }) =>
     disabled ? theme.colors.customer.disabled : theme.colors.customer.main};
-  border-radius: 12px;
-  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
+  border-radius: 0 12px 12px 0;
   cursor: pointer;
+  box-sizing: border-box;
 `;

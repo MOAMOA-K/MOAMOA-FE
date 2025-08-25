@@ -4,16 +4,21 @@ import { HEADER_HEIGHT, NAV_HEIGHT } from '@/constants/number';
 import NavigationCustomer from '@/components/layout/NavigationCustomer';
 import MyPointSection from './components/MyPointSection';
 import ExchangeCouponSection from './components/ExchangeCouponSection';
-import { useState } from 'react';
+import useUser from '../main/hooks/useUser';
 
 const CouponPage = () => {
-  const [point, setPoint] = useState<number>(1250);
+  const { userData, isLoading } = useUser();
+
+  if (isLoading || !userData) {
+    return null;
+  }
+
   return (
     <>
       <Header title='쿠폰 교환하기' />
       <Main>
-        <MyPointSection point={point} />
-        <ExchangeCouponSection point={point} updatePoint={setPoint} />
+        <MyPointSection point={userData.points} />
+        <ExchangeCouponSection point={userData.points} />
       </Main>
       <NavigationCustomer />
     </>
