@@ -25,6 +25,9 @@ const LoginPage = () => {
   return (
     <Main>
       <Logo src='/logo.svg' alt='MOAMOA 로고' />
+      <Typography variant='title1' weight='bold'>
+        로그인
+      </Typography>
       <Form onSubmit={handleSubmit}>
         <FormItem
           value={email}
@@ -74,6 +77,7 @@ const Logo = styled.img`
   height: auto;
   object-fit: contain;
   user-select: none;
+  margin-bottom: 12px;
 `;
 
 const Form = styled.form`

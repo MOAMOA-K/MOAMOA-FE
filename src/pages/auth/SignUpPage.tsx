@@ -24,6 +24,9 @@ const SignUpPage = () => {
   return (
     <Main>
       <Logo src='/logo.svg' alt='MOAMOA 로고' />
+      <Typography variant='title1' weight='bold'>
+        회원가입
+      </Typography>
       <Form onSubmit={handleSubmit}>
         <FormItem
           label='닉네임'
@@ -81,6 +84,7 @@ const Logo = styled.img`
   height: auto;
   object-fit: contain;
   user-select: none;
+  margin-bottom: 12px;
 `;
 
 const Form = styled.form`
