@@ -1,38 +1,56 @@
 import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
-import { Star } from 'lucide-react';
+import { Star, Store } from 'lucide-react';
 
 type LetterItemProps = {
-  name: string;
-  satisfaction: number;
+  id: number;
+  storeName: string;
+  rating: number;
   content: string;
-  date: string;
+  reply: string | null;
+  createdAt: string;
 };
 
-const LetterItem = ({ name, satisfaction, content, date }: LetterItemProps) => {
+const LetterItem = ({
+  storeName,
+  rating,
+  content,
+  reply,
+  createdAt,
+}: LetterItemProps) => {
   return (
     <Container>
       <TitleBox>
         <Typography variant='title2' weight='bold'>
-          {name}
+          {storeName}
         </Typography>
         <Typography variant='body2' color='sub'>
-          {date}
+          {createdAt}
         </Typography>
       </TitleBox>
       <StarBox>
         {[1, 2, 3, 4, 5].map((num) => (
           <Star
             key={num}
-            fill={num <= satisfaction ? 'gold' : 'none'}
+            fill={num <= rating ? 'gold' : 'none'}
             stroke='black'
           />
         ))}
       </StarBox>
       <Typography variant='body1'>{content}</Typography>
-      <ImageBox>
-        <ImageDiv />
-      </ImageBox>
+      {reply && (
+        <Card>
+          <Wrapper>
+            <Store />
+            <Typography variant='body1' weight='medium'>
+              사장님 답변
+            </Typography>
+          </Wrapper>
+          <Typography variant='body1'>
+            {JSON.parse(reply).replyContent}
+          </Typography>
+        </Card>
+      )}
     </Container>
   );
 };
@@ -42,9 +60,11 @@ export default LetterItem;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray[40]};
-  padding: ${({ theme }) => theme.spacing[2]};
+  border-radius: 12px;
+  padding: ${({ theme }) => theme.spacing[6]};
   gap: ${({ theme }) => theme.spacing[2]};
+  background-color: ${({ theme }) => theme.colors.gray[0]};
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
 `;
 
 const TitleBox = styled.div`
@@ -58,19 +78,19 @@ const StarBox = styled.div`
   align-items: center;
 `;
 
-const ImageBox = styled.div`
-  width: 100%;
-  height: 250px;
-  border-radius: 8px;
+const Card = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: ${({ theme }) => theme.spacing[2]};
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.colors.feedback.DONE};
+  border-radius: 16px;
+  gap: ${({ theme }) => theme.spacing[3]};
+  padding: ${({ theme }) => `${theme.spacing[4]} ${theme.spacing[5]}`};
+  width: 100%;
+  max-width: 550px;
 `;
 
-const ImageDiv = styled.div`
-  width: 100%;
-  max-width: 450px;
-  height: 100%;
-  background-color: #ccc;
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing[2]};
 `;

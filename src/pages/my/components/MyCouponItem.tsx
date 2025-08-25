@@ -1,58 +1,106 @@
 import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
+import { useState } from 'react';
+import useUserCouponUse from '../hooks/useUserCouponUse';
 
 type MyCouponItemProps = {
-  name: string;
-  date: string;
-  content: string;
+  userCouponId: number;
+  storeName: string;
+  description: string;
+  couponName: string;
+  validUntil: string;
+  createdAt: string;
 };
 
-const MyCouponItem = ({ name, date, content }: MyCouponItemProps) => {
+const MyCouponItem = ({
+  userCouponId,
+  storeName,
+  couponName,
+  description,
+  validUntil,
+}: MyCouponItemProps) => {
+  const { postUserCouponUse } = useUserCouponUse();
+  const [password, setPassword] = useState('');
+
+  const useCoupon = () => {
+    postUserCouponUse({ userCouponId, password });
+  };
+
   return (
-    <Card>
-      <TitleBox>
-        <Typography variant='title2' weight='bold'>
-          {name}
-        </Typography>
-        <Typography variant='body2' color='sub'>
-          {date}
-        </Typography>
-      </TitleBox>
-      <Typography variant='body1'>{content}</Typography>
-      <ButtonBox>
-        <Button type='button'>사용하기</Button>
-      </ButtonBox>
-    </Card>
+    <form onSubmit={useCoupon}>
+      <Card>
+        <CouponBox>
+          <Typography variant='title2' weight='bold'>
+            {storeName}
+          </Typography>
+          <Typography variant='subtitle2' weight='medium'>
+            {couponName}
+          </Typography>
+          <DescriptionBox>
+            <Typography variant='body2'>{description}</Typography>
+          </DescriptionBox>
+          <Input
+            placeholder='쿠폰번호'
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <Typography variant='body2' color='sub'>
+            유효기간: {validUntil}
+          </Typography>
+        </CouponBox>
+        <PriceButton type='submit' disabled={password.length === 0}>
+          <Typography variant='subtitle1' color='white'>
+            교환하기
+          </Typography>
+        </PriceButton>
+      </Card>
+    </form>
   );
 };
 
 export default MyCouponItem;
 
 const Card = styled.div`
+  min-height: 150px;
+  display: flex;
+  justify-content: space-between;
+  background-color: ${({ theme }) => theme.colors.gray[0]};
+  gap: ${({ theme }) => theme.spacing[3]};
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  box-sizing: border-box;
+`;
+
+const DescriptionBox = styled.div`
+  flex: 1;
+`;
+
+const CouponBox = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) => theme.colors.gray[0]};
-  border: 1px solid ${({ theme }) => theme.colors.gray[20]};
-  gap: ${({ theme }) => theme.spacing[2]};
-  border-radius: 12px;
+  gap: ${({ theme }) => theme.spacing[1]};
   padding: ${({ theme }) => theme.spacing[4]};
 `;
 
-const TitleBox = styled.div`
+const PriceButton = styled.button<{ disabled: boolean }>`
+  min-height: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const Button = styled.button`
-  background: ${({ theme }) => theme.colors.customer.main};
-  color: ${({ theme }) => theme.colors.gray[0]};
-  border-radius: 16px;
-  padding: ${({ theme }) => `${theme.spacing[2]}  ${theme.spacing[4]}`};
+  gap: ${({ theme }) => theme.spacing[3]};
+  padding: ${({ theme }) => `${theme.spacing[8]}`};
+  background-color: ${({ theme, disabled }) =>
+    disabled ? theme.colors.customer.disabled : theme.colors.customer.main};
+  border-radius: 0 12px 12px 0;
   cursor: pointer;
+  box-sizing: border-box;
+`;
+
+const Input = styled.input`
+  padding: ${({ theme }) => theme.spacing[2]};
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.colors.gray[70]};
 `;

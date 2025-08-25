@@ -20,4 +20,5 @@ export const API_PATHS = {
 
   COUPONS_DETAIL: (id: number) => `/api/coupons/store/${id}`,
   USER_COUPON: '/api/user-coupon',
+  USER_COUPON_USE: '/api/user-coupon/use',
 };

@@ -6,3 +6,12 @@ type Coupon = {
   pointCost: number;
   validUntil: string;
 };
+
+type MyCoupon = {
+  userCouponId: number;
+  storeName: string;
+  description: string;
+  couponName: string;
+  validUntil: string;
+  createdAt: string;
+};
