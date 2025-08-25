@@ -29,12 +29,12 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding: ${({ theme }) => theme.spacing[4]};
-  gap: ${({ theme }) => theme.spacing[3]};
+  gap: ${({ theme }) => theme.spacing[2]};
 `;
 
 const Img = styled.img`
   width: 100%;
-  max-width: 300px;
+  max-width: 400px;
   border-radius: 8px;
 `;
 

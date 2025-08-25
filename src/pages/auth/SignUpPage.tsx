@@ -23,9 +23,7 @@ const SignUpPage = () => {
 
   return (
     <Main>
-      <Typography variant='title1' weight='bold' as='h1'>
-        모아모아뀽
-      </Typography>
+      <Logo src='/public/logo.svg' alt='MOAMOA 로고' />
       <Form onSubmit={handleSubmit}>
         <FormItem
           label='닉네임'
@@ -76,6 +74,13 @@ const Main = styled.main`
   align-items: center;
   justify-content: center;
   gap: ${({ theme }) => theme.spacing[4]};
+`;
+
+const Logo = styled.img`
+  width: 160px; /* 필요하면 크기 조절 */
+  height: auto;
+  object-fit: contain;
+  user-select: none;
 `;
 
 const Form = styled.form`
