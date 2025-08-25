@@ -15,6 +15,7 @@ import {
   type CreateFeedbackRequest,
   type FeedbackType,
 } from '@/api/feedback/postFeedback';
+import { useQueryClient } from '@tanstack/react-query';
 
 // LetterTagType -> FeedbackType 매핑
 const typeMap: Record<LetterTagType, FeedbackType> = {
@@ -26,6 +27,7 @@ const typeMap: Record<LetterTagType, FeedbackType> = {
 const LetterPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const queryClient = useQueryClient();
 
   // StoreDetailPage에서 넘겨준 storeId는 state 또는 query에 실려있음
   const storeId = useMemo(() => {
@@ -86,6 +88,8 @@ const LetterPage = () => {
 
       // 4) 피드백 전송
       await createFeedback(payload);
+
+      queryClient.invalidateQueries({ queryKey: ['feedback-my', storeId] });
 
       // 5) 성공 이동
       navigate(ROUTE_PATH.MAIN, { replace: true });
