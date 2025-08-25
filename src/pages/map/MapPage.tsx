@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_PATH } from '@/routes/paths';
 import BottomSheet from '@/pages/map/components/BottomSheet';
 import SearchTrigger from '@/pages/map/components/SearchTrigger';
@@ -165,6 +165,13 @@ export default function MapPage() {
           subtitle={selected?.category}
           imageUrl={selected?.imageUrl}
           onClose={() => setSelected(null)}
+          onClickDetail={() => {
+            if (!selected) return;
+            const path = generatePath(ROUTE_PATH.STORE_DETAIL, {
+              id: String(selected.id),
+            });
+            navigate(path);
+          }}
         />
       </SheetWrap>
 
