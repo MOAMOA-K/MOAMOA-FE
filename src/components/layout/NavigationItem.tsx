@@ -41,7 +41,7 @@ const Container = styled(Link, {
   ${({ active, theme, type }) =>
     active &&
     `
-    color: ${type === 'customer' ? theme.colors.customer.main : theme.colors.owner.main};
+    color: ${type === 'customer' ? theme.colors.customer.main : theme.colors.default.blue};
   `}
   max-width: 720px;
   height: 70px;

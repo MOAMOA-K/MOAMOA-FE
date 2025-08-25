@@ -1,6 +1,6 @@
-import LandingImage from 'public/assets/landing/landingImage1.png';
-import LandingImage2 from 'public/assets/landing/landingImage2.png';
-import LandingImage3 from 'public/assets/landing/landingImage3.png';
+import LandingImage from '/assets/landing/landingImage1.png';
+import LandingImage2 from '/assets/landing/landingImage2.png';
+import LandingImage3 from '/assets/landing/landingImage3.png';
 
 export const landingData = [
   {

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import logo from 'public/logo.svg';
+import logo from '/public/logo.svg';
+
 import { HEADER_HEIGHT } from '@/constants/number';
 import { ArrowLeft } from 'lucide-react';
 
