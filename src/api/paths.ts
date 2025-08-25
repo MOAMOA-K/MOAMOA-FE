@@ -19,4 +19,5 @@ export const API_PATHS = {
   COUPONS: `/api/coupons`,
 
   USER_COUPON: '/api/user-coupon',
+  USER_COUPON_USE: '/api/user-coupon/use',
 };

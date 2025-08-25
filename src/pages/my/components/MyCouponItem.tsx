@@ -1,6 +1,7 @@
 import Typography from '@/components/UI/Typography';
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import useUserCouponUse from '../hooks/useUserCouponUse';
 
 type MyCouponItemProps = {
   userCouponId: number;
@@ -12,12 +13,18 @@ type MyCouponItemProps = {
 };
 
 const MyCouponItem = ({
+  userCouponId,
   storeName,
   couponName,
   description,
   validUntil,
 }: MyCouponItemProps) => {
+  const { postUserCouponUse } = useUserCouponUse();
   const [password, setPassword] = useState('');
+
+  const useCoupon = () => {
+    postUserCouponUse({ userCouponId, password });
+  };
 
   return (
     <form>
@@ -46,7 +53,7 @@ const MyCouponItem = ({
         <PriceButton
           type='button'
           disabled={password.length === 0}
-          onClick={() => {}}
+          onClick={useCoupon}
         >
           <Typography variant='subtitle1' color='white'>
             교환하기
