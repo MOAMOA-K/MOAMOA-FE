@@ -1,14 +1,13 @@
 import styled from '@emotion/styled';
-import { feedbacks } from '../mocks/feedbacks';
 import FeedbackItem from './FeedbackItem';
 import useCustomerFeedback from '../hooks/useCustomerFeedback';
 import Typography from '@/components/UI/Typography';
 
 const FeedbackSection = () => {
-  const { feedbackData, isLoading, isError } = useCustomerFeedback();
+  const { feedbackData, isLoading } = useCustomerFeedback();
 
-  if (isLoading) return null;
-  if (isError || !feedbackData)
+  if (isLoading || !feedbackData) return null;
+  if (feedbackData?.length === 0)
     return (
       <Container>
         <Wrapper>
@@ -24,10 +23,10 @@ const FeedbackSection = () => {
     <Container>
       <Wrapper>
         <Title>최근 피드백</Title>
-        {feedbacks.map((feedback) => (
+        {feedbackData.map((feedback) => (
           <FeedbackItem
             key={feedback.id}
-            title={feedback.title}
+            title={feedback.storeName}
             content={feedback.content}
             date={feedback.createdAt}
           />
