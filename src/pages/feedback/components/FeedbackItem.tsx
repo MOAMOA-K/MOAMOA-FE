@@ -13,6 +13,7 @@ type FeedbackItemProps = {
   modifiedContent: string;
   reply: string | null;
   status: 'UNREAD' | 'DONE';
+  improvements?: string;
   feedbackId: string;
   storeId: string;
 };
@@ -22,12 +23,14 @@ const FeedbackItem = ({
   type,
   createdAt,
   modifiedContent,
+  improvements,
   reply,
   status,
   feedbackId,
   storeId,
 }: FeedbackItemProps) => {
   const theme = useTheme();
+  console.log(improvements);
 
   return (
     <Card>
@@ -60,10 +63,13 @@ const FeedbackItem = ({
       <ContentBox>
         <Typography variant='body1'>{modifiedContent}</Typography>
       </ContentBox>
-      {reply ? (
-        <DoneSection reply={reply} />
-      ) : (
-        <UnReadSection storeId={storeId} feedbackId={feedbackId} />
+      {reply && <DoneSection reply={reply} />}
+      {!reply && improvements && (
+        <UnReadSection
+          storeId={storeId}
+          feedbackId={feedbackId}
+          improvements={improvements}
+        />
       )}
     </Card>
   );

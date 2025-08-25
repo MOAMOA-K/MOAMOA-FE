@@ -14,6 +14,7 @@ const UnReadTab = () => {
           rating={feedback.rating}
           type={feedback.type}
           createdAt={feedback.createdAt}
+          improvements={feedback.improvements}
           modifiedContent={feedback.modifiedContent}
           reply={feedback.reply}
           status={feedback.status}

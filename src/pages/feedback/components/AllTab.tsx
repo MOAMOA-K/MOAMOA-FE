@@ -16,6 +16,7 @@ const AllTab = () => {
           createdAt={feedback.createdAt}
           modifiedContent={feedback.modifiedContent}
           reply={feedback.reply}
+          improvements={feedback.improvements}
           status={feedback.status}
           feedbackId={feedback.id.toString()}
           storeId={storeId}

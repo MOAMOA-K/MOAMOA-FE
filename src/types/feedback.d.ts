@@ -2,6 +2,7 @@ type Feedback = {
   id: number;
   rating: number;
   modifiedContent: string;
+  improvements?: string;
   reply: string | null;
   type: 'COMPLAINT' | 'SUGGESTION' | 'COMPLIMENT';
   status: 'UNREAD' | 'DONE';

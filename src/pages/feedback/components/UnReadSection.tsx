@@ -7,8 +7,13 @@ import useFeedbackReply from '../hooks/useFeedbackReply';
 type UnReadSectionProps = {
   storeId: string;
   feedbackId: string;
+  improvements: string;
 };
-const UnReadSection = ({ storeId, feedbackId }: UnReadSectionProps) => {
+const UnReadSection = ({
+  storeId,
+  feedbackId,
+  improvements,
+}: UnReadSectionProps) => {
   const [processing, setProcessing] = useState(false);
   const [reply, setReply] = useState('');
   const { postReply } = useFeedbackReply({
@@ -39,7 +44,7 @@ const UnReadSection = ({ storeId, feedbackId }: UnReadSectionProps) => {
             AI 추천 개선 방안
           </Typography>
         </Wrapper>
-        <Typography variant='body1'>~~~ 이렇게 개선해보세요</Typography>
+        <Typography variant='body1'>{improvements}</Typography>
       </Card>
       <form onSubmit={handleSubmit}>
         {processing && (
